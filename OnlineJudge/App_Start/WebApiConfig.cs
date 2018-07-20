@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Web.Http;
 
 namespace OnlineJudge
@@ -16,6 +17,10 @@ namespace OnlineJudge
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // Return data in json format
+            config.Formatters.JsonFormatter.SupportedMediaTypes
+                .Add(new MediaTypeHeaderValue("text/html") );
         }
     }
 }
