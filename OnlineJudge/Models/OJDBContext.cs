@@ -22,6 +22,8 @@ namespace OnlineJudge.Models {
         }
 
         public DbSet<Problem> Problems { get; set; }
+        public DbSet<Submission> Submissions { get; set; }
+
 //        public DbSet<User> Users { get; set; }
 //        public DbSet<UserType> UserTypes { get; set; }
 
