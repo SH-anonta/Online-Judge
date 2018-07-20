@@ -10,7 +10,7 @@ namespace JudgeCodeRunner {
         }
 
         static void testCodeRunner(){
-            string source_path = @"G:\compile\ac.cpp";
+            string source_path = CppCode.ac;
 
 
             double time_limit= 0.5;
