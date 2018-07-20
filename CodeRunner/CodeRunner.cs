@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using JudgeCodeRunner.CompilerServices;
 
 namespace JudgeCodeRunner{
@@ -22,7 +23,7 @@ namespace JudgeCodeRunner{
         
         private string input;               // input for the program being judged
         private string expected_output;
-        private string source_file_path;
+        private string source_code;
         private double time_limit;
 
 
@@ -30,17 +31,22 @@ namespace JudgeCodeRunner{
         private Process proc;
 
         // time_limit is in seconds
-        public CodeRunner(string source_file_path, string input, string expected_output, double time_limit){
+        public CodeRunner(string source_code, string input, string expected_output, double time_limit){
             this.input = input;
             this.expected_output = expected_output;
-            this.source_file_path = source_file_path;
+            this.source_code = source_code;
             this.time_limit = time_limit;
         }
         
         // used by client 
         public void RunCode(){
             compiler.OnCompilationFinished += compilationFinishedHandler;
-            compiler.CompileSource(source_file_path, output_exe_name);
+
+            // todo create files for source code inside compilers
+            string file_path = Utility.GetTempFilePath()+".cpp";
+            File.WriteAllText(file_path, source_code);
+
+            compiler.CompileSource(file_path, output_exe_name);
         }
 
 
