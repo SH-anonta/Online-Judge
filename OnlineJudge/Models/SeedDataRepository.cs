@@ -2015,7 +2015,10 @@ public static string intput= @"1000
             var a=  new Problem(){
                 Title = "Sum it",
                 TestCaseInput = ProblemDummyData.intput,
-                TestCaseOutput = ProblemDummyData.expected_output
+                TestCaseOutput = ProblemDummyData.expected_output,
+                TimeLimit = 1,
+                MemoryLimit = 25
+
             };
 
             var problems= new List<Problem>();

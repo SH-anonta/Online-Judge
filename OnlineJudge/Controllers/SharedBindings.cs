@@ -13,6 +13,7 @@ namespace OnlineJudge.Controllers{
     }
 
     public class SubmissionRequestData{
+        public string ProblemCode { set; get; }
         public string SolutionCode { set; get; }
         public string Language { set; get; }
     }

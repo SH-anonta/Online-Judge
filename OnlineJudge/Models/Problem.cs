@@ -9,6 +9,9 @@ namespace OnlineJudge.Models {
         public int Id{ set; get; }
 
         public string Title { set; get; }
+        
+        public double TimeLimit { set; get; }
+        public double MemoryLimit { set; get; }
 
         public string TestCaseInput { set; get; }
         public string TestCaseOutput { set; get; }
