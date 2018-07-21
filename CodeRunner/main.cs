@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom.Compiler;
+using CodeRunner.Compilers;
 using JudgeCodeRunner.CompilerServices;
 
 namespace JudgeCodeRunner {
@@ -10,11 +11,11 @@ namespace JudgeCodeRunner {
         }
 
         static void testCodeRunner(){
-            string source_path = CppCode.ac;
-
+            string source_path = DummyCode.getCCode();
+            ProgrammingLanguage lang = ProgrammingLanguage.C;
 
             double time_limit= 0.5;
-            CodeRunner runner = new CodeRunner(source_path, DummyData.intput, DummyData.expected_output, time_limit);
+            CodeRunner runner = new CodeRunner(lang, source_path, DummyData.intput, DummyData.expected_output, time_limit);
             runner.OnExecutionFinished += CodeResultsHandler;
             runner.RunCode();
 
@@ -24,24 +25,6 @@ namespace JudgeCodeRunner {
 
         private static void CodeResultsHandler(object sender, ExecutionResultEventArgs args){
             Console.WriteLine(args.ExecutionResult);
-        }
-
-        static void testCompiler(){
-            string source_path = @"G:\compile\ac.cpp";
-            CPPCompiler cpp = new CPPCompiler();
-//            cpp.CompileSource(handler, source_path, @"G:\compile\exes\auto.exe");
-//            cpp.CompileSource(handler, source_path);
-
-
-            cpp.OnCompilationFinished += handler;
-            cpp.CompileSource(source_path);
-
-//          intentionally wait forever
-            while (true){}
-        }
-
-        static void handler(object sender, CompilationFinishedEventArgs args){
-            Console.WriteLine(args.compilation_result);
         }
     }
 }

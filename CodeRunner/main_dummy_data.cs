@@ -2009,8 +2009,10 @@ namespace JudgeCodeRunner {
 32";
     }
 
-    class CppCode{
-        public static string ac= @"#include <iostream>
+    class DummyCode{
+
+        public static string getCpp89Code(){
+            return @"#include <iostream>
 
 using namespace std;
 
@@ -2027,5 +2029,46 @@ int main(int argc, char* argv[]){
     return 0;
 }
 ";
+        }
+
+        public static string getCpp11Code(){
+            return @"#include <iostream>
+
+using namespace std;
+
+int main(int argc, char* argv[]){
+    auto x = 1100;
+    int t, a,b;
+    cin>>t;
+
+    for(int i= 0; i<t; i++){
+        cin>>a>>b;
+        cout<< a+b<<endl;
     }
+
+
+    return 0;
+}
+";
+        }
+
+        
+        public static string getCCode(){
+            return @"#include <stdio.h>
+
+int main(){
+    int t, a,b;
+    scanf(""%d"", &t);
+
+            for(int i= 0; i<t; i++){
+                scanf(""%d%d"", &a,&b);
+                printf(""%d\n"", a+b);
+            }
+
+            return 0;
+        }
+        ";
+        }
+    }
+
 }

@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeRunner.cs" />
+    <Compile Include="Compilers\Compiler.cs" />
     <Compile Include="Compilers\CompilerFactory.cs" />
     <Compile Include="Compilers\CPPCompiler.cs" />
     <Compile Include="Events.cs" />
