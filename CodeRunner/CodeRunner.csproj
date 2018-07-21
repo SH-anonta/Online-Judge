@@ -59,8 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeRunner.cs" />
-    <Compile Include="CompilerFactory.cs" />
-    <Compile Include="CPPCompiler.cs" />
+    <Compile Include="Compilers\CompilerFactory.cs" />
+    <Compile Include="Compilers\CPPCompiler.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="Judge.cs" />
     <Compile Include="main.cs" />
@@ -73,6 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tests\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
