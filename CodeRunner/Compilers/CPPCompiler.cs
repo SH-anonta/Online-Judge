@@ -1,69 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeRunner.Compilers;
 
 // todo turn deligate into events
 
 namespace JudgeCodeRunner.CompilerServices {
-    public class CompilationResult{
-        public bool CompilationSuccessful { get; }
-        public int ExitCode { get; }
-        public string StandardError { get; }
-        public Process process { get; }
-
-        public CompilationResult(bool success, int exit_code, Process process, string standard_error=""){
-            CompilationSuccessful = success;
-            ExitCode = exit_code;
-            StandardError = standard_error;
-            this.process = process;
-        }
-
-        public override string ToString(){
-            return String.Format("Success: {0}\nExitCode: {1}\n\nStd Error: {2}",
-                                CompilationSuccessful,ExitCode, StandardError);
-        }
-    }
-
-    public class CompilationFinishedEventArgs :EventArgs{
-        public CompilationResult compilation_result { get; }
-        
-
-        public CompilationFinishedEventArgs(CompilationResult result){
-            compilation_result = result;
-        }
-    }
+    
 
 
-    public class CPPCompiler{
+    public class  CPPCompiler: Compiler{
         public event EventHandler<CompilationFinishedEventArgs> OnCompilationFinished;
 
-        private static string gcc_compiler_path = @"C:\Program Files (x86)\CodeBlocks\MinGW\bin\g++.exe";
-
+        private string compiler_path;
+        private string command_arguments;
         private string output_exe_path;
 
 
+        public CPPCompiler(string compiler_path, string command_arguments= "")        {
+            this.compiler_path = compiler_path;
+            this.command_arguments = command_arguments;
+        }
+        
         // compiles given source code and creates exe file in output_file_path, if output file path is null,
         // exe file is created in temp directory
-        public string CompileSource(string source_path, string output_file_path = null){
+        public void CompileSource(string source_code){
+            output_exe_path = Utility.GetTempFilePath();
 
-            output_exe_path = output_file_path ?? Utility.GetTempFilePath();
+            string file_path = Utility.GetTempFilePath()+".cpp";
+            File.WriteAllText(file_path, source_code);
 
-            Process compiler_proc = CreateCompilerProcessObject(source_path);
+            Process compiler_proc = CreateCompilerProcessObject(file_path);
             compiler_proc.Exited += new EventHandler(this.compilationFinishedHandler);
             
             compiler_proc.Start();
-
-            return output_file_path;
         }
 
         private Process CreateCompilerProcessObject(string source_file_path){
             Process compiler_proc = new Process();
 
-            compiler_proc.StartInfo.FileName = gcc_compiler_path;
-            compiler_proc.StartInfo.Arguments = String.Format("{0} -o {1}", source_file_path, output_exe_path);
+            compiler_proc.StartInfo.FileName = compiler_path;
+            compiler_proc.StartInfo.Arguments = String.Format("{0} {1} -o {2}", this.command_arguments, source_file_path, output_exe_path);
             compiler_proc.StartInfo.RedirectStandardOutput = true;
             compiler_proc.StartInfo.RedirectStandardError= true;
 
