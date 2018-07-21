@@ -7,7 +7,7 @@ using CodeRunner.Compilers;
 using JudgeCodeRunner.CompilerServices;
 
 namespace JudgeCodeRunner {
-    public enum ProgrammingLanguage{
+    public enum ProgrammingLanguageEnum{
         Cpp89,
         Cpp11,
         C,
@@ -18,24 +18,24 @@ namespace JudgeCodeRunner {
         private static string GPP_COMPILER_PATH= @"C:\Program Files (x86)\CodeBlocks\MinGW\bin\g++.exe";
         private static string GCC_COMPILER_PATH= @"C:\Program Files (x86)\CodeBlocks\MinGW\bin\gcc.exe";
 
-        public static Compiler getCompiler(ProgrammingLanguage language){
+        public static Compiler getCompiler(ProgrammingLanguageEnum languageEnum){
             Compiler comp= null;
 
-            if (language == ProgrammingLanguage.Cpp89){
+            if (languageEnum == ProgrammingLanguageEnum.Cpp89){
                 comp = new CPPCompiler(GPP_COMPILER_PATH, "-std=c++98");
             }
-            else if(language == ProgrammingLanguage.Cpp11){
+            else if(languageEnum == ProgrammingLanguageEnum.Cpp11){
                 comp = new CPPCompiler(GPP_COMPILER_PATH, "-std=c++11");
             }
-            else if(language == ProgrammingLanguage.C){
+            else if(languageEnum == ProgrammingLanguageEnum.C){
                 comp = new CPPCompiler(GCC_COMPILER_PATH);
             }
-            else if(language == ProgrammingLanguage.Python3){
+            else if(languageEnum == ProgrammingLanguageEnum.Python3){
                 // todo implement
             }
             else{
                 comp = null;
-                throw new Exception("Invalid programming language enum: "+ language.ToString());
+                throw new Exception("Invalid programming languageEnum enum: "+ languageEnum.ToString());
             }
 
             return comp;

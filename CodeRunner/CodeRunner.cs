@@ -32,13 +32,13 @@ namespace JudgeCodeRunner{
         private Process proc;
 
         // time_limit is in seconds
-        public CodeRunner(ProgrammingLanguage language, string source_code, string input, string expected_output, double time_limit){
+        public CodeRunner(ProgrammingLanguageEnum languageEnum, string source_code, string input, string expected_output, double time_limit){
             this.input = input;
             this.expected_output = expected_output;
             this.source_code = source_code;
             this.time_limit = time_limit;
 
-            this.compiler = CompilerFactory.getCompiler(language);
+            this.compiler = CompilerFactory.getCompiler(languageEnum);
         }
         
         // used by client 

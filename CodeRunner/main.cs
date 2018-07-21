@@ -12,7 +12,7 @@ namespace JudgeCodeRunner {
 
         static void testCodeRunner(){
             string source_path = DummyCode.getCCode();
-            ProgrammingLanguage lang = ProgrammingLanguage.C;
+            ProgrammingLanguageEnum lang = ProgrammingLanguageEnum.C;
 
             double time_limit= 0.5;
             CodeRunner runner = new CodeRunner(lang, source_path, DummyData.intput, DummyData.expected_output, time_limit);

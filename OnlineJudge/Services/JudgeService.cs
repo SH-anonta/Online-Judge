@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Web;
-using JudgeCodeRunner;
 using OnlineJudge.Controllers;
 using OnlineJudge.Models;
+using JudgeCodeRunner;
 
 
 namespace OnlineJudge.Services {
@@ -20,10 +16,11 @@ namespace OnlineJudge.Services {
             var ctx = new OjDBContext();
             var problem = ctx.Problems.Find(problem_code);
 
-            var runner = new CodeRunner(submissison.SolutionCode,
-                                        problem.TestCaseInput,
-                                        problem.TestCaseOutput,
-                                        problem.TimeLimit);
+            var runner = new JudgeCodeRunner.CodeRunner(ProgrammingLanguageEnum.Cpp89,
+                                                        submissison.SolutionCode,
+                                                        problem.TestCaseInput,
+                                                        problem.TestCaseOutput,
+                                                        problem.TimeLimit);
 
             var submission = new Submission()
             {
