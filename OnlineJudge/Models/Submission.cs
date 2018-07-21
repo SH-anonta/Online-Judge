@@ -6,7 +6,7 @@ using System.Web;
 namespace OnlineJudge.Models {
     public class Submission{
         public int Id{set; get;}
-        public Problem Problem{set; get;}
+        public virtual Problem Problem{set; get;}
         
         // todo use verdict model instead of string
         public String Status{set; get;}

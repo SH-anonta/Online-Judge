@@ -13,13 +13,14 @@ namespace OnlineJudge.Services {
         private static readonly log4net.ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public void judge(SubmissionRequestData submisison){
-            logger.Info("Submission recieved");
-
+        public void judge(SubmissionRequestData submissison){
+            int problem_code = Int32.Parse(submissison.ProblemCode);
+            logger.Info(String.Format("Submission recieved from user {0}, for Problem {1}", 1, problem_code));
+            
             var ctx = new OjDBContext();
-            var problem = ctx.Problems.Find(1);
+            var problem = ctx.Problems.Find(problem_code);
 
-            var runner = new CodeRunner(submisison.SolutionCode,
+            var runner = new CodeRunner(submissison.SolutionCode,
                                         problem.TestCaseInput,
                                         problem.TestCaseOutput,
                                         problem.TimeLimit);
@@ -28,7 +29,7 @@ namespace OnlineJudge.Services {
             {
                 Status = "Running",
                 Problem = problem,
-                SolutionCode =  submisison.SolutionCode
+                SolutionCode =  submissison.SolutionCode
             };
 
             ctx.Submissions.Add(submission);
