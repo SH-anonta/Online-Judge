@@ -179,6 +179,7 @@
     <Compile Include="Models\Problem.cs" />
     <Compile Include="Models\SeedDataRepository.cs" />
     <Compile Include="Models\Submission.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\DataRepository.cs" />
     <Compile Include="Repository\DataValidator.cs" />

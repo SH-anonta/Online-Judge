@@ -26,7 +26,6 @@ namespace OnlineJudge.Services {
             {
                 Status = "Running",
                 Problem = problem,
-                SolutionCode =  submissison.SolutionCode
             };
 
             ctx.Submissions.Add(submission);
