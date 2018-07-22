@@ -170,8 +170,6 @@
     <Compile Include="Controllers\AnnouncementsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProblemController.cs" />
-    <Compile Include="Controllers\ResponseDataBindings.cs" />
-    <Compile Include="Controllers\SharedBindings.cs" />
     <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -187,6 +185,9 @@
     <Compile Include="Repository\DataRepository.cs" />
     <Compile Include="Repository\DataValidator.cs" />
     <Compile Include="Repository\ProblemsRepository.cs" />
+    <Compile Include="ResponseModels\AnnouncementResponses.cs" />
+    <Compile Include="ResponseModels\SharedResponses.cs" />
+    <Compile Include="ResponseModels\SubmissionResponses.cs" />
     <Compile Include="Repository\SubmissionsRepository.cs" />
     <Compile Include="Services\JudgeService.cs" />
   </ItemGroup>

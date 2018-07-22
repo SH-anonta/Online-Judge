@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace OnlineJudge.Controllers{
+namespace OnlineJudge.ResponseModels {
     // common response object for all controllers
     public class ResponseMessage
     {
