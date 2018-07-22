@@ -62,6 +62,7 @@
     <Compile Include="Compilers\Compiler.cs" />
     <Compile Include="Compilers\CompilerFactory.cs" />
     <Compile Include="Compilers\CPPCompiler.cs" />
+    <Compile Include="Compilers\PythonCompiler.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="Judge.cs" />
     <Compile Include="main.cs" />

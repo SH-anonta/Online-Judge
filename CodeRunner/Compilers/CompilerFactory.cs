@@ -17,6 +17,7 @@ namespace JudgeCodeRunner {
     public class CompilerFactory {
         private static string GPP_COMPILER_PATH= @"C:\Program Files (x86)\CodeBlocks\MinGW\bin\g++.exe";
         private static string GCC_COMPILER_PATH= @"C:\Program Files (x86)\CodeBlocks\MinGW\bin\gcc.exe";
+        
 
         public static Compiler getCompiler(ProgrammingLanguageEnum languageEnum){
             Compiler comp= null;
@@ -31,7 +32,7 @@ namespace JudgeCodeRunner {
                 comp = new CPPCompiler(GCC_COMPILER_PATH);
             }
             else if(languageEnum == ProgrammingLanguageEnum.Python3){
-                // todo implement
+                comp = new PythonCompiler();
             }
             else{
                 comp = null;

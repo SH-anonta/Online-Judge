@@ -2069,6 +2069,27 @@ int main(){
         }
         ";
         }
+
+        public static string getPython3Code(){
+            return @"def readArray(type= int):
+    line = input()
+    return [type(x) for x in line.split()]
+
+
+def solve():
+    n = int(input())
+
+    for x in range(n):
+        a,b = readArray()
+        print(a+b)
+
+
+if __name__ == '__main__':
+    # sys.stdin = open('input.txt')
+    solve()
+
+";
+        }
     }
 
 }

@@ -11,8 +11,10 @@ namespace JudgeCodeRunner {
         }
 
         static void testCodeRunner(){
-            string source_path = DummyCode.getCCode();
-            ProgrammingLanguageEnum lang = ProgrammingLanguageEnum.C;
+//            string source_path = DummyCode.getCCode();
+            string source_path = DummyCode.getPython3Code();
+//            ProgrammingLanguageEnum lang = ProgrammingLanguageEnum.C;
+            ProgrammingLanguageEnum lang = ProgrammingLanguageEnum.Python3;
 
             double time_limit= 0.5;
             CodeRunner runner = new CodeRunner(lang, source_path, DummyData.intput, DummyData.expected_output, time_limit);
