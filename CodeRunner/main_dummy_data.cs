@@ -2090,6 +2090,31 @@ if __name__ == '__main__':
 
 ";
         }
+
+        public static string getCPP89WACode()
+        {
+            return @"#include <iostream>
+#include <time.h>
+
+using namespace std;
+
+int main(int argc, char* argv[]){
+    clock_t start = clock();
+    int t, a,b;
+    cin>>t;
+
+    for(int i= 0; i<t; i++){
+        cin>>a>>b;
+        cout<< a+b<<endl;
+    }
+
+    clock_t end_time = clock();
+
+    cout<< ((end_time-start)/(double)CLOCKS_PER_SEC) <<endl;
+    return 0;
+}
+";
+        }
     }
 
 }
