@@ -6,6 +6,10 @@ using JudgeCodeRunner.CompilerServices;
 
 namespace JudgeCodeRunner{
     public enum Verdict{
+        Queueed,
+        Compiling,
+        Running,
+
         Accepted,
         WrongAnswer,
         RunTimeError,

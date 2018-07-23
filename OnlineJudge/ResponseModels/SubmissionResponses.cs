@@ -12,7 +12,7 @@ namespace OnlineJudge.ResponseModels {
 
         public SubmissionResponseData(Submission submission){
             ProblemTitle = submission.Problem.Title;
-            Status = submission.Status;
+            Status = submission.Status.Name;
             UserName  = "Anna";
         }
 

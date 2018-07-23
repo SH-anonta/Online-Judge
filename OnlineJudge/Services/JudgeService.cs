@@ -25,8 +25,10 @@ namespace OnlineJudge.Services {
 
             var submission = new Submission()
             {
-                Status = "Running",
+                Status = ctx.SubmissionStatus.Find(Verdict.Running),
                 Problem = problem,
+                SourceCode = submissison.SolutionCode,
+                SubmissionDate = DateTime.Now
             };
 
             ctx.Submissions.Add(submission);
@@ -37,7 +39,8 @@ namespace OnlineJudge.Services {
                 logger.Info("Execution finished");
 
                 var result = e.ExecutionResult;
-                submission.Status = result.Verdict.ToString();
+                var status_id = result.Verdict;
+                submission.Status = ctx.SubmissionStatus.Find(status_id);
 
                 ctx.SaveChanges();
             };
@@ -45,5 +48,7 @@ namespace OnlineJudge.Services {
             runner.RunCode();
 
         }
+
+        
     }
 }
