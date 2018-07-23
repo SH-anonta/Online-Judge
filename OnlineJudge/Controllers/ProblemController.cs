@@ -8,17 +8,25 @@ using OnlineJudge.Models;
 using OnlineJudge.ResponseModels;
 using OnlineJudge.Services;
 
-namespace OnlineJudge.Controllers
-{
+namespace OnlineJudge.Controllers{
     [RoutePrefix("api/problems")]
     public class ProblemController : ApiController{
+        private static readonly log4net.ILog logger =
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         [Route("submit")]
         [HttpPost]
         public ResponseMessage Submit(SubmissionRequestData data)
         {
             var judge = new JudgeService();
-            judge.judge(data);
+
+            try{
+                judge.judge(data);
+            }
+            catch (Exception e){
+                logger.Error("Failed to judge submission", e);
+            }
+            
             
             return new ResponseMessage(){Success = true};
         }
