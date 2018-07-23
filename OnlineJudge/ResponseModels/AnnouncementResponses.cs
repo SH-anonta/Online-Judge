@@ -6,13 +6,15 @@ using OnlineJudge.Models;
 
 namespace OnlineJudge.ResponseModels {
 
-    class AnnouncementsResponseData{
+    public class AnnouncementsResponseData{
+        public int Id{ set; get; }
         public string Title{ set; get; }
         public string Description{ set; get; }
         public string Creator{ set; get; }
         public DateTime CreateDate{ set; get; }
 
         public AnnouncementsResponseData(Announcement data){
+            this.Id = data.Id;
             this.Title = data.Title;
             this.Description = data.Description;
             this.CreateDate = data.CreateDate;

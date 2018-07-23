@@ -23,42 +23,28 @@ namespace OnlineJudge.Models {
 
         public DbSet<Problem> Problems { get; set; }
         public DbSet<Submission> Submissions { get; set; }
+        public DbSet<Announcement> Announcements { get; set; }
+
 
 //        public DbSet<User> Users { get; set; }
 //        public DbSet<UserType> UserTypes { get; set; }
-
-
-        
-        // for keeping system logs, this table will be used by log4net
-        // Commented out intentionally, logs are kept in a text file for now
-//        public DbSet<Log> Logs { get; set; }
     }
 
-//    public class OjDBInitializer :  DropCreateDatabaseAlways<OjDBContext>{
-    public class OjDBInitializer :  DropCreateDatabaseIfModelChanges<OjDBContext>{
+    public class OjDBInitializer :  DropCreateDatabaseAlways<OjDBContext>{
+//    public class OjDBInitializer :  DropCreateDatabaseIfModelChanges<OjDBContext>{
         protected override void Seed(OjDBContext context){
 //            seedUserTypeData(context);
-            seedProblemsData(context);
+            
+            // seed only for development
+            context.Announcements.AddRange(SeedDataRepository.getAnnouncements());
+
+            // seed only for development
+            context.Problems.AddRange(SeedDataRepository.getProblems());
+
 
             // this must be at the end of this function
             base.Seed(context);
         }
 
-        void seedProblemsData(OjDBContext context){
-            var problems = SeedDataRepository.getProblems();
-
-            context.Problems.AddRange(problems);
-        }
-
-        // Seed user type data, this is to be included in production
-//        void seedUserTypeData(OjDBContext context){
-//            context.UserTypes.Add(new UserType(){Name="user"});
-//            context.UserTypes.Add(new UserType(){Name="judge"});
-//            context.UserTypes.Add(new UserType(){Name="admin"});
-//        }
-
-//        void seedUserData(OjDBContext context){
-//
-//        }
     }
 }

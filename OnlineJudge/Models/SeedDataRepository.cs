@@ -2027,5 +2027,33 @@ public static string intput= @"1000
 
             return problems;
         }
+
+        // only for develpment purposes
+        public static List<Announcement> getAnnouncements(){
+            var array = new List<Announcement>();
+
+            array.Add(new Announcement()
+            {
+                Title =  "New problems added",
+                Description = "Hurr, durr, new problems ",
+                CreateDate = DateTime.Now,
+            });
+
+            array.Add(new Announcement()
+            {
+                Title =  "Judge is going to be offline",
+                Description = "Description goes here",
+                CreateDate = DateTime.Now,
+            });
+
+            array.Add(new Announcement()
+            {
+                Title =  "The judge is under attack!",
+                Description = "Pls send help",
+                CreateDate = DateTime.Now,
+            });
+
+            return array;
+        }
     }
 }
