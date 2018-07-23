@@ -16,12 +16,10 @@ namespace OnlineJudge.Models {
 
         public virtual Problem Problem{set; get;}
         public virtual User Submitter{set; get;}
+        public virtual SubmissionStatus Status{set; get;}
 
         public double RunningTime {set; get;}
         public double PeakMemmoryUsage {set; get;}
-        
-        
-        public virtual SubmissionStatus Status{set; get;}
 
         // todo add programming language FK
         public string ProgrammingLanguage {set; get;}

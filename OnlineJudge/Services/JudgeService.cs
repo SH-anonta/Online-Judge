@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using OnlineJudge.Controllers;
 using OnlineJudge.Models;
 using JudgeCodeRunner;
@@ -10,6 +11,7 @@ namespace OnlineJudge.Services {
         private static readonly log4net.ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        // todo move db logic to DataRepository class
         public void judge(SubmissionRequestData submissison){
             int problem_code = Int32.Parse(submissison.ProblemCode);
             logger.Info(String.Format("Submission recieved from user {0}, for Problem {1}", 1, problem_code));
@@ -28,7 +30,8 @@ namespace OnlineJudge.Services {
                 Status = ctx.SubmissionStatus.Find(Verdict.Running),
                 Problem = problem,
                 SourceCode = submissison.SolutionCode,
-                SubmissionDate = DateTime.Now
+                SubmissionDate = DateTime.Now,
+                Submitter = ctx.Users.First(x => x.UserName == "admin")
             };
 
             ctx.Submissions.Add(submission);
@@ -41,6 +44,9 @@ namespace OnlineJudge.Services {
                 var result = e.ExecutionResult;
                 var status_id = result.Verdict;
                 submission.Status = ctx.SubmissionStatus.Find(status_id);
+                submission.RunningTime = result.RunningTime;
+                submission.PeakMemmoryUsage = result.MemmoryUsage;
+                submission.StandardErrorStream= result.ErrorMsg;
 
                 ctx.SaveChanges();
             };

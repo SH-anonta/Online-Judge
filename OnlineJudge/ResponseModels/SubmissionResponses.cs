@@ -7,13 +7,33 @@ using OnlineJudge.Models;
 namespace OnlineJudge.ResponseModels {
     class SubmissionResponseData{
         public string ProblemTitle { set; get; }
+        public int ProblemId { set; get; }
+
         public string Status { set; get; }
         public string UserName { set; get; }
 
+        public string SourceCode{set; get;}
+        public string StandardErrorStream{set; get;}
+
+        public DateTime SubmissionDate { set; get; }
+
+        public double RunningTime {set; get;}
+        public double PeakMemmoryUsage {set; get;}
+
         public SubmissionResponseData(Submission submission){
-            ProblemTitle = submission.Problem.Title;
-            Status = submission.Status.Name;
-            UserName  = "Anna";
+            this.ProblemTitle = submission.Problem.Title;
+            this.ProblemId = submission.Problem.Id;
+
+            this.Status = submission.Status.Name;
+
+            this.UserName = submission.Submitter.UserName;
+
+            this.SourceCode = submission.SourceCode;
+            this.StandardErrorStream = submission.StandardErrorStream;
+            this.SubmissionDate = submission.SubmissionDate;
+            
+            this.RunningTime = submission.RunningTime;
+            this.PeakMemmoryUsage = submission.PeakMemmoryUsage;
         }
 
         public static List<SubmissionResponseData> MapTo(IQueryable<Submission> subs){
