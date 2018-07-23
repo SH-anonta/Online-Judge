@@ -11,7 +11,8 @@ namespace OnlineJudge.Models {
         public string Email{set; get;}
         public string Password{set; get;}
         
-        public virtual UserType UserType{set; get;}
+        // todo add user type
+//        public virtual UserType UserType{set; get;}
     }
 
     public class UserType {

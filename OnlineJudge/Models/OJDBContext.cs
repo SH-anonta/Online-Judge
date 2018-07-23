@@ -26,21 +26,29 @@ namespace OnlineJudge.Models {
         public DbSet<Announcement> Announcements { get; set; }
 
 
-//        public DbSet<User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 //        public DbSet<UserType> UserTypes { get; set; }
     }
 
     public class OjDBInitializer :  DropCreateDatabaseAlways<OjDBContext>{
 //    public class OjDBInitializer :  DropCreateDatabaseIfModelChanges<OjDBContext>{
         protected override void Seed(OjDBContext context){
-//            seedUserTypeData(context);
             
+            // Important: Order of seeding data is important
+            // Important: Some seed data rely on other seed data, so context.SaveChanges() has to be called multiple time
+
+            // seed for production
+            context.Users.AddRange(SeedDataRepository.getUsers());
+            context.SaveChanges();
+
             // seed only for development
             context.Announcements.AddRange(SeedDataRepository.getAnnouncements());
+            context.SaveChanges();
 
             // seed only for development
             context.Problems.AddRange(SeedDataRepository.getProblems());
-
+            context.SaveChanges();
+            
 
             // this must be at the end of this function
             base.Seed(context);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace OnlineJudge.Models {
 
@@ -2032,11 +2031,14 @@ public static string intput= @"1000
         public static List<Announcement> getAnnouncements(){
             var array = new List<Announcement>();
 
-            array.Add(new Announcement()
-            {
+            var ctx = new OjDBContext();
+            var admin = ctx.Users.First(x => x.UserName == "admin");
+
+            array.Add(new Announcement(){
                 Title =  "New problems added",
                 Description = "Hurr, durr, new problems ",
                 CreateDate = DateTime.Now,
+                Creator = admin
             });
 
             array.Add(new Announcement()
@@ -2044,6 +2046,7 @@ public static string intput= @"1000
                 Title =  "Judge is going to be offline",
                 Description = "Description goes here",
                 CreateDate = DateTime.Now,
+                Creator = admin
             });
 
             array.Add(new Announcement()
@@ -2051,9 +2054,25 @@ public static string intput= @"1000
                 Title =  "The judge is under attack!",
                 Description = "Pls send help",
                 CreateDate = DateTime.Now,
+                Creator = admin
             });
 
             return array;
+        }
+
+
+
+        public static List<User> getUsers(){
+            var users = new List<User>();
+
+            users.Add(new User()
+            {
+                UserName = "admin",
+                Email = "admin@admin.min",
+                Password = "password"
+            });
+
+            return users;
         }
     }
 }
