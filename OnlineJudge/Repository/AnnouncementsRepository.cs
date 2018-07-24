@@ -14,9 +14,9 @@ namespace OnlineJudge.Repository {
 
         }
 
-        public static List<AnnouncementsResponseData> GetAllAnnouncements(){
+        public static List<AnnouncementListItem> GetAnnouncementList(){
             var ctx = getContext();
-            return AnnouncementsResponseData.MapTo(ctx.Announcements);
+            return AnnouncementListItem.MapTo(ctx.Announcements);
         }
 
         public static void createAnnouncement(AnnouncementForm data){
@@ -30,6 +30,11 @@ namespace OnlineJudge.Repository {
 
             ctx.Announcements.Add(announcement);
             ctx.SaveChanges();
+        }
+
+        public static AnnouncementsResponseData GetAnnouncementById(int id){
+            var announcement = getContext().Announcements.Find(id);
+            return new AnnouncementsResponseData(announcement);
         }
     }
 }

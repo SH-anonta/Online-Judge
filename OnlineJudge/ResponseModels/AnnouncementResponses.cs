@@ -31,4 +31,28 @@ namespace OnlineJudge.ResponseModels {
             return mapped;
         }
     }
+
+    public class AnnouncementListItem{
+        public int Id{ set; get; }
+        public string Title{ set; get; }
+        public string Creator{ set; get; }
+        public DateTime CreateDate{ set; get; }
+
+        public AnnouncementListItem(Announcement data){
+            this.Id = data.Id;
+            this.Title = data.Title;
+            this.CreateDate = data.CreateDate;
+            this.Creator = data.Creator.UserName;
+        }
+
+        public static List<AnnouncementListItem> MapTo(IQueryable<Announcement> announcements){
+            var mapped = new List<AnnouncementListItem>();
+
+            foreach (var announcement in announcements){
+                mapped.Add(new AnnouncementListItem(announcement));
+            }
+
+            return mapped;
+        }
+    }
 }
