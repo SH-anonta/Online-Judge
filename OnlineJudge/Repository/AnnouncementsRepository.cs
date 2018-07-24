@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
 using OnlineJudge.ResponseModels;
@@ -17,6 +18,11 @@ namespace OnlineJudge.Repository {
         public static List<AnnouncementListItem> GetAnnouncementList(){
             var ctx = getContext();
             return AnnouncementListItem.MapTo(ctx.Announcements);
+        }      
+
+        public static AnnouncementsResponseData GetAnnouncementById(int id){
+            var announcement = getContext().Announcements.Find(id);
+            return new AnnouncementsResponseData(announcement);
         }
 
         public static void createAnnouncement(AnnouncementForm data){
@@ -32,9 +38,13 @@ namespace OnlineJudge.Repository {
             ctx.SaveChanges();
         }
 
-        public static AnnouncementsResponseData GetAnnouncementById(int id){
-            var announcement = getContext().Announcements.Find(id);
-            return new AnnouncementsResponseData(announcement);
+        public static void UpdateAnnouncement(int id, AnnouncementForm data)
+        {
+            var ctx = getContext();
+            var announcement = ctx.Announcements.Find(id);
+            announcement.Title = data.Title;
+            announcement.Description = data.Description ;
+            ctx.SaveChanges();
         }
     }
 }

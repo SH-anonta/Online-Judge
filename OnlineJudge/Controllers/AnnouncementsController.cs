@@ -27,6 +27,13 @@ namespace OnlineJudge.Controllers{
         public AnnouncementsResponseData AnnoucementDetails(int id){
             return DataRepository.GetAnnouncementById(id);
         }
+
+        [HttpPost]
+        [Route("{id}/edit")]
+        public IHttpActionResult EditAnnouncement(int id, [FromBody] AnnouncementForm data){
+            DataRepository.UpdateAnnouncement(id, data);
+            return Ok();
+        }
         
     }
 }
