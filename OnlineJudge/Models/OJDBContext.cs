@@ -32,8 +32,8 @@ namespace OnlineJudge.Models {
 //        public DbSet<UserType> UserTypes { get; set; }
     }
 
-    public class OjDBInitializer :  DropCreateDatabaseAlways<OjDBContext>{
-//    public class OjDBInitializer :  DropCreateDatabaseIfModelChanges<OjDBContext>{
+//    public class OjDBInitializer :  DropCreateDatabaseAlways<OjDBContext>{
+    public class OjDBInitializer :  DropCreateDatabaseIfModelChanges<OjDBContext>{
         protected override void Seed(OjDBContext context){
             
             // Important: Order of seeding data is important
