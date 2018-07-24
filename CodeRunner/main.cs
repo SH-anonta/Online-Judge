@@ -17,7 +17,7 @@ namespace JudgeCodeRunner {
 //            ProgrammingLanguageEnum lang = ProgrammingLanguageEnum.Python3;
 
             double time_limit= 0.5;
-            CodeRunner runner = new CodeRunner(lang, source_path, DummyData.intput, DummyData.expected_output, time_limit);
+            CodeRunner runner = new CodeRunner(lang, source_path, DummyData.bigInput, DummyData.expected_output, time_limit);
             runner.OnExecutionFinished += CodeResultsHandler;
             runner.RunCode();
 

@@ -34,7 +34,6 @@ namespace JudgeCodeRunner {
 
         private StringBuilder actual_output= new StringBuilder();
 
-        private Stopwatch running_time_recorder = new Stopwatch();
 
         // flags
         private bool process_killed_by_TLE_timer= false;
@@ -47,15 +46,13 @@ namespace JudgeCodeRunner {
             
             // expects StartInfo.FileName of proc to be set
             // todo throw exception if path of exe is not set
-            if (proc.StartInfo.FileName == null){
+            if (proc.StartInfo.FileName == null || proc.StartInfo.FileName == ""){
                 throw new Exception("StartInfo.FileName of process must be set (by the compiler)");
             }
-
             
             proc.StartInfo.RedirectStandardInput= true;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.RedirectStandardError= true;
-            
             
             proc.EnableRaisingEvents = true;
             proc.StartInfo.UseShellExecute = false;
@@ -66,7 +63,6 @@ namespace JudgeCodeRunner {
         }
 
         public void Run(){           
-            running_time_recorder.Start();
             proc.Start();
 
             // Provide the program with the test case input
@@ -94,9 +90,6 @@ namespace JudgeCodeRunner {
                 // the TLE verdict has already been submitted
                 return;
             }
-
-            running_time_recorder.Stop();
-            
 
 //            double running_time = running_time_recorder.Elapsed.TotalSeconds;
             double running_time = (proc.ExitTime-proc.StartTime).TotalSeconds;
