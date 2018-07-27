@@ -15,6 +15,13 @@ namespace OnlineJudge.Controllers{
             return DataRepository.GetAnnouncementList();
         }
 
+        [HttpGet]
+        [Route("")]
+        public List<AnnouncementListItem> AnnouncementList(int from, int to){
+            return DataRepository.GetAnnouncementList(from, to);
+        }
+
+
         [HttpPost]
         [Route("create")]
         public ResponseMessage Create([FromBody] AnnouncementForm data){

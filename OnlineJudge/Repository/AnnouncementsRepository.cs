@@ -9,15 +9,26 @@ using OnlineJudge.ResponseModels;
 
 namespace OnlineJudge.Repository {
     public partial class DataRepository {
-        // returns the n most recent announcements
-        public static void GetRecentAnnouncements(int n = 20){
-            //todo implement
+        // sort the rows in descending order by create date
+        // return skip the first 'from'-1 rows and then return the next 'to' rows
+        public static List<AnnouncementListItem> GetAnnouncementList(int from, int to = 20){
+            var ctx = getContext();
+            var rows = from s in ctx.Announcements
+                orderby s.CreateDate
+                descending
+                select s;
 
+            return AnnouncementListItem.MapTo(rows.Skip(from-1).Take(to));
         }
 
         public static List<AnnouncementListItem> GetAnnouncementList(){
             var ctx = getContext();
-            return AnnouncementListItem.MapTo(ctx.Announcements);
+            var rows = from s in ctx.Announcements
+                orderby s.CreateDate
+                descending 
+                select s;
+
+            return AnnouncementListItem.MapTo(rows);
         }      
 
         public static AnnouncementsResponseData GetAnnouncementById(int id){
