@@ -27,6 +27,8 @@ namespace OnlineJudge.Models {
         public string TestCaseInput { set; get; }
         public string TestCaseOutput { set; get; }
 
+        public bool IsPublic { set; get; }
+
         public virtual User Creator { set; get; }
 
         [Column(TypeName = "DateTime2")]

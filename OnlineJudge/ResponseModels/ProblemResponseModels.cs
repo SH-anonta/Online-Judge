@@ -10,6 +10,7 @@ namespace OnlineJudge.ResponseModels {
 
         public string Title { set; get; }
         public string Creator { set; get; }
+        public bool IsPublic { set; get; }
         public DateTime CreateDate { set; get; }
 
 
@@ -18,6 +19,7 @@ namespace OnlineJudge.ResponseModels {
             this.Title = problem.Title; 
             this.Creator = problem.Creator.UserName; 
             this.CreateDate = problem.CreateDate; 
+            this.IsPublic = problem.IsPublic; 
         }
 
         public static List<ProblemListItem> MapTo(IQueryable<Problem> problems){
@@ -54,6 +56,8 @@ namespace OnlineJudge.ResponseModels {
         public string Creator { set; get; }
         public DateTime CreateDate { set; get; }
 
+        public bool IsPublic { set; get; }
+
 
         public ProblemDetails(Problem problem){
             this.Id = problem.Id;
@@ -71,6 +75,7 @@ namespace OnlineJudge.ResponseModels {
             this.TestCaseOutput = problem.TestCaseOutput; 
             this.Creator = problem.Creator.UserName; 
             this.CreateDate = problem.CreateDate;
+            this.IsPublic = problem.IsPublic; 
         }
 
         public static List<ProblemDetails> MapTo(IQueryable<Problem> problems){
