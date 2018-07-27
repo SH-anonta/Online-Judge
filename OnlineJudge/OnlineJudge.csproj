@@ -187,6 +187,7 @@
     <Compile Include="Repository\DataValidator.cs" />
     <Compile Include="Repository\ProblemsRepository.cs" />
     <Compile Include="ResponseModels\AnnouncementResponses.cs" />
+    <Compile Include="ResponseModels\ProblemResponseModels.cs" />
     <Compile Include="ResponseModels\SharedResponses.cs" />
     <Compile Include="ResponseModels\SubmissionResponses.cs" />
     <Compile Include="Repository\SubmissionsRepository.cs" />

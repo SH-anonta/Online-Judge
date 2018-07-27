@@ -14,6 +14,15 @@ namespace OnlineJudge.Controllers{
         private static readonly log4net.ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        
+        // return all problems in order of creation date
+        [Route("")]
+        [HttpGet]
+        public ResponseMessage GetProblemList(){
+            return new ResponseMessage(){Success = true};
+        }
+        
+      
         [Route("submit")]
         [HttpPost]
         public ResponseMessage Submit(SubmissionRequestData data)
@@ -30,6 +39,8 @@ namespace OnlineJudge.Controllers{
             
             return new ResponseMessage(){Success = true};
         }
+
+
     }
 
 

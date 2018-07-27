@@ -10,6 +10,7 @@ namespace OnlineJudge.Models {
 
         public string Title { set; get; }
         public string Description { set; get; }
+        public string Constraints { set; get; }
         
         public string InputSpecification { set; get; }
         public string OutputSpecification { set; get; }
@@ -24,18 +25,8 @@ namespace OnlineJudge.Models {
 
         public string TestCaseInput { set; get; }
         public string TestCaseOutput { set; get; }
+
+        public User Creator { set; get; }
+        public DateTime CreateDate { set; get; }
     }
-
-
-//    public class Problem {
-//        public int Id{ set; get; }
-//
-//        public string Title { set; get; }
-//        
-//        public double TimeLimit { set; get; }
-//        public double MemoryLimit { set; get; }
-//
-//        public string TestCaseInput { set; get; }
-//        public string TestCaseOutput { set; get; }
-//    }
 }
