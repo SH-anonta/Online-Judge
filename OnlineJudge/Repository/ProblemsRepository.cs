@@ -96,5 +96,16 @@ namespace OnlineJudge.Repository {
             ctx.Problems.Add(problem);
             ctx.SaveChanges();
         }
+
+        public static void DeleteProblem(int id){
+            var ctx = getContext();
+            Problem prob = ctx.Problems.Find(id);
+            if (prob == null){
+                throw new ObjectNotFoundException("Problem record with specified id does not exist");
+            }
+
+            ctx.Problems.Remove(prob);
+            ctx.SaveChanges();
+        }
     }
 }

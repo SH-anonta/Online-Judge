@@ -41,7 +41,6 @@ namespace OnlineJudge.Controllers{
             }
         }
 
-
         private HttpResponseMessage CreateTextFileResponse(MemoryStream mem_stream, string file_name){
             var response = new HttpResponseMessage(HttpStatusCode.OK)
             {
@@ -115,7 +114,22 @@ namespace OnlineJudge.Controllers{
             
             return Ok();
         }
-      
+
+
+        [HttpPost]
+        [Route("{id}/delete")]
+        public IHttpActionResult DeleteProblem(int id){
+            try
+            {
+                DataRepository.DeleteProblem(id);
+            }
+            catch (ObjectNotFoundException e){
+                return InternalServerError(e);
+            }
+            
+            return Ok();
+        }
+        
         [Route("submit")]
         [HttpPost]
         public IHttpActionResult Submit(SubmissionRequestData data){
