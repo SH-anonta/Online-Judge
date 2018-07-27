@@ -46,16 +46,20 @@ namespace OnlineJudge.FormModels {
             this.MemoryLimit  = Double.Parse(data.GetValues("MemoryLimit")[0]);
             this.IsPublic  = Boolean.Parse(data.GetValues("IsPublic")[0]);
 
-            if (files.Count != 2){
-                throw new InvalidDataException(String.Format("Expected two files in \"files\" argument, got {0}", files.Count));
+
+            this.TestCaseInput = null;
+            this.TestCaseOutput = null;
+
+            // only if files are provided 
+            if (files.Count == 2){
+                // todo which file contains which data is determined by the order of files, find a better way to do this 
+                string input_file_path = files.First().LocalFileName;
+                string output_file_path = files.Skip(1).First().LocalFileName;
+
+                this.TestCaseInput = File.ReadAllText(input_file_path);
+                this.TestCaseOutput = File.ReadAllText(output_file_path);
             }
 
-            // todo which file contains which data is determined by the order of files, find a better way to do this 
-            string input_file_path = files.First().LocalFileName;
-            string output_file_path = files.Skip(1).First().LocalFileName;
-
-            this.TestCaseInput = File.ReadAllText(input_file_path);
-            this.TestCaseOutput = File.ReadAllText(output_file_path);
         }
     }
 }

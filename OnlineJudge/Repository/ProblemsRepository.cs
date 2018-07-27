@@ -4,6 +4,7 @@ using System.Data.Entity.Core;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.WebPages;
 using Microsoft.Ajax.Utilities;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
@@ -105,6 +106,38 @@ namespace OnlineJudge.Repository {
             }
 
             ctx.Problems.Remove(prob);
+            ctx.SaveChanges();
+        }
+
+        public static void UpdateProblem(int id, ProblemCreationForm problem_form){
+            var ctx = getContext();
+            var problem = ctx.Problems.Find(id);
+            if (problem == null){
+                throw new ObjectNotFoundException("Problem record with specified id does not exist");
+            }
+
+            problem.Title = problem_form.Title;
+            problem.Description = problem_form.Description;
+            problem.Constraints = problem_form.Constraints;
+            problem.InputSpecification = problem_form.InputSpecification;
+            problem.OutputSpecification = problem_form.OutputSpecification;
+            problem.SampleInput = problem_form.SampleInput;
+            problem.SampleOutput = problem_form.SampleOutput;
+            problem.Notes = problem_form.Notes;
+            problem.TimeLimit = problem_form.TimeLimit;
+            problem.MemoryLimit = problem_form.MemoryLimit;
+            problem.IsPublic = problem_form.IsPublic;
+
+
+            // these values will be updated only if they were provided
+            if(problem_form.TestCaseInput != null){
+                problem.TestCaseInput = problem_form.TestCaseInput;
+            }
+            if(problem_form.TestCaseOutput != null){
+                problem.TestCaseOutput = problem_form.TestCaseOutput;
+            }
+            
+            
             ctx.SaveChanges();
         }
     }
