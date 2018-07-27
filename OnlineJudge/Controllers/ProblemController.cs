@@ -39,23 +39,44 @@ namespace OnlineJudge.Controllers{
         }
 
 
+        private HttpResponseMessage CreateTextFileResponse(MemoryStream mem_stream, string file_name){
+            var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ByteArrayContent(mem_stream.ToArray())
+            };
+            response.Content.Headers.ContentDisposition =
+                new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment"){
+                    FileName = "input.txt"
+                };
+            response.Content.Headers.ContentType =
+                new MediaTypeHeaderValue("text/plain");
+
+            return response;
+        }
+
+
         [Route("{Id}/input-file")]
         [HttpGet]
         public HttpResponseMessage GetProblemInputTestCases(int Id){
             try{
                 MemoryStream mem_stream = DataRepository.GetProblemInputTestCases(Id);
-                var resposne = new HttpResponseMessage(HttpStatusCode.OK)
-                {
-                    Content = new ByteArrayContent(mem_stream.ToArray())
-                };
-                resposne.Content.Headers.ContentDisposition =
-                    new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment"){
-                        FileName = "input.txt"
-                    };
-                resposne.Content.Headers.ContentType =
-                    new MediaTypeHeaderValue("text/plain");
                 
+                return CreateTextFileResponse(mem_stream, "input.txt");
+
+            }
+            catch (ObjectNotFoundException e){
+                var resposne = new HttpResponseMessage(HttpStatusCode.NotFound);
                 return resposne;
+            }
+        }
+
+        [Route("{Id}/output-file")]
+        [HttpGet]
+        public HttpResponseMessage GetProblemOutputTestCases(int Id){
+            try{
+                MemoryStream mem_stream = DataRepository.GetProblemOutputTestCases(Id);
+                
+                return CreateTextFileResponse(mem_stream, "output.txt");
 
             }
             catch (ObjectNotFoundException e){
