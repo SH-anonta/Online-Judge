@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -26,7 +27,9 @@ namespace OnlineJudge.Models {
         public string TestCaseInput { set; get; }
         public string TestCaseOutput { set; get; }
 
-        public User Creator { set; get; }
+        public virtual User Creator { set; get; }
+
+        [Column(TypeName = "DateTime2")]
         public DateTime CreateDate { set; get; }
     }
 }

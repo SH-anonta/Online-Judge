@@ -21,6 +21,7 @@ namespace OnlineJudge.Models {
             Database.SetInitializer<OjDBContext>(new OjDBInitializer());
         }
 
+
         public DbSet<Problem> Problems { get; set; }
         public DbSet<Submission> Submissions { get; set; }
         public DbSet<SubmissionStatus> SubmissionStatus { get; set; }
@@ -32,8 +33,8 @@ namespace OnlineJudge.Models {
 //        public DbSet<UserType> UserTypes { get; set; }
     }
 
-//    public class OjDBInitializer :  DropCreateDatabaseAlways<OjDBContext>{
-    public class OjDBInitializer :  DropCreateDatabaseIfModelChanges<OjDBContext>{
+    public class OjDBInitializer :  DropCreateDatabaseAlways<OjDBContext>{
+//    public class OjDBInitializer :  DropCreateDatabaseIfModelChanges<OjDBContext>{
         protected override void Seed(OjDBContext context){
             
             // Important: Order of seeding data is important
@@ -52,7 +53,7 @@ namespace OnlineJudge.Models {
             context.SaveChanges();
 
             // seed only for development
-            context.Problems.AddRange(SeedDataRepository.getProblems());
+            context.Problems.AddRange(SeedDataRepository.getProblems(context));
             context.SaveChanges();
             
 

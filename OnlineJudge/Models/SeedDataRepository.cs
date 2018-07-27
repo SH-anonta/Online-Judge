@@ -2010,19 +2010,21 @@ public static string intput= @"1000
     
     
     public class SeedDataRepository {
-        public static List<Problem> getProblems(){
+        public static List<Problem> getProblems(OjDBContext ctx){
+            var user = ctx.Users.First(x => x.UserName == "admin");
+
             var a=  new Problem(){
                 Title = "Sum it",
                 TestCaseInput = ProblemDummyData.intput,
                 TestCaseOutput = ProblemDummyData.expected_output,
                 TimeLimit = 1,
-                MemoryLimit = 25
-
+                MemoryLimit = 25,
+                CreateDate = DateTime.Now,
+                Creator = user
             };
 
             var problems= new List<Problem>();
             problems.Add(a);
-
 
             return problems;
         }
@@ -2059,8 +2061,6 @@ public static string intput= @"1000
 
             return array;
         }
-
-
 
         public static List<User> getUsers(){
             var users = new List<User>();

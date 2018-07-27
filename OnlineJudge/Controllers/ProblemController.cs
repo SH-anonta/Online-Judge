@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using OnlineJudge.Models;
+using OnlineJudge.Repository;
 using OnlineJudge.ResponseModels;
 using OnlineJudge.Services;
 
@@ -18,8 +19,8 @@ namespace OnlineJudge.Controllers{
         // return all problems in order of creation date
         [Route("")]
         [HttpGet]
-        public ResponseMessage GetProblemList(){
-            return new ResponseMessage(){Success = true};
+        public List<ProblemListItem> GetProblemList(){
+            return DataRepository.GetProblemList();
         }
         
       
