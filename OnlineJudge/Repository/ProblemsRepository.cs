@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Web;
 using OnlineJudge.ResponseModels;
@@ -16,6 +17,19 @@ namespace OnlineJudge.Repository {
                 select problem;
 
             return ProblemListItem.MapTo(problems);
+        }
+
+        public static ProblemDetails GetProblemDetails(int id){
+            var ctx = getContext();
+
+            var problem = ctx.Problems.Find(id);
+
+            if (problem == null){
+                throw new ObjectNotFoundException();
+            }
+            
+
+            return new ProblemDetails(problem);
         }
     }
 }

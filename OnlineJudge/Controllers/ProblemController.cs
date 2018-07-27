@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -19,15 +20,29 @@ namespace OnlineJudge.Controllers{
         // return all problems in order of creation date
         [Route("")]
         [HttpGet]
-        public List<ProblemListItem> GetProblemList(){
-            return DataRepository.GetProblemList();
+        public IHttpActionResult GetProblemList(){
+            return Ok(DataRepository.GetProblemList());
         }
-        
+
+        [Route("{Id}")]
+        [HttpGet]
+        public IHttpActionResult GetProblemDetials(int Id){
+            try{
+                ProblemDetails problem = DataRepository.GetProblemDetails(Id);
+                return Ok(problem);
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
+            
+                
+
+            
+        }
       
         [Route("submit")]
         [HttpPost]
-        public ResponseMessage Submit(SubmissionRequestData data)
-        {
+        public IHttpActionResult Submit(SubmissionRequestData data){
             var judge = new JudgeService();
 
             try{
@@ -37,11 +52,8 @@ namespace OnlineJudge.Controllers{
                 logger.Error("Failed to judge submission", e);
             }
             
-            
-            return new ResponseMessage(){Success = true};
+            return Ok();
         }
-
-
     }
 
 
