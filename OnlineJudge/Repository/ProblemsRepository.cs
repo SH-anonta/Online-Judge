@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using Microsoft.Ajax.Utilities;
+using OnlineJudge.FormModels;
 using OnlineJudge.Models;
 using OnlineJudge.ResponseModels;
 
@@ -67,6 +68,33 @@ namespace OnlineJudge.Repository {
             writer.Close();
 
             return data_stream;
+        }
+
+        public static void CreateProblem(ProblemCreationForm data){
+            var ctx = getContext();
+
+            Problem problem = new Problem(){
+                Title = data.Title,
+                Description = data.Description,
+                Constraints = data.Constraints,
+                InputSpecification = data.InputSpecification,
+                OutputSpecification = data.OutputSpecification,
+                SampleInput = data.SampleInput,
+                SampleOutput = data.SampleOutput,
+                Notes = data.Notes,
+                TimeLimit = data.TimeLimit,
+                MemoryLimit = data.MemoryLimit,
+                IsPublic = data.IsPublic,
+                TestCaseInput = data.TestCaseInput,
+                TestCaseOutput = data.TestCaseOutput,
+
+                CreateDate = DateTime.Now,
+                // todo set to the request sender
+                Creator = ctx.Users.Find(1),
+            };
+
+            ctx.Problems.Add(problem);
+            ctx.SaveChanges();
         }
     }
 }

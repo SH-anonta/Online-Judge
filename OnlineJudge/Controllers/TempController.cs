@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
+using OnlineJudge.FormModels;
 using OnlineJudge.Models;
 
 namespace OnlineJudge.Controllers
@@ -35,6 +39,13 @@ namespace OnlineJudge.Controllers
 
             return "Problem: " + ctx.Problems.Count();
         }
+
+        public class Notice{
+            public string Title { set; get; }
+            public string Descripiton { set; get; }
+        }
+
+        
 
     }
 }

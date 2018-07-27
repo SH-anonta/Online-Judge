@@ -172,6 +172,7 @@
     <Compile Include="Controllers\ProblemController.cs" />
     <Compile Include="Controllers\TempController.cs" />
     <Compile Include="FormModels\AnnouncementForm.cs" />
+    <Compile Include="FormModels\ProblemForms.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
