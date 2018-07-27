@@ -11,28 +11,28 @@ namespace OnlineJudge.Controllers{
 
         [HttpGet]
         [Route("")]
-        public List<AnnouncementListItem> AnnouncementList(){
-            return DataRepository.GetAnnouncementList();
+        public IHttpActionResult AnnouncementList(){
+            return Ok(DataRepository.GetAnnouncementList());
         }
 
         [HttpGet]
         [Route("")]
-        public List<AnnouncementListItem> AnnouncementList(int from, int to){
-            return DataRepository.GetAnnouncementList(from, to);
+        public IHttpActionResult AnnouncementList(int from, int to){
+            return Ok(DataRepository.GetAnnouncementList(from, to));
         }
 
 
         [HttpPost]
         [Route("create")]
-        public ResponseMessage Create([FromBody] AnnouncementForm data){
+        public IHttpActionResult Create([FromBody] AnnouncementForm data){
             DataRepository.createAnnouncement(data);
-            return new ResponseMessage(){Success = true};
+            return Ok();
         }
 
         [HttpGet]
         [Route("{id}")]
-        public AnnouncementsResponseData AnnoucementDetails(int id){
-            return DataRepository.GetAnnouncementById(id);
+        public IHttpActionResult AnnoucementDetails(int id){
+            return Ok(DataRepository.GetAnnouncementById(id));
         }
 
         [HttpPost]
