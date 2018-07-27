@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -9,6 +10,7 @@ using OnlineJudge.ResponseModels;
 
 namespace OnlineJudge.Repository {
     public partial class DataRepository {
+
         // sort the rows in descending order by create date
         // return skip the first 'from'-1 rows and then return the next 'to' rows
         public static List<AnnouncementListItem> GetAnnouncementList(int from, int to = 20){
@@ -55,6 +57,16 @@ namespace OnlineJudge.Repository {
             var announcement = ctx.Announcements.Find(id);
             announcement.Title = data.Title;
             announcement.Description = data.Description ;
+            ctx.SaveChanges();
+        }
+
+        public static void DeleteAnnouncement(int id){
+            var ctx = getContext();
+            var announcement = ctx.Announcements.Find(id);
+
+            if(announcement == null){ throw new ObjectNotFoundException();}
+
+            ctx.Announcements.Remove(announcement);
             ctx.SaveChanges();
         }
     }

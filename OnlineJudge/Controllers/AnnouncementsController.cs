@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Web.Http;
 using OnlineJudge.FormModels;
 using OnlineJudge.Repository;
@@ -40,6 +41,20 @@ namespace OnlineJudge.Controllers{
         public IHttpActionResult EditAnnouncement(int id, [FromBody] AnnouncementForm data){
             DataRepository.UpdateAnnouncement(id, data);
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("{id}/delete")]
+        public IHttpActionResult DeleteAnnouncement(int id){
+            try{
+                DataRepository.DeleteAnnouncement(id);
+                return Ok();
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
+            
+            
         }
         
     }
