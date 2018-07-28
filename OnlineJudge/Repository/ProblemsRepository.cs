@@ -13,7 +13,7 @@ using OnlineJudge.ResponseModels;
 namespace OnlineJudge.Repository {
     public partial class DataRepository {
 
-        private static Problem FindProblemById(int id){
+        private Problem FindProblemById(int id){
             var ctx = getContext();
             var problem = ctx.Problems.Find(id);
 
@@ -25,7 +25,7 @@ namespace OnlineJudge.Repository {
         }
 
         // get all problems in descending order of their creation
-        public static List<ProblemListItem> GetProblemList(){
+        public List<ProblemListItem> GetProblemList(){
             var ctx = getContext();
 
             var problems = from problem in ctx.Problems
@@ -36,13 +36,13 @@ namespace OnlineJudge.Repository {
             return ProblemListItem.MapTo(problems);
         }
 
-        public static ProblemDetails GetProblemDetails(int id){
+        public ProblemDetails GetProblemDetails(int id){
             var problem = FindProblemById(id);
 
             return new ProblemDetails(problem);
         }
 
-        public static MemoryStream GetProblemInputTestCases(int id){
+        public MemoryStream GetProblemInputTestCases(int id){
             var problem = FindProblemById(id);
 
             MemoryStream data_stream = new MemoryStream();
@@ -57,7 +57,7 @@ namespace OnlineJudge.Repository {
         }
 
 
-        public static MemoryStream GetProblemOutputTestCases(int id){
+        public MemoryStream GetProblemOutputTestCases(int id){
             var problem = FindProblemById(id);
 
             MemoryStream data_stream = new MemoryStream();
@@ -71,7 +71,7 @@ namespace OnlineJudge.Repository {
             return data_stream;
         }
 
-        public static void CreateProblem(ProblemCreationForm data){
+        public void CreateProblem(ProblemCreationForm data){
             var ctx = getContext();
 
             Problem problem = new Problem(){
@@ -98,7 +98,7 @@ namespace OnlineJudge.Repository {
             ctx.SaveChanges();
         }
 
-        public static void DeleteProblem(int id){
+        public void DeleteProblem(int id){
             var ctx = getContext();
             Problem prob = ctx.Problems.Find(id);
             if (prob == null){
@@ -109,7 +109,7 @@ namespace OnlineJudge.Repository {
             ctx.SaveChanges();
         }
 
-        public static void UpdateProblem(int id, ProblemCreationForm problem_form){
+        public void UpdateProblem(int id, ProblemCreationForm problem_form){
             var ctx = getContext();
             var problem = ctx.Problems.Find(id);
             if (problem == null){

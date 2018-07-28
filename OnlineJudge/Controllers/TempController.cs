@@ -9,11 +9,14 @@ using System.Web;
 using System.Web.Http;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
+using OnlineJudge.Repository;
 
 namespace OnlineJudge.Controllers
 {
     [RoutePrefix("api/temp")]
     public class TempController : ApiController{
+        public DataRepository data_repository = new DataRepository();
+
         private static readonly log4net.ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

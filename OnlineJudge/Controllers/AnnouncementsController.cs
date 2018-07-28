@@ -8,38 +8,44 @@ using OnlineJudge.ResponseModels;
 namespace OnlineJudge.Controllers{
     [RoutePrefix("api/announcements")]
     public class AnnouncementsController : ApiController{
+        public DataRepository data_repository = new DataRepository();
+
+        // todo add object not found exception handlers to acitons 
+        public AnnouncementsController(): base(){
+            
+        }
 
 
         [HttpGet]
         [Route("")]
         public IHttpActionResult AnnouncementList(){
-            return Ok(DataRepository.GetAnnouncementList());
+            return Ok(data_repository.GetAnnouncementList());
         }
 
         [HttpGet]
         [Route("")]
         public IHttpActionResult AnnouncementList(int from, int to){
-            return Ok(DataRepository.GetAnnouncementList(from, to));
+            return Ok(data_repository.GetAnnouncementList(from, to));
         }
 
 
         [HttpPost]
         [Route("create")]
         public IHttpActionResult Create([FromBody] AnnouncementForm data){
-            DataRepository.createAnnouncement(data);
+            data_repository.createAnnouncement(data);
             return Ok();
         }
 
         [HttpGet]
         [Route("{id}")]
         public IHttpActionResult AnnoucementDetails(int id){
-            return Ok(DataRepository.GetAnnouncementById(id));
+            return Ok(data_repository.GetAnnouncementById(id));
         }
 
         [HttpPost]
         [Route("{id}/edit")]
         public IHttpActionResult EditAnnouncement(int id, [FromBody] AnnouncementForm data){
-            DataRepository.UpdateAnnouncement(id, data);
+            data_repository.UpdateAnnouncement(id, data);
             return Ok();
         }
 
@@ -47,7 +53,7 @@ namespace OnlineJudge.Controllers{
         [Route("{id}/delete")]
         public IHttpActionResult DeleteAnnouncement(int id){
             try{
-                DataRepository.DeleteAnnouncement(id);
+                data_repository.DeleteAnnouncement(id);
                 return Ok();
             }
             catch (ObjectNotFoundException e){

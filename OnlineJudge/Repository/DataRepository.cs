@@ -6,7 +6,7 @@ using OnlineJudge.Models;
 
 namespace OnlineJudge.Repository {
     public partial class DataRepository {
-        private static OjDBContext getContext(){
+        private OjDBContext getContext(){
             return new OjDBContext();
         }
     }

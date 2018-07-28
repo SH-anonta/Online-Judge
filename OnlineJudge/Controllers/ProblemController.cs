@@ -20,20 +20,21 @@ namespace OnlineJudge.Controllers{
     public class ProblemController : ApiController{
         private static readonly log4net.ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        
+        public DataRepository data_repository = new DataRepository();
         
         // return all problems in order of creation date
         [Route("")]
         [HttpGet]
         public IHttpActionResult GetProblemList(){
-            return Ok(DataRepository.GetProblemList());
+            return Ok(data_repository.GetProblemList());
         }
 
         [Route("{Id}")]
         [HttpGet]
         public IHttpActionResult GetProblemDetials(int Id){
             try{
-                ProblemDetails problem = DataRepository.GetProblemDetails(Id);
+                ProblemDetails problem = data_repository.GetProblemDetails(Id);
                 return Ok(problem);
             }
             catch (ObjectNotFoundException e){
@@ -61,7 +62,7 @@ namespace OnlineJudge.Controllers{
         [HttpGet]
         public HttpResponseMessage GetProblemInputTestCases(int Id){
             try{
-                MemoryStream mem_stream = DataRepository.GetProblemInputTestCases(Id);
+                MemoryStream mem_stream = data_repository.GetProblemInputTestCases(Id);
                 
                 return CreateTextFileResponse(mem_stream, "input.txt");
 
@@ -76,7 +77,7 @@ namespace OnlineJudge.Controllers{
         [HttpGet]
         public HttpResponseMessage GetProblemOutputTestCases(int Id){
             try{
-                MemoryStream mem_stream = DataRepository.GetProblemOutputTestCases(Id);
+                MemoryStream mem_stream = data_repository.GetProblemOutputTestCases(Id);
                 
                 return CreateTextFileResponse(mem_stream, "output.txt");
 
@@ -110,7 +111,7 @@ namespace OnlineJudge.Controllers{
 
             var problem_form = new ProblemCreationForm(provider.FormData, provider.FileData);
 
-            DataRepository.CreateProblem(problem_form);
+            data_repository.CreateProblem(problem_form);
             
             return Ok();
         }
@@ -138,7 +139,7 @@ namespace OnlineJudge.Controllers{
             var problem_form = new ProblemCreationForm(provider.FormData, provider.FileData);
 
             try{
-                DataRepository.UpdateProblem(id, problem_form);
+                data_repository.UpdateProblem(id, problem_form);
             }
             catch (ObjectNotFoundException e){
                 return InternalServerError(e);
@@ -153,7 +154,7 @@ namespace OnlineJudge.Controllers{
         public IHttpActionResult DeleteProblem(int id){
             try
             {
-                DataRepository.DeleteProblem(id);
+                data_repository.DeleteProblem(id);
             }
             catch (ObjectNotFoundException e){
                 return InternalServerError(e);
