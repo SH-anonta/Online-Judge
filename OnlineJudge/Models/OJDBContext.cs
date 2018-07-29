@@ -50,7 +50,7 @@ namespace OnlineJudge.Models {
             context.SaveChanges();
 
             // seed only for development
-            context.Announcements.AddRange(SeedDataRepository.getAnnouncements());
+            context.Announcements.AddRange(SeedDataRepository.getAnnouncements(context));
             context.SaveChanges();
 
             // seed for production

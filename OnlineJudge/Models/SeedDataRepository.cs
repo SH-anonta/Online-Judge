@@ -2030,10 +2030,9 @@ public static string intput= @"1000
         }
 
         // only for develpment purposes
-        public static List<Announcement> getAnnouncements(){
+        public static List<Announcement> getAnnouncements(OjDBContext ctx){
             var array = new List<Announcement>();
 
-            var ctx = new OjDBContext();
             var admin = ctx.Users.First(x => x.UserName == "admin");
 
             array.Add(new Announcement(){
