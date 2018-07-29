@@ -14,8 +14,7 @@ namespace OnlineJudge.Repository {
     public partial class DataRepository {
 
         private Problem FindProblemById(int id){
-            var ctx = getContext();
-            var problem = ctx.Problems.Find(id);
+            var problem = context.Problems.Find(id);
 
             if (problem == null){
                 throw new ObjectNotFoundException();
@@ -26,9 +25,7 @@ namespace OnlineJudge.Repository {
 
         // get all problems in descending order of their creation
         public List<ProblemListItem> GetProblemList(){
-            var ctx = getContext();
-
-            var problems = from problem in ctx.Problems
+            var problems = from problem in context.Problems
                 orderby problem.CreateDate
                 descending
                 select problem;
@@ -72,8 +69,6 @@ namespace OnlineJudge.Repository {
         }
 
         public void CreateProblem(ProblemCreationForm data){
-            var ctx = getContext();
-
             Problem problem = new Problem(){
                 Title = data.Title,
                 Description = data.Description,
@@ -91,27 +86,25 @@ namespace OnlineJudge.Repository {
 
                 CreateDate = DateTime.Now,
                 // todo set to the request sender
-                Creator = ctx.Users.Find(1),
+                Creator = context.Users.Find(1),
             };
 
-            ctx.Problems.Add(problem);
-            ctx.SaveChanges();
+            context.Problems.Add(problem);
+            context.SaveChanges();
         }
 
         public void DeleteProblem(int id){
-            var ctx = getContext();
-            Problem prob = ctx.Problems.Find(id);
+            Problem prob = context.Problems.Find(id);
             if (prob == null){
                 throw new ObjectNotFoundException("Problem record with specified id does not exist");
             }
 
-            ctx.Problems.Remove(prob);
-            ctx.SaveChanges();
+            context.Problems.Remove(prob);
+            context.SaveChanges();
         }
 
         public void UpdateProblem(int id, ProblemCreationForm problem_form){
-            var ctx = getContext();
-            var problem = ctx.Problems.Find(id);
+            var problem = context.Problems.Find(id);
             if (problem == null){
                 throw new ObjectNotFoundException("Problem record with specified id does not exist");
             }
@@ -138,7 +131,7 @@ namespace OnlineJudge.Repository {
             }
             
             
-            ctx.SaveChanges();
+            context.SaveChanges();
         }
     }
 }

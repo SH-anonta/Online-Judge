@@ -12,15 +12,13 @@ namespace OnlineJudge.Repository {
     public partial class DataRepository {
 
         public List<UserListItemData> GetUserList(){
-            var ctx = getContext();
 
-            return UserListItemData.MapTo(ctx.Users);
+            return UserListItemData.MapTo(context.Users);
         }
 
 
         public UserDetailsData GetUserDetails(int id){
-            var ctx = getContext();
-            User user = ctx.Users.Find(id);
+            User user = context.Users.Find(id);
 
             if (user == null){
                 throw new ObjectNotFoundException("User with specified ID not found");
@@ -30,8 +28,7 @@ namespace OnlineJudge.Repository {
         }
 
         public void UpdateUser(int id, UserProfileUpdateForm data){
-            var ctx = getContext();
-            User user = ctx.Users.Find(id);
+            User user = context.Users.Find(id);
 
             if (user == null){
                 throw new ObjectNotFoundException("User with specified ID not found");
@@ -39,9 +36,9 @@ namespace OnlineJudge.Repository {
 
             user.Email = data.Email;
             user.Password = data.Password;
-            user.UserType = ctx.UserTypes.Find(data.UserType);
+            user.UserType = context.UserTypes.Find(data.UserType);
 
-            ctx.SaveChanges();
+            context.SaveChanges();
         }
     }
 }

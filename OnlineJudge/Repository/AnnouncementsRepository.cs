@@ -14,8 +14,7 @@ namespace OnlineJudge.Repository {
         // sort the rows in descending order by create date
         // return skip the first 'from'-1 rows and then return the next 'to' rows
         public List<AnnouncementListItem> GetAnnouncementList(int from, int to = 20){
-            var ctx = getContext();
-            var rows = from s in ctx.Announcements
+            var rows = from s in context.Announcements
                 orderby s.CreateDate
                 descending
                 select s;
@@ -24,8 +23,7 @@ namespace OnlineJudge.Repository {
         }
 
         public List<AnnouncementListItem> GetAnnouncementList(){
-            var ctx = getContext();
-            var rows = from s in ctx.Announcements
+            var rows = from s in context.Announcements
                 orderby s.CreateDate
                 descending 
                 select s;
@@ -34,40 +32,36 @@ namespace OnlineJudge.Repository {
         }      
 
         public AnnouncementsResponseData GetAnnouncementById(int id){
-            var announcement = getContext().Announcements.Find(id);
+            var announcement = context.Announcements.Find(id);
             return new AnnouncementsResponseData(announcement);
         }
 
         public void createAnnouncement(AnnouncementForm data){
-            var ctx = getContext();
             Announcement announcement = new Announcement(){
                 Title = data.Title,
                 Description = data.Description,
                 CreateDate = DateTime.Now,
-                Creator = ctx.Users.First(x => x.UserName == "admin")
+                Creator = context.Users.First(x => x.UserName == "admin")
             };
 
-            ctx.Announcements.Add(announcement);
-            ctx.SaveChanges();
+            context.Announcements.Add(announcement);
+            context.SaveChanges();
         }
 
-        public void UpdateAnnouncement(int id, AnnouncementForm data)
-        {
-            var ctx = getContext();
-            var announcement = ctx.Announcements.Find(id);
+        public void UpdateAnnouncement(int id, AnnouncementForm data){
+            var announcement = context.Announcements.Find(id);
             announcement.Title = data.Title;
             announcement.Description = data.Description ;
-            ctx.SaveChanges();
+            context.SaveChanges();
         }
 
         public void DeleteAnnouncement(int id){
-            var ctx = getContext();
-            var announcement = ctx.Announcements.Find(id);
+            var announcement = context.Announcements.Find(id);
 
             if(announcement == null){ throw new ObjectNotFoundException();}
 
-            ctx.Announcements.Remove(announcement);
-            ctx.SaveChanges();
+            context.Announcements.Remove(announcement);
+            context.SaveChanges();
         }
     }
 }
