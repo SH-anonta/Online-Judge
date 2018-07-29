@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Routing;
+using OnlineJudge.FormModels;
 using OnlineJudge.Repository;
 
 namespace OnlineJudge.Controllers{
@@ -21,8 +22,7 @@ namespace OnlineJudge.Controllers{
             try{
                 return Ok(data_repository.GetUserDetails(id));
             }
-            catch (ObjectNotFoundException e)
-            {
+            catch (ObjectNotFoundException e){
                 return NotFound();
             }
         }
@@ -35,9 +35,14 @@ namespace OnlineJudge.Controllers{
 
         [HttpPost]
         [Route("{id}/edit")]
-        public IHttpActionResult UpdateUser(int id){
-            // todo implement
-            return Ok();
+        public IHttpActionResult UpdateUser([FromBody]UserProfileUpdateForm data, int id){
+            try{
+                data_repository.UpdateUser(id, data);
+                return Ok();
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
         }
 
     }
