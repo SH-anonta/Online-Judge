@@ -11,12 +11,15 @@ namespace OnlineJudge.Models {
         public string Email{set; get;}
         public string Password{set; get;}
         
-        // todo add user type
-//        public virtual UserType UserType{set; get;}
+        public virtual UserType UserType{set; get;}
+    }
+
+    public enum UserTypeEnum{
+        Admin, User, Judge
     }
 
     public class UserType {
-        public int Id{set; get;}
+        public UserTypeEnum Id{set; get;}
         public string TypeName{set; get;}
     }
 }

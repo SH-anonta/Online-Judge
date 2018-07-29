@@ -30,7 +30,7 @@ namespace OnlineJudge.Models {
 
 
         public DbSet<User> Users { get; set; }
-//        public DbSet<UserType> UserTypes { get; set; }
+        public DbSet<UserType> UserTypes { get; set; }
     }
 
 //    public class OjDBInitializer :  DropCreateDatabaseAlways<OjDBContext>{
@@ -39,9 +39,14 @@ namespace OnlineJudge.Models {
             
             // Important: Order of seeding data is important
             // Important: Some seed data rely on other seed data, so context.SaveChanges() has to be called multiple time
+            
 
             // seed for production
-            context.Users.AddRange(SeedDataRepository.getUsers());
+            context.UserTypes.AddRange(SeedDataRepository.getUserTypes());
+            context.SaveChanges();
+
+            // seed for production
+            context.Users.AddRange(SeedDataRepository.getUsers(context));
             context.SaveChanges();
 
             // seed only for development

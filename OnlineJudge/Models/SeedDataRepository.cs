@@ -2062,14 +2062,36 @@ public static string intput= @"1000
             return array;
         }
 
-        public static List<User> getUsers(){
+        public static List<UserType> getUserTypes(){
+            var types = new List<UserType>();
+
+            types.Add(new UserType(){
+                Id = UserTypeEnum.Admin,
+                TypeName = "Admin"
+            });
+
+            types.Add(new UserType(){
+                Id = UserTypeEnum.User,
+                TypeName = "User"
+            });
+
+            types.Add(new UserType(){
+                Id = UserTypeEnum.Judge,
+                TypeName = "Judge"
+            });
+
+            return types;
+        }
+
+        public static List<User> getUsers(OjDBContext ctx){
             var users = new List<User>();
 
             users.Add(new User()
             {
                 UserName = "admin",
                 Email = "admin@admin.min",
-                Password = "password"
+                Password = "password",
+                UserType = ctx.UserTypes.First(x => x.TypeName == "Admin")
             });
 
             return users;
