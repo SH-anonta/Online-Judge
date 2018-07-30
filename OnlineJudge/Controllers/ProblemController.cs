@@ -21,7 +21,7 @@ namespace OnlineJudge.Controllers{
         private static readonly log4net.ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
-        public DataRepository data_repository = new DataRepository();
+        public ProblemRepository data_repository = new ProblemRepository();
         
         // return all problems in order of creation date
         [Route("")]

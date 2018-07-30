@@ -12,7 +12,7 @@ using OnlineJudge.Repository;
 namespace OnlineJudge.Controllers{
     [RoutePrefix("api/users")]
     public class UserController : ApiController{
-        public DataRepository data_repository= new DataRepository();
+        public UserRepository data_repository= new UserRepository();
 
 
         [HttpGet]

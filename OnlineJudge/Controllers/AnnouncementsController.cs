@@ -8,7 +8,7 @@ using OnlineJudge.ResponseModels;
 namespace OnlineJudge.Controllers{
     [RoutePrefix("api/announcements")]
     public class AnnouncementsController : ApiController{
-        public DataRepository data_repository = new DataRepository();
+        public AnnouncementRepository announcement_repository = new AnnouncementRepository();
 
         // todo add object not found exception handlers to acitons 
         public AnnouncementsController(): base(){
@@ -19,33 +19,33 @@ namespace OnlineJudge.Controllers{
         [HttpGet]
         [Route("")]
         public IHttpActionResult AnnouncementList(){
-            return Ok(data_repository.GetAnnouncementList());
+            return Ok(announcement_repository.GetAnnouncementList());
         }
 
         [HttpGet]
         [Route("")]
         public IHttpActionResult AnnouncementList(int from, int to){
-            return Ok(data_repository.GetAnnouncementList(from, to));
+            return Ok(announcement_repository.GetAnnouncementList(from, to));
         }
 
 
         [HttpPost]
         [Route("create")]
         public IHttpActionResult Create([FromBody] AnnouncementFormData data){
-            data_repository.createAnnouncement(data);
+            announcement_repository.createAnnouncement(data);
             return Ok();
         }
 
         [HttpGet]
         [Route("{id}")]
         public IHttpActionResult AnnoucementDetails(int id){
-            return Ok(data_repository.GetAnnouncementById(id));
+            return Ok(announcement_repository.GetAnnouncementById(id));
         }
 
         [HttpPost]
         [Route("{id}/edit")]
         public IHttpActionResult EditAnnouncement(int id, [FromBody] AnnouncementFormData data){
-            data_repository.UpdateAnnouncement(id, data);
+            announcement_repository.UpdateAnnouncement(id, data);
             return Ok();
         }
 
@@ -53,7 +53,7 @@ namespace OnlineJudge.Controllers{
         [Route("{id}/delete")]
         public IHttpActionResult DeleteAnnouncement(int id){
             try{
-                data_repository.DeleteAnnouncement(id);
+                announcement_repository.DeleteAnnouncement(id);
                 return Ok();
             }
             catch (ObjectNotFoundException e){

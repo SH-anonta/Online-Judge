@@ -11,7 +11,18 @@ using OnlineJudge.Models;
 using OnlineJudge.ResponseModels;
 
 namespace OnlineJudge.Repository {
-    public partial class DataRepository {
+    public partial class ProblemRepository {
+
+        public OjDBContext context;
+
+        public ProblemRepository(){
+            this.context = new OjDBContext();
+        }
+
+        public ProblemRepository(OjDBContext context){
+            this.context = context;
+        }
+
 
         private Problem FindProblemById(int id){
             var problem = context.Problems.Find(id);

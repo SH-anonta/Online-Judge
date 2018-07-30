@@ -10,10 +10,19 @@ using OnlineJudge.Models;
 using OnlineJudge.ResponseModels;
 
 namespace OnlineJudge.Repository {
-    public partial class DataRepository {
+    public partial class UserRepository {
+
+        public OjDBContext context;
+
+        public UserRepository(){
+            this.context = new OjDBContext();
+        }
+
+        public UserRepository(OjDBContext context){
+            this.context = context;
+        }
 
         public List<UserListItemData> GetUserList(){
-
             return UserListItemData.MapTo(context.Users);
         }
 

@@ -4,7 +4,5 @@ using System.Linq;
 using System.Web;
 
 namespace OnlineJudge.Repository {
-    public partial class DataRepository {
-
-    }
+    
 }

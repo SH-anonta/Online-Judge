@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Linq;
 using System.Web;
@@ -9,7 +10,16 @@ using OnlineJudge.Models;
 using OnlineJudge.ResponseModels;
 
 namespace OnlineJudge.Repository {
-    public partial class DataRepository {
+    public partial class AnnouncementRepository {
+        public OjDBContext context = new OjDBContext();
+
+        public AnnouncementRepository(OjDBContext context){
+            this.context = context;
+        }
+
+        public AnnouncementRepository(){
+            this.context = new OjDBContext();
+        }
 
         // sort the rows in descending order by create date
         // return skip the first 'from'-1 rows and then return the next 'to' rows
