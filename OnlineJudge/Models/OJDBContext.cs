@@ -25,6 +25,7 @@ namespace OnlineJudge.Models {
         public DbSet<Problem> Problems { get; set; }
         public DbSet<Submission> Submissions { get; set; }
         public DbSet<SubmissionStatus> SubmissionStatus { get; set; }
+        public DbSet<ProgrammingLanguage> ProgrammingLanguages { get; set; }
 
         public DbSet<Announcement> Announcements { get; set; }
 
@@ -51,6 +52,10 @@ namespace OnlineJudge.Models {
 
             // seed only for development
             context.Announcements.AddRange(SeedDataRepository.getAnnouncements(context));
+            context.SaveChanges();
+
+            // seed for production
+            context.ProgrammingLanguages.AddRange(SeedDataRepository.GetProgrammingLanguages());
             context.SaveChanges();
 
             // seed for production

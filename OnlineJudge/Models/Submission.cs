@@ -52,7 +52,7 @@ namespace OnlineJudge.Models {
     }
 
     public class ProgrammingLanguage{
-        public int Id{set; get;}
+        public ProgrammingLanguageEnum Id{set; get;}
         public string Name{set; get;}
     }
 }

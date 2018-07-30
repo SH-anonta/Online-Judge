@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
+using JudgeCodeRunner;
 
 namespace OnlineJudge.Models {
 
@@ -2095,5 +2097,29 @@ public static string intput= @"1000
 
             return users;
         }
+
+        public static List<ProgrammingLanguage> GetProgrammingLanguages(){
+            var seeds = new List<ProgrammingLanguage>();
+
+            seeds.Add(new ProgrammingLanguage(){
+                Id= ProgrammingLanguageEnum.C,
+                Name = "C"
+            });
+            seeds.Add(new ProgrammingLanguage(){
+                Id= ProgrammingLanguageEnum.Cpp89,
+                Name = "C++ (98)"
+            });
+            seeds.Add(new ProgrammingLanguage(){
+                Id= ProgrammingLanguageEnum.Cpp11,
+                Name = "C++ (11)"
+            });
+            seeds.Add(new ProgrammingLanguage(){
+                Id= ProgrammingLanguageEnum.Python3,
+                Name = "Python 3"
+            });
+
+            return seeds;
+        }
+
     }
 }
