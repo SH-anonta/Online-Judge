@@ -31,7 +31,7 @@ namespace OnlineJudge.Controllers{
 
         [HttpPost]
         [Route("create")]
-        public IHttpActionResult Create([FromBody] AnnouncementForm data){
+        public IHttpActionResult Create([FromBody] AnnouncementFormData data){
             data_repository.createAnnouncement(data);
             return Ok();
         }
@@ -44,7 +44,7 @@ namespace OnlineJudge.Controllers{
 
         [HttpPost]
         [Route("{id}/edit")]
-        public IHttpActionResult EditAnnouncement(int id, [FromBody] AnnouncementForm data){
+        public IHttpActionResult EditAnnouncement(int id, [FromBody] AnnouncementFormData data){
             data_repository.UpdateAnnouncement(id, data);
             return Ok();
         }

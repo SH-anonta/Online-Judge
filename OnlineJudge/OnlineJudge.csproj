@@ -172,7 +172,8 @@
     <Compile Include="Controllers\ProblemController.cs" />
     <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="FormModels\AnnouncementForm.cs" />
+    <Compile Include="FormModels\AnnouncementFormData.cs" />
+    <Compile Include="FormModels\FormData.cs" />
     <Compile Include="FormModels\ProblemForms.cs" />
     <Compile Include="FormModels\UserForms.cs" />
     <Compile Include="Global.asax.cs">

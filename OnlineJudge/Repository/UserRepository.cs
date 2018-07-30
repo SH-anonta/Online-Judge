@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Web;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
@@ -40,5 +41,7 @@ namespace OnlineJudge.Repository {
 
             context.SaveChanges();
         }
+
+
     }
 }

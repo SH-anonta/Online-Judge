@@ -36,7 +36,7 @@ namespace OnlineJudge.Repository {
             return new AnnouncementsResponseData(announcement);
         }
 
-        public void createAnnouncement(AnnouncementForm data){
+        public void createAnnouncement(AnnouncementFormData data){
             Announcement announcement = new Announcement(){
                 Title = data.Title,
                 Description = data.Description,
@@ -48,7 +48,7 @@ namespace OnlineJudge.Repository {
             context.SaveChanges();
         }
 
-        public void UpdateAnnouncement(int id, AnnouncementForm data){
+        public void UpdateAnnouncement(int id, AnnouncementFormData data){
             var announcement = context.Announcements.Find(id);
             announcement.Title = data.Title;
             announcement.Description = data.Description ;
