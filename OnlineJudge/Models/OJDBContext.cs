@@ -29,9 +29,16 @@ namespace OnlineJudge.Models {
 
         public DbSet<Announcement> Announcements { get; set; }
 
-
         public DbSet<User> Users { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
+        
+        
+        public DbSet<Contest> Contests { get; set; }
+        public DbSet<ContestProblem> ContestProblems { get; set; }
+        public DbSet<Contestant> Contestants { get; set; }
+        public DbSet<ContestantSubmission> ContestantSubmissions { get; set; }
+
+
     }
 
     public class OjDBInitializer :  DropCreateDatabaseAlways<OjDBContext>{

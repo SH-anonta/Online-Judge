@@ -180,6 +180,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Announcement.cs" />
+    <Compile Include="Models\Contest.cs" />
     <Compile Include="Models\OJDBContext.cs" />
     <Compile Include="Models\Problem.cs" />
     <Compile Include="Models\SeedDataRepository.cs" />
