@@ -4,16 +4,38 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using OnlineJudge.Repository;
+using OnlineJudge.ResponseModels;
 
 namespace OnlineJudge.Controllers{
-    [RoutePrefix("contests")]
+    [RoutePrefix("api/contests")]
     public class ContestController : ApiController{
-        
+        private ContestRepository contest_repository;
+
+        public ContestController(){
+            contest_repository = new ContestRepository();
+        }
+
+        public ContestController(ContestRepository repo){
+            contest_repository = repo;
+        }
+
         [HttpGet]
         [Route("")]
         public IHttpActionResult ContestList(){
-            // todo implement
-            return Ok();
+            // returns a list of all contests
+
+            var all_contests= contest_repository.GetAllContestList();
+            return Ok(ContestListItem.MapTo(all_contests));
+        }
+
+        [HttpGet]
+        [Route("")]
+        public IHttpActionResult ContestList(int from, int to){
+            // returns a list of most recent contests
+
+            var all_contests= contest_repository.GetAllContestList();
+            return Ok(ContestListItem.MapTo(all_contests));
         }
 
         [HttpGet]

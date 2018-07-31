@@ -190,9 +190,11 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AnnouncementsRepository.cs" />
+    <Compile Include="Repository\ContestRepository.cs" />
     <Compile Include="Repository\ProblemsRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="ResponseModels\AnnouncementResponses.cs" />
+    <Compile Include="ResponseModels\ContestResponseModels.cs" />
     <Compile Include="ResponseModels\ProblemResponseModels.cs" />
     <Compile Include="ResponseModels\SharedResponses.cs" />
     <Compile Include="ResponseModels\SubmissionResponses.cs" />

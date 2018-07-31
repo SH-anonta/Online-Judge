@@ -29,7 +29,7 @@ namespace OnlineJudge.Repository {
                 descending
                 select s;
 
-            return AnnouncementListItem.MapTo(rows.Skip(from-1).Take(to));
+            return AnnouncementListItem.MapTo(rows.Skip(from-1).Take(to-from+1));
         }
 
         public List<AnnouncementListItem> GetAnnouncementList(){
