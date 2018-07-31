@@ -12,8 +12,10 @@ namespace OnlineJudge {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             // order of routes is important,
-            // angular route must be the last route 
             
+            routes.MapMvcAttributeRoutes();
+            
+            // angular route must be the last route 
             mapAngularRoutes(routes);
 
 //            routes.MapRoute(
