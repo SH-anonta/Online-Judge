@@ -23,27 +23,27 @@ namespace OnlineJudge.Repository {
 
         // sort the rows in descending order by create date
         // return skip the first 'from'-1 rows and then return the next 'to' rows
-        public List<AnnouncementListItem> GetAnnouncementList(int from, int to = 20){
+        public IQueryable<Announcement> GetAnnouncementList(int from, int to = 20){
             var rows = from s in context.Announcements
                 orderby s.CreateDate
                 descending
                 select s;
 
-            return AnnouncementListItem.MapTo(rows.Skip(from-1).Take(to-from+1));
+            return rows.Skip(from-1).Take(to-from+1);
         }
 
-        public List<AnnouncementListItem> GetAnnouncementList(){
+        public IQueryable<Announcement> GetAnnouncementList(){
             var rows = from s in context.Announcements
                 orderby s.CreateDate
                 descending 
                 select s;
 
-            return AnnouncementListItem.MapTo(rows);
+            return rows;
         }      
 
-        public AnnouncementsResponseData GetAnnouncementById(int id){
+        public Announcement GetAnnouncementById(int id){
             var announcement = context.Announcements.Find(id);
-            return new AnnouncementsResponseData(announcement);
+            return announcement;
         }
 
         public void createAnnouncement(AnnouncementFormData data){

@@ -2,32 +2,37 @@
 using System.Data.Entity.Core;
 using System.Web.Http;
 using OnlineJudge.FormModels;
+using OnlineJudge.Models;
 using OnlineJudge.Repository;
 using OnlineJudge.ResponseModels;
 
 namespace OnlineJudge.Controllers{
     [RoutePrefix("api/announcements")]
     public class AnnouncementsController : ApiController{
-        public AnnouncementRepository announcement_repository = new AnnouncementRepository();
+        private AnnouncementRepository announcement_repository;
 
         // todo add object not found exception handlers to acitons 
         public AnnouncementsController(): base(){
-            
+            announcement_repository = new AnnouncementRepository();
         }
 
+        public AnnouncementsController(AnnouncementRepository repo): base(){
+            announcement_repository = repo;
+        }
 
         [HttpGet]
         [Route("")]
         public IHttpActionResult AnnouncementList(){
-            return Ok(announcement_repository.GetAnnouncementList());
+            var announcements = announcement_repository.GetAnnouncementList();
+            return Ok(AnnouncementListItem.MapTo(announcements));
         }
 
         [HttpGet]
         [Route("")]
         public IHttpActionResult AnnouncementList(int from, int to){
-            return Ok(announcement_repository.GetAnnouncementList(from, to));
+            var announcements = announcement_repository.GetAnnouncementList(from, to);
+            return Ok(AnnouncementListItem.MapTo(announcements));
         }
-
 
         [HttpPost]
         [Route("create")]
@@ -39,7 +44,8 @@ namespace OnlineJudge.Controllers{
         [HttpGet]
         [Route("{id}")]
         public IHttpActionResult AnnoucementDetails(int id){
-            return Ok(announcement_repository.GetAnnouncementById(id));
+            Announcement announcement = announcement_repository.GetAnnouncementById(id);
+            return Ok(new AnnouncementsResponseData(announcement));
         }
 
         [HttpPost]

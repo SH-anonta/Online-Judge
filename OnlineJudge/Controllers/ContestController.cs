@@ -25,16 +25,17 @@ namespace OnlineJudge.Controllers{
         public IHttpActionResult ContestList(){
             // returns a list of all contests
 
-            var all_contests= contest_repository.GetAllContestList();
+            var all_contests= contest_repository.GetAllContestsList();
             return Ok(ContestListItem.MapTo(all_contests));
         }
+
 
         [HttpGet]
         [Route("")]
         public IHttpActionResult ContestList(int from, int to){
             // returns a list of most recent contests
 
-            var all_contests= contest_repository.GetAllContestList();
+            var all_contests= contest_repository.GetRecentContestsList(from, to);
             return Ok(ContestListItem.MapTo(all_contests));
         }
 

@@ -16,14 +16,14 @@ namespace OnlineJudge.Repository {
             this.context= context;
         }
 
-        public IEnumerable<Contest> GetAllContestList(){
+        public IEnumerable<Contest> GetAllContestsList(){
             return from contest in context.Contests
                 orderby contest.StartDate
                 select contest;
         }
 
-        public IEnumerable<Contest> GetAllContestList(int from, int to){
-            var contests = GetAllContestList();
+        public IEnumerable<Contest> GetRecentContestsList(int from, int to){
+            var contests = GetAllContestsList();
             return contests.Skip(from - 1).Take(to-from+1);
         }
     }
