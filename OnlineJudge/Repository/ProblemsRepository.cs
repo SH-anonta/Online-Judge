@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.IO;
 using System.Linq;
@@ -35,13 +34,13 @@ namespace OnlineJudge.Repository {
         }
 
         // get all problems in descending order of their creation
-        public List<ProblemListItem> GetProblemList(){
+        public IQueryable<Problem> GetAllProblemsList(){
             var problems = from problem in context.Problems
                 orderby problem.CreateDate
                 descending
                 select problem;
 
-            return ProblemListItem.MapTo(problems);
+            return problems;
         }
 
         public ProblemDetails GetProblemDetails(int id){

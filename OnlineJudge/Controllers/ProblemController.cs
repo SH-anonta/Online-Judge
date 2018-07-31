@@ -27,7 +27,8 @@ namespace OnlineJudge.Controllers{
         [Route("")]
         [HttpGet]
         public IHttpActionResult GetProblemList(){
-            return Ok(data_repository.GetProblemList());
+            var problems = data_repository.GetAllProblemsList();
+            return Ok(ProblemListItem.MapTo(problems));
         }
 
         [Route("{Id}")]

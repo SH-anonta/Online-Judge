@@ -7,7 +7,6 @@ using System.Web;
 using System.Web.Http;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
-using OnlineJudge.ResponseModels;
 
 namespace OnlineJudge.Repository {
     public partial class AnnouncementRepository {
