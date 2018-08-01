@@ -13,11 +13,11 @@ namespace OnlineJudge.ResponseModels {
         public string Creator { set; get; }
 
         public ContestListItem(Contest contest){
-            this.Id = Id;
-            this.Title = Title; 
-            this.StartDate = StartDate; 
-            this.EndDate = EndDate; 
-            this.Creator = Creator; 
+            this.Id = contest.Id;
+            this.Title = contest.Title; 
+            this.StartDate = contest.StartDate; 
+            this.EndDate = contest.EndDate; 
+            this.Creator = contest.Creator.UserName; 
         }
 
 

@@ -68,10 +68,16 @@ namespace OnlineJudge.Models {
             // seed for production
             context.SubmissionStatus.AddRange(SubmissionStatus.getSeedData());
             context.SaveChanges();
-
+            
             // seed only for development
             context.Problems.AddRange(SeedDataRepository.getProblems(context));
             context.SaveChanges();
+
+            // seed only for development
+            context.Contests.AddRange(SeedDataRepository.GetContests(context));
+            context.SaveChanges();
+            
+            
             
 
             // this must be at the end of this function

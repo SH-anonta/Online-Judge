@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
+using System.Web.UI.WebControls;
 using JudgeCodeRunner;
 
 namespace OnlineJudge.Models {
@@ -2121,5 +2122,38 @@ public static string intput= @"1000
             return seeds;
         }
 
+        public static List<Contest> GetContests(OjDBContext ctx){
+            var contests = new List<Contest>();
+
+            Problem problem = ctx.Problems.First();
+
+            var contest = new Contest(){
+                Title = "Practice contest #8",
+                Description = "Contest Contest",
+                Creator = ctx.Users.First(),
+                Problems = new List<ContestProblem>(),
+                Contestants = new List<Contestant>(),
+
+                StartDate = DateTime.Now,
+                EndDate = DateTime.MaxValue,
+            };
+
+            ContestProblem contest_problem = new ContestProblem(){
+                Contest = contest,
+                Problem =  problem,
+            };
+
+            Contestant contestant = new Contestant(){
+                Score = 0,
+                User = ctx.Users.First()
+            };
+
+            contest.Problems.Add(contest_problem);
+            contest.Contestants.Add(contestant);
+
+            contests.Add(contest);
+
+            return contests;
+        }
     }
 }
