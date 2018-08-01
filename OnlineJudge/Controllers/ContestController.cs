@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using OnlineJudge.Models;
 using OnlineJudge.Repository;
 using OnlineJudge.ResponseModels;
 
@@ -42,8 +44,15 @@ namespace OnlineJudge.Controllers{
         [HttpGet]
         [Route("{contest_id}")]
         public IHttpActionResult ContestDetails(int contest_id){
-            // todo implement
-            return Ok();
+            try{
+                var contest = contest_repository.GetContestById(contest_id);
+                return Ok(new ContestDetailsData(contest));
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
+            
+            
         }
 
         [HttpPost]

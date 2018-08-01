@@ -22,7 +22,7 @@ namespace OnlineJudge.ResponseModels {
             this.IsPublic = problem.IsPublic; 
         }
 
-        public static List<ProblemListItem> MapTo(IQueryable<Problem> problems){
+        public static List<ProblemListItem> MapTo(IEnumerable<Problem> problems){
             var mapped = new List<ProblemListItem>();
 
             foreach (var problem in problems){

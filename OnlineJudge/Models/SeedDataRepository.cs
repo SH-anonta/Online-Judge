@@ -2131,13 +2131,11 @@ public static string intput= @"1000
                 Title = "Practice contest #8",
                 Description = "Contest Contest",
                 Creator = ctx.Users.First(),
-                Problems = new List<ContestProblem>(),
-                Contestants = new List<Contestant>(),
 
                 StartDate = DateTime.Now,
                 EndDate = DateTime.MaxValue,
             };
-
+            
             ContestProblem contest_problem = new ContestProblem(){
                 Contest = contest,
                 Problem =  problem,
@@ -2147,6 +2145,10 @@ public static string intput= @"1000
                 Score = 0,
                 User = ctx.Users.First()
             };
+
+//            ctx.ContestProblems.Add(contest_problem);
+//            ctx.Contestants.Add(contestant);
+//            ctx.SaveChanges();
 
             contest.Problems.Add(contest_problem);
             contest.Contestants.Add(contestant);

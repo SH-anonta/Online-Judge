@@ -17,7 +17,13 @@ namespace OnlineJudge.Models {
         
         public ICollection<ContestProblem> Problems { set; get; }
         public ICollection<Contestant> Contestants { set; get; }
-        public ICollection<ContestantSubmission> Submissions { set; get; }
+        public ICollection<ContestSubmission> Submissions { set; get; }
+
+        public Contest(){
+            this.Problems = new HashSet<ContestProblem>();
+            this.Contestants = new HashSet<Contestant>();
+            this.Submissions = new HashSet<ContestSubmission>();
+        }
     }
 
     public class ContestProblem {
@@ -28,7 +34,7 @@ namespace OnlineJudge.Models {
         public virtual Contest Contest { set; get; }
         public virtual Problem Problem { set; get; }
         
-        public ICollection<ContestantSubmission> Submissions { set; get; }
+        public ICollection<ContestSubmission> Submissions { set; get; }
     }
 
 
@@ -38,10 +44,10 @@ namespace OnlineJudge.Models {
         public virtual User User { set; get; }
         public virtual Contest Contest { set; get; }
 
-        public ICollection<ContestantSubmission> Submissions { set; get; }
+        public ICollection<ContestSubmission> Submissions { set; get; }
     }
 
-    public class ContestantSubmission{
+    public class ContestSubmission{
         public int Id{ set; get; }
         public int Score { set; get; }
 
