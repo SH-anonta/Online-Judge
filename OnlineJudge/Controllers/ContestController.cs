@@ -58,13 +58,13 @@ namespace OnlineJudge.Controllers{
         [HttpPost]
         [Route("{contest_id}/register")]
         public IHttpActionResult ContestRegistration(int contest_id){
-            try
-            {
-                var contestant = contest_repository.RegisterUserForContest(contest_id, 1);
-                return Ok(contestant.Contest.Title);
+            
+            try{
+                // todo replace user id 2 with the user sending the request
+                contest_repository.RegisterUserForContest(contest_id, 2);
+                return Ok();
             }
-            catch (ObjectNotFoundException e)
-            {
+            catch (ObjectNotFoundException e){
                 return NotFound();
             }
             catch (InvalidOperationException e){

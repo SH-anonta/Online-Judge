@@ -2093,7 +2093,23 @@ public static string intput= @"1000
                 UserName = "admin",
                 Email = "admin@admin.min",
                 Password = "password",
-                UserType = ctx.UserTypes.First(x => x.TypeName == "Admin")
+                UserType = ctx.UserTypes.Find(UserTypeEnum.Admin)
+            });
+
+            users.Add(new User()
+            {
+                UserName = "user",
+                Email = "user@oj.com",
+                Password = "password",
+                UserType = ctx.UserTypes.Find(UserTypeEnum.User)
+            });
+
+            users.Add(new User()
+            {
+                UserName = "judge",
+                Email = "judge@oj.com",
+                Password = "password",
+                UserType = ctx.UserTypes.Find(UserTypeEnum.Judge)
             });
 
             return users;
