@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using OnlineJudge.Models;
@@ -29,7 +31,8 @@ namespace OnlineJudge.Repository {
         }
 
         public Contest GetContestById(int contest_id){
-            Contest contest = context.Contests.Find(contest_id);
+//            Contest contest = context.Contests.Find(contest_id);
+            Contest contest = context.Contests.Include(x => x.Problems).First();
 
             if (contest == null){
                 throw new ObjectNotFoundException("Contest entry with specified id not found");
