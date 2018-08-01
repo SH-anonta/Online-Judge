@@ -31,14 +31,42 @@ namespace OnlineJudge.Repository {
         }
 
         public Contest GetContestById(int contest_id){
-//            Contest contest = context.Contests.Find(contest_id);
-            Contest contest = context.Contests.Include(x => x.Problems).First();
+            Contest contest = context.Contests.Include(x => x.Problems).FirstOrDefault(x => x.Id== contest_id);
 
             if (contest == null){
                 throw new ObjectNotFoundException("Contest entry with specified id not found");
             }
 
             return contest;
+        }
+
+        public Contestant RegisterUserForContest(int contest_id, int user_id){
+            // todo implemet with, check if user is already registered
+
+            Contest contest = context.Contests.Include(x=> x.Contestants).FirstOrDefault(x => x.Id == contest_id);
+            
+            var user = context.Users.Find(user_id);
+
+            if (contest == null){
+                throw new ObjectNotFoundException("Contest with specified id not found");
+            }
+
+            if (user == null){
+                throw new ObjectNotFoundException("User with specified id not found");
+            }
+
+            // if user is already registered for this contest
+            if (contest.Contestants.Count(x => x.User == user) > 0){
+                throw new InvalidOperationException("User is already registered for contest");
+            }
+
+            Trace.WriteLine(contest.Contestants.Count);
+            var contestant = new Contestant(user);
+            
+            contest.Contestants.Add(contestant);
+            context.SaveChanges();
+            
+            return contestant;
         }
     }
 }

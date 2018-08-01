@@ -2141,10 +2141,7 @@ public static string intput= @"1000
                 Problem =  problem,
             };
 
-            Contestant contestant = new Contestant(){
-                Score = 0,
-                User = ctx.Users.First()
-            };
+            Contestant contestant = new Contestant(ctx.Users.First());
 
 //            ctx.ContestProblems.Add(contest_problem);
 //            ctx.Contestants.Add(contestant);

@@ -45,6 +45,13 @@ namespace OnlineJudge.Models {
         public virtual Contest Contest { set; get; }
 
         public ICollection<ContestSubmission> Submissions { set; get; }
+
+        public Contestant(){}
+        public Contestant(User user){
+            this.User = user;
+            this.Score = 0;
+            this.Submissions = new HashSet<ContestSubmission>();
+        }
     }
 
     public class ContestSubmission{
