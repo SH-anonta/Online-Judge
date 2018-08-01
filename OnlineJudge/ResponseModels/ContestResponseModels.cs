@@ -91,7 +91,28 @@ namespace OnlineJudge.ResponseModels {
         }
     }
 
-    
+    class ContestantListItemData{
+        public int UserId { set; get; }
+        public string UserName { set; get; }
+        public int Score { set; get; }
+
+
+        public ContestantListItemData(Contestant contestant){
+            this.UserId = contestant.User.Id;
+            this.UserName = contestant.User.UserName;
+            this.Score= contestant.Score;
+        }
+
+        public static List<ContestantListItemData> MapTo(IEnumerable<Contestant> contestants){
+            var mapped = new List<ContestantListItemData>();
+
+            foreach (var contestant in contestants){
+                mapped.Add(new ContestantListItemData(contestant));
+            }
+
+            return mapped;
+        }
+    }
 
     
 }

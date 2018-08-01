@@ -68,5 +68,15 @@ namespace OnlineJudge.Repository {
             
             return contestant;
         }
+
+        public IEnumerable<Contestant> GetContestantsOfContest(int contest_id){
+            var contest = context.Contests.Include(x=>x.Contestants).FirstOrDefault(x => x.Id == contest_id);
+
+            if (contest == null){
+                throw new ObjectNotFoundException();
+            }
+
+            return contest.Contestants;
+        }
     }
 }
