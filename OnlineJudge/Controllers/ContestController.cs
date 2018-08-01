@@ -51,8 +51,6 @@ namespace OnlineJudge.Controllers{
             catch (ObjectNotFoundException e){
                 return NotFound();
             }
-            
-            
         }
 
         [HttpPost]
@@ -102,14 +100,16 @@ namespace OnlineJudge.Controllers{
 
         [HttpGet]
         [Route("{contest_id}/problems/{problem_no}")]
-        public IHttpActionResult ContestProblemDetails(int contest_id, string problem_no){
-            // todo implement
-            return Ok();
+        public IHttpActionResult ContestProblemDetails(int contest_id, int problem_no)
+        {
+            var conest_prblem = contest_repository.GetContestProblem(contest_id, problem_no);
+
+            return Ok(new ContestProblemDetailsData(conest_prblem));
         }
 
         [HttpPost]
         [Route("{contest_id}/problems/{problem_no}/submit")]
-        public IHttpActionResult ContestProblemSubmit(int contest_id, string problem_no){
+        public IHttpActionResult ContestProblemSubmit(int contest_id, int problem_no){
             // todo implement
             return Ok();
         }
@@ -117,7 +117,7 @@ namespace OnlineJudge.Controllers{
         // submissions
         [HttpGet]
         [Route("{contest_id}/problems/{problem_no}/submissions")]
-        public IHttpActionResult ContestProblemSubmissionsResult(int contest_id, string problem_no){
+        public IHttpActionResult ContestProblemSubmissionsResult(int contest_id, int problem_no){
             // todo implement
             return Ok();
         }

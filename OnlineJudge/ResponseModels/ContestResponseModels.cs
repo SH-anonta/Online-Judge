@@ -114,5 +114,14 @@ namespace OnlineJudge.ResponseModels {
         }
     }
 
-    
+    class ContestProblemDetailsData{
+        public ProblemDetails problem_details { set; get; }
+        public int Order { set; get; }
+
+        public ContestProblemDetailsData(ContestProblem problem){
+            this.problem_details = new ProblemDetails(problem.Problem);
+            this.Order = problem.Order;
+        }
+    }
+
 }

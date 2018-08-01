@@ -6,10 +6,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using OnlineJudge.Models;
+using OnlineJudge.ResponseModels;
 
 namespace OnlineJudge.Repository {
     public class ContestRepository{
         private OjDBContext context;
+
 
         public ContestRepository(){
             this.context= new OjDBContext();
@@ -41,8 +43,6 @@ namespace OnlineJudge.Repository {
         }
 
         public Contestant RegisterUserForContest(int contest_id, int user_id){
-            // todo implemet with, check if user is already registered
-
             Contest contest = context.Contests.Include(x=> x.Contestants).FirstOrDefault(x => x.Id == contest_id);
             
             var user = context.Users.Find(user_id);
@@ -77,6 +77,26 @@ namespace OnlineJudge.Repository {
             }
 
             return contest.Contestants;
+        }
+
+        public IEnumerable<ContestProblem> GetContestProblems(int contest_id){
+            Contest contest = context.Contests.Include(x=> x.Problems).FirstOrDefault(x => x.Id == contest_id);
+
+            if (contest == null){
+                throw new ObjectNotFoundException("Contest with specified n");
+            }
+
+            return contest.Problems;
+        }
+
+        public ContestProblem GetContestProblem(int contest_id, int problem_order){
+            Contest contest = context.Contests.Include(x=> x.Problems).FirstOrDefault(x => x.Id == contest_id);
+
+            if (contest == null){
+                throw new ObjectNotFoundException("Contest with specified n");
+            }
+
+            return contest.Problems.First(x => x.Order == problem_order);
         }
     }
 }
