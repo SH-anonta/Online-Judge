@@ -105,17 +105,20 @@ namespace OnlineJudge.Repository {
             ContestProblem contest_problem = contest.Problems.FirstOrDefault(x=>x.Order == problem_no);
             Problem problem = contest_problem.Problem;
 
+            // important: problem_repository must be initialized using this.context
+            ProblemRepository problem_repository = new ProblemRepository(this.context);
             //todo check for null values
 
             // todo fix
             User submitter = context.Users.First();
 
-            Submission submission= new Submission(){
-                Submitter = submitter, 
-                Problem = problem,
-                ProgrammingLanguage = context.ProgrammingLanguages.Find(ProgrammingLanguageEnum.Cpp11),
-                Status = context.SubmissionStatus.Find(Verdict.Queueed)
-            };
+            Submission submission = problem_repository.CreateSubmission(submission_data);
+//            Submission submission= new Submission(){
+//                Submitter = submitter, 
+//                Problem = problem,
+//                ProgrammingLanguage = context.ProgrammingLanguages.Find(ProgrammingLanguageEnum.Cpp11),
+//                Status = context.SubmissionStatus.Find(Verdict.Queueed)
+//            };
 
             ContestSubmission contest_submission = new ContestSubmission(){
                 Submitter = context.Contestants.First(x => x.User.Id == submitter.Id),
