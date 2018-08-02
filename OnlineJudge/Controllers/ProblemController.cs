@@ -9,6 +9,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using JudgeCodeRunner;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
 using OnlineJudge.Repository;
@@ -21,13 +22,13 @@ namespace OnlineJudge.Controllers{
         private static readonly log4net.ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
-        public ProblemRepository data_repository = new ProblemRepository();
+        public ProblemRepository problem_repository = new ProblemRepository();
         
         // return all problems in order of creation date
         [Route("")]
         [HttpGet]
         public IHttpActionResult GetProblemList(){
-            var problems = data_repository.GetAllProblemsList();
+            var problems = problem_repository.GetAllProblemsList();
             return Ok(ProblemListItem.MapTo(problems));
         }
 
@@ -35,7 +36,7 @@ namespace OnlineJudge.Controllers{
         [HttpGet]
         public IHttpActionResult GetProblemDetials(int Id){
             try{
-                ProblemDetails problem = data_repository.GetProblemDetails(Id);
+                ProblemDetails problem = problem_repository.GetProblemDetails(Id);
                 return Ok(problem);
             }
             catch (ObjectNotFoundException e){
@@ -63,7 +64,7 @@ namespace OnlineJudge.Controllers{
         [HttpGet]
         public HttpResponseMessage GetProblemInputTestCases(int Id){
             try{
-                MemoryStream mem_stream = data_repository.GetProblemInputTestCases(Id);
+                MemoryStream mem_stream = problem_repository.GetProblemInputTestCases(Id);
                 
                 return CreateTextFileResponse(mem_stream, "input.txt");
 
@@ -78,7 +79,7 @@ namespace OnlineJudge.Controllers{
         [HttpGet]
         public HttpResponseMessage GetProblemOutputTestCases(int Id){
             try{
-                MemoryStream mem_stream = data_repository.GetProblemOutputTestCases(Id);
+                MemoryStream mem_stream = problem_repository.GetProblemOutputTestCases(Id);
                 
                 return CreateTextFileResponse(mem_stream, "output.txt");
 
@@ -112,7 +113,7 @@ namespace OnlineJudge.Controllers{
 
             var problem_form = new ProblemCreationForm(provider.FormData, provider.FileData);
 
-            data_repository.CreateProblem(problem_form);
+            problem_repository.CreateProblem(problem_form);
             
             return Ok();
         }
@@ -140,7 +141,7 @@ namespace OnlineJudge.Controllers{
             var problem_form = new ProblemCreationForm(provider.FormData, provider.FileData);
 
             try{
-                data_repository.UpdateProblem(id, problem_form);
+                problem_repository.UpdateProblem(id, problem_form);
             }
             catch (ObjectNotFoundException e){
                 return InternalServerError(e);
@@ -155,7 +156,7 @@ namespace OnlineJudge.Controllers{
         public IHttpActionResult DeleteProblem(int id){
             try
             {
-                data_repository.DeleteProblem(id);
+                problem_repository.DeleteProblem(id);
             }
             catch (ObjectNotFoundException e){
                 return InternalServerError(e);
@@ -167,10 +168,8 @@ namespace OnlineJudge.Controllers{
         [Route("submit")]
         [HttpPost]
         public IHttpActionResult Submit(SubmissionFormData data){
-            var judge = new JudgeService();
-
             try{
-                judge.judge(data);
+                problem_repository.CreateSubmission(data);
             }
             catch (Exception e){
                 logger.Error("Failed to judge submission", e);

@@ -2,12 +2,15 @@
 using System.Data.Entity.Core;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Web;
 using System.Web.WebPages;
+using JudgeCodeRunner;
 using Microsoft.Ajax.Utilities;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
 using OnlineJudge.ResponseModels;
+using OnlineJudge.Services;
 
 namespace OnlineJudge.Repository {
     public partial class ProblemRepository {
@@ -141,6 +144,49 @@ namespace OnlineJudge.Repository {
             }
             
             
+            context.SaveChanges();
+        }
+
+        public Submission CreateSubmission(SubmissionFormData submission_data){
+            int problem_code = Int32.Parse(submission_data.ProblemCode);
+            var judge = new JudgeService();
+            var problem = context.Problems.Find(problem_code);
+
+
+            var submission = new Submission(){
+                Status = context.SubmissionStatus.Find(Verdict.Running),
+                Problem = problem,
+                SourceCode = submission_data.SolutionCode,
+                SubmissionDate = DateTime.Now,
+                Submitter = context.Users.First(x => x.UserName == "admin")
+            };
+
+            context.Submissions.Add(submission);
+            context.SaveChanges();
+
+            judge.OnSubmissionStatusChange += (sender, e) =>{
+                var result = e.ExecutionResult;
+                submission.Status = context.SubmissionStatus.Find(result.Verdict);
+                submission.RunningTime = result.RunningTime;
+                submission.PeakMemmoryUsage = result.MemmoryUsage;
+                submission.StandardErrorStream= result.ErrorMsg;
+
+                context.SaveChanges();
+            };
+
+            judge.judge(submission_data, problem);
+
+            return submission;
+        }
+
+        public void UpdateSubmissionStatus(int submission_id, Verdict status){
+            Submission submission = context.Submissions.Find(submission_id);
+
+            if (submission == null){
+                throw new ObjectNotFoundException("Submission with specified id not found");
+            }
+
+            submission.Status = context.SubmissionStatus.Find(status);
             context.SaveChanges();
         }
     }
