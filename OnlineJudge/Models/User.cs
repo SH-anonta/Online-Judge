@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -12,6 +13,7 @@ namespace OnlineJudge.Models {
         public string Password{set; get;}
         
         public virtual UserType UserType{set; get;}
+        public ICollection<Submission> Submissions { set; get; }
     }
 
     public enum UserTypeEnum{

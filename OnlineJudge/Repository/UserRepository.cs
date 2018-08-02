@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Core;
-using System.Data.Entity.Migrations;
+using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Web;
+using JudgeCodeRunner;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
 using OnlineJudge.ResponseModels;
@@ -26,6 +28,10 @@ namespace OnlineJudge.Repository {
             return context.Users.Select(x=>x);
         }
 
+        public IEnumerable<Submission> GetUserSubmissions(int user_id){
+            var submissions = context.Submissions.Where(x => x.Submitter.Id == user_id);
+            return submissions;
+        }
 
         public User GetUserDetails(int id){
             User user = context.Users.Find(id);
@@ -51,6 +57,8 @@ namespace OnlineJudge.Repository {
             context.SaveChanges();
         }
 
-
+        public IEnumerable<Contest> GetUserContestHistory(int user_id){
+            return context.Contestants.Where(x => x.User.Id == user_id).Select(x=>x.Contest);
+        }
     }
 }
