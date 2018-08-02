@@ -46,5 +46,17 @@ namespace OnlineJudge.Controllers{
             }
         }
 
+        [HttpGet]
+        [Route("{id}/submissions")]
+        public IHttpActionResult UserSubmissions(int id){
+            return Ok(SubmissionResponseData.MapTo(user_repository.GetUserSubmissions(id)));
+        }
+
+        [HttpGet]
+        [Route("{id}/contests")]
+        public IHttpActionResult GetContestHistory(int id){
+            return Ok(ContestListItem.MapTo(user_repository.GetUserContestHistory(id)));
+        }
+
     }
 }

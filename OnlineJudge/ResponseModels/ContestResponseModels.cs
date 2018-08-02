@@ -124,4 +124,7 @@ namespace OnlineJudge.ResponseModels {
         }
     }
 
+    class ContestHistoryListItemData{
+        // todo implement
+    }
 }

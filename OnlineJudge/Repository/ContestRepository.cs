@@ -125,7 +125,6 @@ namespace OnlineJudge.Repository {
             context.SaveChanges();
 
         }
-        
 
         public IEnumerable<Submission> GetAllSubmissions(int contest_id){
             Contest contest = context.Contests.Include(x => x.Submissions).FirstOrDefault(x=>x.Id == contest_id);
@@ -154,6 +153,37 @@ namespace OnlineJudge.Repository {
                 .FirstOrDefault(x => x.Contest.Id == contest_id && x.Order == problem_no);
 
             return problem.Submissions.Select(x => x.Submission);
+        }
+
+        public void CreateContest(int user_id, ContestCreationFormData data){
+
+            List<ContestProblem> contest_problems = new List<ContestProblem>();
+            var creator = context.Users.Find(user_id);
+
+            foreach(int problem_id in data.Problems){
+                var problem = context.Problems.Find(problem_id);
+                
+
+                if (problem == null){
+                    throw new InvalidOperationException("One or more specified problem IDs were not found");
+                }
+
+                contest_problems.Add(new ContestProblem(){
+                    Problem = problem,
+                });
+            }
+
+            Contest contest = new Contest(){
+                Title = data.Title,
+                Description = data.Description,
+                StartDate = data.StartDate,
+                EndDate = data.EndDate,
+                Problems = contest_problems,
+                Creator = creator
+            };
+
+            context.Contests.Add(contest);
+            context.SaveChanges();
         }
     }
 }

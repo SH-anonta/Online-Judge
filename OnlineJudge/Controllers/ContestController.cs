@@ -74,8 +74,14 @@ namespace OnlineJudge.Controllers{
 
         [HttpPost]
         [Route("create")]
-        public IHttpActionResult ContestCreate(){
-            // todo implement
+        public IHttpActionResult ContestCreate([FromBody]ContestCreationFormData data){
+            try{
+                // todo replace 1 with current user id
+                contest_repository.CreateContest(1, data);
+            }
+            catch (Exception e){
+                return InternalServerError(e);
+            }
             return Ok();
         }
 

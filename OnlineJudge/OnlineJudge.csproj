@@ -175,6 +175,7 @@
     <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="FormModels\AnnouncementFormData.cs" />
+    <Compile Include="FormModels\ContestFormModels.cs" />
     <Compile Include="FormModels\FormData.cs" />
     <Compile Include="FormModels\ProblemForms.cs" />
     <Compile Include="FormModels\SubmissionFormData.cs" />
