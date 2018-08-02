@@ -22,19 +22,19 @@ namespace OnlineJudge.Repository {
             this.context = context;
         }
 
-        public List<UserListItemData> GetUserList(){
-            return UserListItemData.MapTo(context.Users);
+        public IEnumerable<User> GetUserList(){
+            return context.Users.Select(x=>x);
         }
 
 
-        public UserDetailsData GetUserDetails(int id){
+        public User GetUserDetails(int id){
             User user = context.Users.Find(id);
 
             if (user == null){
                 throw new ObjectNotFoundException("User with specified ID not found");
             }
 
-            return new UserDetailsData(user);
+            return user;
         }
 
         public void UpdateUser(int id, UserProfileUpdateForm data){

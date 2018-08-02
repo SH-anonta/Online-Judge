@@ -8,11 +8,12 @@ using System.Web.Http;
 using System.Web.Http.Routing;
 using OnlineJudge.FormModels;
 using OnlineJudge.Repository;
+using OnlineJudge.ResponseModels;
 
 namespace OnlineJudge.Controllers{
     [RoutePrefix("api/users")]
     public class UserController : ApiController{
-        public UserRepository data_repository= new UserRepository();
+        public UserRepository user_repository= new UserRepository();
 
 
         [HttpGet]
@@ -20,7 +21,7 @@ namespace OnlineJudge.Controllers{
         public IHttpActionResult UserDetails(int id){
 
             try{
-                return Ok(data_repository.GetUserDetails(id));
+                return Ok(new UserDetailsData(user_repository.GetUserDetails(id)));
             }
             catch (ObjectNotFoundException e){
                 return NotFound();
@@ -30,14 +31,14 @@ namespace OnlineJudge.Controllers{
         [HttpGet]
         [Route("")]
         public IHttpActionResult UserList(){
-            return Ok(data_repository.GetUserList());
+            return Ok(UserListItemData.MapTo(user_repository.GetUserList()));
         }
 
         [HttpPost]
         [Route("{id}/edit")]
         public IHttpActionResult UpdateUser([FromBody]UserProfileUpdateForm data, int id){
             try{
-                data_repository.UpdateUser(id, data);
+                user_repository.UpdateUser(id, data);
                 return Ok();
             }
             catch (ObjectNotFoundException e){
