@@ -5,13 +5,14 @@ using System.Data.Entity.Core;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using JudgeCodeRunner;
+using OnlineJudge.FormModels;
 using OnlineJudge.Models;
 using OnlineJudge.ResponseModels;
 
 namespace OnlineJudge.Repository {
     public class ContestRepository{
         private OjDBContext context;
-
 
         public ContestRepository(){
             this.context= new OjDBContext();
@@ -97,6 +98,34 @@ namespace OnlineJudge.Repository {
             }
 
             return contest.Problems.First(x => x.Order == problem_order);
+        }
+
+        public void CreateSubmission(int contest_id, int problem_no, SubmissionFormData submission_data){
+            Contest contest = context.Contests.Include(x=>x.Problems).FirstOrDefault(x=>x.Id == contest_id);
+            ContestProblem contest_problem = contest.Problems.FirstOrDefault(x=>x.Order == problem_no);
+            Problem problem = contest_problem.Problem;
+
+            //todo check for null values
+
+            // todo fix
+            User submitter = context.Users.First();
+
+            Submission submission= new Submission(){
+                Submitter = submitter, 
+                Problem = problem,
+                ProgrammingLanguage = context.ProgrammingLanguages.Find(ProgrammingLanguageEnum.Cpp11),
+                Status = context.SubmissionStatus.Find(Verdict.Queueed)
+            };
+
+            ContestSubmission contest_submission = new ContestSubmission(){
+                Submitter = context.Contestants.First(x => x.User.Id == submitter.Id),
+                Problem = contest_problem,
+                Submission = submission,
+            };
+
+            context.ContestantSubmissions.Add(contest_submission);
+            context.SaveChanges();
+
         }
     }
 }

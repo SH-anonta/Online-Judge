@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using JudgeCodeRunner;
+using OnlineJudge.FormModels;
 
 namespace OnlineJudge.Models {
     public class Submission{
@@ -12,6 +13,7 @@ namespace OnlineJudge.Models {
         public string SourceCode{set; get;}
         public string StandardErrorStream{set; get;}
 
+        [Column(TypeName = "datetime2")]
         public DateTime SubmissionDate { set; get; }
 
         public virtual Problem Problem{set; get;}
@@ -21,9 +23,11 @@ namespace OnlineJudge.Models {
         public double RunningTime {set; get;}
         public double PeakMemmoryUsage {set; get;}
 
-        // todo add programming language FK
-        public string ProgrammingLanguage {set; get;}
+        public virtual ProgrammingLanguage ProgrammingLanguage {set; get;}
 
+        public Submission(){
+
+        }
     }
 
     public class SubmissionStatus{

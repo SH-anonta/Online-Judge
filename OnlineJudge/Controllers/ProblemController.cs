@@ -166,7 +166,7 @@ namespace OnlineJudge.Controllers{
         
         [Route("submit")]
         [HttpPost]
-        public IHttpActionResult Submit(SubmissionRequestData data){
+        public IHttpActionResult Submit(SubmissionFormData data){
             var judge = new JudgeService();
 
             try{
@@ -186,7 +186,7 @@ namespace OnlineJudge.Controllers{
 
         [Route("")]
         [HttpGet]
-        public Object AllSubmissions(SubmissionRequestData data){
+        public Object AllSubmissions(SubmissionFormData data){
             var ctx = new OjDBContext();
             var subs = ctx.Submissions.Where(x => true);
             return SubmissionResponseData.MapTo(subs);

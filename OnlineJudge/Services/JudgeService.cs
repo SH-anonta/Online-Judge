@@ -3,7 +3,7 @@ using System.Linq;
 using OnlineJudge.Controllers;
 using OnlineJudge.Models;
 using JudgeCodeRunner;
-using OnlineJudge.ResponseModels;
+using OnlineJudge.FormModels;
 
 
 namespace OnlineJudge.Services {
@@ -12,7 +12,7 @@ namespace OnlineJudge.Services {
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         // todo move db logic to DataRepository class
-        public void judge(SubmissionRequestData submissison){
+        public void judge(SubmissionFormData submissison){
             int problem_code = Int32.Parse(submissison.ProblemCode);
             logger.Info(String.Format("Submission recieved from user {0}, for Problem {1}", 1, problem_code));
             

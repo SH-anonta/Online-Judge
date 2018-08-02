@@ -177,6 +177,7 @@
     <Compile Include="FormModels\AnnouncementFormData.cs" />
     <Compile Include="FormModels\FormData.cs" />
     <Compile Include="FormModels\ProblemForms.cs" />
+    <Compile Include="FormModels\SubmissionFormData.cs" />
     <Compile Include="FormModels\UserForms.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

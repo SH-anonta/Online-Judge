@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using OnlineJudge.FormModels;
 using OnlineJudge.Models;
 using OnlineJudge.Repository;
 using OnlineJudge.ResponseModels;
@@ -100,18 +101,21 @@ namespace OnlineJudge.Controllers{
 
         [HttpGet]
         [Route("{contest_id}/problems/{problem_no}")]
-        public IHttpActionResult ContestProblemDetails(int contest_id, int problem_no)
-        {
+        public IHttpActionResult ContestProblemDetails(int contest_id, int problem_no){
             var conest_prblem = contest_repository.GetContestProblem(contest_id, problem_no);
-
             return Ok(new ContestProblemDetailsData(conest_prblem));
         }
 
         [HttpPost]
         [Route("{contest_id}/problems/{problem_no}/submit")]
-        public IHttpActionResult ContestProblemSubmit(int contest_id, int problem_no){
-            // todo implement
-            return Ok();
+        public IHttpActionResult ContestProblemSubmit(int contest_id, int problem_no, [FromBody] SubmissionFormData submission_data){
+            try{
+                contest_repository.CreateSubmission(contest_id, problem_no, submission_data);
+                return Ok();
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
         }
 
         // submissions
