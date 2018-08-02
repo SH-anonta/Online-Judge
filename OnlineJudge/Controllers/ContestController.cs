@@ -155,9 +155,15 @@ namespace OnlineJudge.Controllers{
 
         [HttpGet]
         [Route("{contest_id}/contestants/{user_id}/submissions")]
-        public IHttpActionResult ContestantSubmissions(int contest_id){
-            // todo implement
-            return Ok();
+        public IHttpActionResult ContestantSubmissions(int contest_id, int user_id){
+            try{
+                var submissions = contest_repository.GetContestantSubmissions(contest_id, user_id);
+                return Ok(SubmissionResponseData.MapTo(submissions));
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
+            
         }
 
     }

@@ -137,15 +137,20 @@ namespace OnlineJudge.Repository {
             return contest.Submissions.Select(x=>x.Submission);
         }
 
-        public IEnumerable<Submission> GetContestantSubmissions(int contest_id, int contestant_id){
-            // todo implement
-            Contest contest = null;
+        public IEnumerable<Submission> GetContestantSubmissions(int contest_id, int user_id){
+            Contest contest = context.Contests.Include(x=>x.Contestants).FirstOrDefault(x=>x.Id == contest_id);
 
-            if (contest == null){
+            // todo add null value checks
+            Contestant contestant = context.Contestants.Include(x => x.Submissions)
+                                                       .FirstOrDefault(x => x.Contest.Id == contest_id 
+                                                            && x.User.Id == user_id);
+
+            if(contestant == null){
                 throw new ObjectDisposedException("Contest with specified id not found");
             }
 
-            return contest.Submissions.Select(x=>x.Submission);
+//            return submissions.Select(x=>x.Su);
+            return contestant.Submissions.Select(x=>x.Submission);
         }
         
     }
