@@ -11,6 +11,7 @@ namespace OnlineJudge.ResponseModels {
 
         public string Status { set; get; }
         public string UserName { set; get; }
+        public int UserId { set; get; }
 
         public string SourceCode{set; get;}
         public string StandardErrorStream{set; get;}
@@ -27,6 +28,7 @@ namespace OnlineJudge.ResponseModels {
             this.Status = submission.Status.Name;
 
             this.UserName = submission.Submitter.UserName;
+            this.UserId = submission.Submitter.Id;
 
             this.SourceCode = submission.SourceCode;
             this.StandardErrorStream = submission.StandardErrorStream;
@@ -36,7 +38,7 @@ namespace OnlineJudge.ResponseModels {
             this.PeakMemmoryUsage = submission.PeakMemmoryUsage;
         }
 
-        public static List<SubmissionResponseData> MapTo(IQueryable<Submission> subs){
+        public static List<SubmissionResponseData> MapTo(IEnumerable<Submission> subs){
             var mapped = new List<SubmissionResponseData>();
 
             foreach (var sub in subs){
@@ -46,4 +48,5 @@ namespace OnlineJudge.ResponseModels {
             return mapped;
         }
     }
+
 }

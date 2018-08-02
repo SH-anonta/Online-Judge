@@ -126,6 +126,20 @@ namespace OnlineJudge.Controllers{
             return Ok();
         }
 
+        // submissions
+        [HttpGet]
+        [Route("{contest_id}/submissions")]
+        public IHttpActionResult ContestSubmissions(int contest_id){
+            try{
+                var submissions = contest_repository.GetAllSubmissions(contest_id);
+                return Ok(SubmissionResponseData.MapTo(submissions));
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
+            
+        }
+
         [HttpGet]
         [Route("{contest_id}/contestants")]
         public IHttpActionResult ContestantList(int contest_id){
@@ -140,7 +154,7 @@ namespace OnlineJudge.Controllers{
         }
 
         [HttpGet]
-        [Route("{contest_id}/contestants/{user_id}/contestants")]
+        [Route("{contest_id}/contestants/{user_id}/submissions")]
         public IHttpActionResult ContestantSubmissions(int contest_id){
             // todo implement
             return Ok();

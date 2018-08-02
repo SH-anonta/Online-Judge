@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core;
@@ -113,12 +114,6 @@ namespace OnlineJudge.Repository {
             User submitter = context.Users.First();
 
             Submission submission = problem_repository.CreateSubmission(submission_data);
-//            Submission submission= new Submission(){
-//                Submitter = submitter, 
-//                Problem = problem,
-//                ProgrammingLanguage = context.ProgrammingLanguages.Find(ProgrammingLanguageEnum.Cpp11),
-//                Status = context.SubmissionStatus.Find(Verdict.Queueed)
-//            };
 
             ContestSubmission contest_submission = new ContestSubmission(){
                 Submitter = context.Contestants.First(x => x.User.Id == submitter.Id),
@@ -126,9 +121,32 @@ namespace OnlineJudge.Repository {
                 Submission = submission,
             };
 
-            context.ContestantSubmissions.Add(contest_submission);
+            contest.Submissions.Add(contest_submission);
             context.SaveChanges();
 
         }
+        
+
+        public IEnumerable<Submission> GetAllSubmissions(int contest_id){
+            Contest contest = context.Contests.Include(x => x.Submissions).FirstOrDefault(x=>x.Id == contest_id);
+
+            if (contest == null){
+                throw new ObjectDisposedException("Contest with specified id not found");
+            }
+
+            return contest.Submissions.Select(x=>x.Submission);
+        }
+
+        public IEnumerable<Submission> GetContestantSubmissions(int contest_id, int contestant_id){
+            // todo implement
+            Contest contest = null;
+
+            if (contest == null){
+                throw new ObjectDisposedException("Contest with specified id not found");
+            }
+
+            return contest.Submissions.Select(x=>x.Submission);
+        }
+        
     }
 }
