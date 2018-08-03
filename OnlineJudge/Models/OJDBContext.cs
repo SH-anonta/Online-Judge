@@ -12,7 +12,7 @@ namespace OnlineJudge.Models {
     
     public class OjDBContext : DbContext{
 
-        public OjDBContext(): base("name=OjDBConnectionString"){
+        public OjDBContext(): base(){
             Database.SetInitializer<OjDBContext>(new OjDBInitializer());
         }
 

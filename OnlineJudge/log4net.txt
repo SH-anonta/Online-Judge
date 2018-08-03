@@ -1,0 +1,607 @@
+log4net: log4net assembly [log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a]. Loaded from [C:\Users\anont\AppData\Local\Temp\Temporary ASP.NET Files\vs\e4ad1c20\1c348260\assembly\dl3\ec4ad0c5\0093df93_0f98d201\log4net.dll]. (.NET Runtime [4.0.30319.42000] on Microsoft Windows NT 10.0.17134.0)
+log4net: defaultRepositoryType [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository for assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]
+log4net: Assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] Loaded From [C:\Users\anont\AppData\Local\Temp\Temporary ASP.NET Files\vs\e4ad1c20\1c348260\assembly\dl3\64581f80\ccea9880_d52ad401\OnlineJudge.dll]
+log4net: Assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] does not have a RepositoryAttribute specified.
+log4net: Assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] using repository [log4net-default-repository] and repository type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository [log4net-default-repository] using type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: configuring repository [log4net-default-repository] using file [C:\compilezone\Hybrid\OnlineJudge\OnlineJudge\web.config] watching for file updates
+log4net: configuring repository [log4net-default-repository] using file [C:\compilezone\Hybrid\OnlineJudge\OnlineJudge\web.config]
+log4net: configuring repository [log4net-default-repository] using stream
+log4net: loading XML configuration
+log4net: Configuring Repository [log4net-default-repository]
+log4net: Configuration update mode [Merge].
+log4net: Logger [root] Level string is [ALL].
+log4net: Logger [root] level set to [name="ALL",value=-2147483648].
+log4net: Loading Appender [ADONetAppender] type: [log4net.Appender.ADONetAppender]
+log4net: Setting Property [BufferSize] to Int32 value [1]
+log4net: Setting Property [ConnectionType] to String value [System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]
+log4net: Setting Property [ConnectionString] to String value [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]
+log4net: Setting Property [CommandText] to String value [INSERT INTO Logs ([Date],[Thread],[Level],[Logger],[Message],[Exception]) VALUES (@log_date, @thread, @log_level, @logger, @message, @exception)]
+log4net: Setting Property [ParameterName] to String value [@log_date]
+log4net: Setting Property [DbType] to DbType value [DateTime]
+log4net: Setting Property [Layout] to object [log4net.Layout.RawTimeStampLayout]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@thread]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%thread]
+log4net: Converter [thread] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@log_level]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [50]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%level]
+log4net: Converter [level] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@logger]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%logger]
+log4net: Converter [logger] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@message]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [4000]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%message]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@exception]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [2000]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net:ERROR [AdoNetAppender] ErrorCode: GenericFailure. Could not open database connection [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]. Connection string context [ConnectionString].
+System.Data.SqlClient.SqlException (0x80131904): Cannot open database "OJLogDB" requested by the login. The login failed.
+Login failed for user 'DESKTOP-18I8KEM\anonta'.
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at log4net.Appender.AdoNetAppender.InitializeDatabaseConnection()
+ClientConnectionId:2fea84e2-1f29-4658-9817-6e80a73940cd
+Error Number:4060,State:1,Class:11
+log4net: Created Appender [ADONetAppender]
+log4net: Adding appender named [ADONetAppender] to logger [root].
+log4net: Hierarchy Threshold []
+log4net: configuring repository [log4net-default-repository] using .config file section
+log4net: Application config file is [C:\compilezone\Hybrid\OnlineJudge\OnlineJudge\web.config]
+log4net: Configuring Repository [log4net-default-repository]
+log4net: Configuration update mode [Merge].
+log4net: Logger [root] Level string is [ALL].
+log4net: Logger [root] level set to [name="ALL",value=-2147483648].
+log4net: Loading Appender [ADONetAppender] type: [log4net.Appender.ADONetAppender]
+log4net: Setting Property [BufferSize] to Int32 value [1]
+log4net: Setting Property [ConnectionType] to String value [System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]
+log4net: Setting Property [ConnectionString] to String value [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]
+log4net: Setting Property [CommandText] to String value [INSERT INTO Logs ([Date],[Thread],[Level],[Logger],[Message],[Exception]) VALUES (@log_date, @thread, @log_level, @logger, @message, @exception)]
+log4net: Setting Property [ParameterName] to String value [@log_date]
+log4net: Setting Property [DbType] to DbType value [DateTime]
+log4net: Setting Property [Layout] to object [log4net.Layout.RawTimeStampLayout]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@thread]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%thread]
+log4net: Converter [thread] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@log_level]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [50]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%level]
+log4net: Converter [level] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@logger]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%logger]
+log4net: Converter [logger] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@message]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [4000]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%message]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@exception]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [2000]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net:ERROR [AdoNetAppender] ErrorCode: GenericFailure. Could not open database connection [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]. Connection string context [ConnectionString].
+System.Data.SqlClient.SqlException (0x80131904): Cannot open database "OJLogDB" requested by the login. The login failed.
+Login failed for user 'DESKTOP-18I8KEM\anonta'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at log4net.Appender.AdoNetAppender.InitializeDatabaseConnection()
+ClientConnectionId:2fea84e2-1f29-4658-9817-6e80a73940cd
+Error Number:4060,State:1,Class:11
+log4net: Created Appender [ADONetAppender]
+log4net: Adding appender named [ADONetAppender] to logger [root].
+log4net: Hierarchy Threshold []
+log4net: log4net assembly [log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a]. Loaded from [C:\Users\anont\AppData\Local\Temp\Temporary ASP.NET Files\vs\e4ad1c20\1c348260\assembly\dl3\ec4ad0c5\0093df93_0f98d201\log4net.dll]. (.NET Runtime [4.0.30319.42000] on Microsoft Windows NT 10.0.17134.0)
+log4net: defaultRepositoryType [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository for assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]
+log4net: Assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] Loaded From [C:\Users\anont\AppData\Local\Temp\Temporary ASP.NET Files\vs\e4ad1c20\1c348260\assembly\dl3\64581f80\1a039107_d62ad401\OnlineJudge.dll]
+log4net: Assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] does not have a RepositoryAttribute specified.
+log4net: Assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] using repository [log4net-default-repository] and repository type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository [log4net-default-repository] using type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: configuring repository [log4net-default-repository] using file [C:\compilezone\Hybrid\OnlineJudge\OnlineJudge\web.config] watching for file updates
+log4net: configuring repository [log4net-default-repository] using file [C:\compilezone\Hybrid\OnlineJudge\OnlineJudge\web.config]
+log4net: configuring repository [log4net-default-repository] using stream
+log4net: loading XML configuration
+log4net: Configuring Repository [log4net-default-repository]
+log4net: Configuration update mode [Merge].
+log4net: Logger [root] Level string is [ALL].
+log4net: Logger [root] level set to [name="ALL",value=-2147483648].
+log4net: Loading Appender [ADONetAppender] type: [log4net.Appender.ADONetAppender]
+log4net: Setting Property [BufferSize] to Int32 value [1]
+log4net: Setting Property [ConnectionType] to String value [System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]
+log4net: Setting Property [ConnectionString] to String value [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]
+log4net: Setting Property [CommandText] to String value [INSERT INTO Logs ([Date],[Thread],[Level],[Logger],[Message],[Exception]) VALUES (@log_date, @thread, @log_level, @logger, @message, @exception)]
+log4net: Setting Property [ParameterName] to String value [@log_date]
+log4net: Setting Property [DbType] to DbType value [DateTime]
+log4net: Setting Property [Layout] to object [log4net.Layout.RawTimeStampLayout]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@thread]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%thread]
+log4net: Converter [thread] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@log_level]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [50]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%level]
+log4net: Converter [level] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@logger]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%logger]
+log4net: Converter [logger] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@message]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [4000]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%message]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@exception]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [2000]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net:ERROR [AdoNetAppender] ErrorCode: GenericFailure. Could not open database connection [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]. Connection string context [ConnectionString].
+System.Data.SqlClient.SqlException (0x80131904): Cannot open database "OJLogDB" requested by the login. The login failed.
+Login failed for user 'DESKTOP-18I8KEM\anonta'.
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at log4net.Appender.AdoNetAppender.InitializeDatabaseConnection()
+ClientConnectionId:e5d524be-e893-4203-9a73-2db0941e477e
+Error Number:4060,State:1,Class:11
+log4net: Created Appender [ADONetAppender]
+log4net: Adding appender named [ADONetAppender] to logger [root].
+log4net: Hierarchy Threshold []
+log4net: configuring repository [log4net-default-repository] using .config file section
+log4net: Application config file is [C:\compilezone\Hybrid\OnlineJudge\OnlineJudge\web.config]
+log4net: Configuring Repository [log4net-default-repository]
+log4net: Configuration update mode [Merge].
+log4net: Logger [root] Level string is [ALL].
+log4net: Logger [root] level set to [name="ALL",value=-2147483648].
+log4net: Loading Appender [ADONetAppender] type: [log4net.Appender.ADONetAppender]
+log4net: Setting Property [BufferSize] to Int32 value [1]
+log4net: Setting Property [ConnectionType] to String value [System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]
+log4net: Setting Property [ConnectionString] to String value [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]
+log4net: Setting Property [CommandText] to String value [INSERT INTO Logs ([Date],[Thread],[Level],[Logger],[Message],[Exception]) VALUES (@log_date, @thread, @log_level, @logger, @message, @exception)]
+log4net: Setting Property [ParameterName] to String value [@log_date]
+log4net: Setting Property [DbType] to DbType value [DateTime]
+log4net: Setting Property [Layout] to object [log4net.Layout.RawTimeStampLayout]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@thread]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%thread]
+log4net: Converter [thread] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@log_level]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [50]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%level]
+log4net: Converter [level] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@logger]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%logger]
+log4net: Converter [logger] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@message]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [4000]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%message]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@exception]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [2000]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net:ERROR [AdoNetAppender] ErrorCode: GenericFailure. Could not open database connection [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]. Connection string context [ConnectionString].
+System.Data.SqlClient.SqlException (0x80131904): Cannot open database "OJLogDB" requested by the login. The login failed.
+Login failed for user 'DESKTOP-18I8KEM\anonta'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at log4net.Appender.AdoNetAppender.InitializeDatabaseConnection()
+ClientConnectionId:e5d524be-e893-4203-9a73-2db0941e477e
+Error Number:4060,State:1,Class:11
+log4net: Created Appender [ADONetAppender]
+log4net: Adding appender named [ADONetAppender] to logger [root].
+log4net: Hierarchy Threshold []
+log4net: log4net assembly [log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a]. Loaded from [C:\Users\anont\AppData\Local\Temp\Temporary ASP.NET Files\vs\e4ad1c20\1c348260\assembly\dl3\ec4ad0c5\0093df93_0f98d201\log4net.dll]. (.NET Runtime [4.0.30319.42000] on Microsoft Windows NT 10.0.17134.0)
+log4net: defaultRepositoryType [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository for assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]
+log4net: Assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] Loaded From [C:\Users\anont\AppData\Local\Temp\Temporary ASP.NET Files\vs\e4ad1c20\1c348260\assembly\dl3\64581f80\78001a59_d62ad401\OnlineJudge.dll]
+log4net: Assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] does not have a RepositoryAttribute specified.
+log4net: Assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] using repository [log4net-default-repository] and repository type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository [log4net-default-repository] using type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: configuring repository [log4net-default-repository] using file [C:\compilezone\Hybrid\OnlineJudge\OnlineJudge\web.config] watching for file updates
+log4net: configuring repository [log4net-default-repository] using file [C:\compilezone\Hybrid\OnlineJudge\OnlineJudge\web.config]
+log4net: configuring repository [log4net-default-repository] using stream
+log4net: loading XML configuration
+log4net: Configuring Repository [log4net-default-repository]
+log4net: Configuration update mode [Merge].
+log4net: Logger [root] Level string is [ALL].
+log4net: Logger [root] level set to [name="ALL",value=-2147483648].
+log4net: Loading Appender [ADONetAppender] type: [log4net.Appender.ADONetAppender]
+log4net: Setting Property [BufferSize] to Int32 value [1]
+log4net: Setting Property [ConnectionType] to String value [System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]
+log4net: Setting Property [ConnectionString] to String value [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]
+log4net: Setting Property [CommandText] to String value [INSERT INTO Logs ([Date],[Thread],[Level],[Logger],[Message],[Exception]) VALUES (@log_date, @thread, @log_level, @logger, @message, @exception)]
+log4net: Setting Property [ParameterName] to String value [@log_date]
+log4net: Setting Property [DbType] to DbType value [DateTime]
+log4net: Setting Property [Layout] to object [log4net.Layout.RawTimeStampLayout]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@thread]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%thread]
+log4net: Converter [thread] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@log_level]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [50]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%level]
+log4net: Converter [level] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@logger]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%logger]
+log4net: Converter [logger] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@message]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [4000]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%message]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@exception]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [2000]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net:ERROR [AdoNetAppender] ErrorCode: GenericFailure. Could not open database connection [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]. Connection string context [ConnectionString].
+System.Data.SqlClient.SqlException (0x80131904): Cannot open database "OJLogDB" requested by the login. The login failed.
+Login failed for user 'DESKTOP-18I8KEM\anonta'.
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at log4net.Appender.AdoNetAppender.InitializeDatabaseConnection()
+ClientConnectionId:a942cfd4-ae64-4992-984c-d0b15d1e8ae6
+Error Number:4060,State:1,Class:11
+log4net: Created Appender [ADONetAppender]
+log4net: Adding appender named [ADONetAppender] to logger [root].
+log4net: Hierarchy Threshold []
+log4net: configuring repository [log4net-default-repository] using .config file section
+log4net: Application config file is [C:\compilezone\Hybrid\OnlineJudge\OnlineJudge\web.config]
+log4net: Configuring Repository [log4net-default-repository]
+log4net: Configuration update mode [Merge].
+log4net: Logger [root] Level string is [ALL].
+log4net: Logger [root] level set to [name="ALL",value=-2147483648].
+log4net: Loading Appender [ADONetAppender] type: [log4net.Appender.ADONetAppender]
+log4net: Setting Property [BufferSize] to Int32 value [1]
+log4net: Setting Property [ConnectionType] to String value [System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]
+log4net: Setting Property [ConnectionString] to String value [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]
+log4net: Setting Property [CommandText] to String value [INSERT INTO Logs ([Date],[Thread],[Level],[Logger],[Message],[Exception]) VALUES (@log_date, @thread, @log_level, @logger, @message, @exception)]
+log4net: Setting Property [ParameterName] to String value [@log_date]
+log4net: Setting Property [DbType] to DbType value [DateTime]
+log4net: Setting Property [Layout] to object [log4net.Layout.RawTimeStampLayout]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@thread]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%thread]
+log4net: Converter [thread] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@log_level]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [50]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%level]
+log4net: Converter [level] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@logger]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%logger]
+log4net: Converter [logger] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@message]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [4000]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%message]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@exception]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [2000]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net:ERROR [AdoNetAppender] ErrorCode: GenericFailure. Could not open database connection [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]. Connection string context [ConnectionString].
+System.Data.SqlClient.SqlException (0x80131904): Cannot open database "OJLogDB" requested by the login. The login failed.
+Login failed for user 'DESKTOP-18I8KEM\anonta'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at log4net.Appender.AdoNetAppender.InitializeDatabaseConnection()
+ClientConnectionId:a942cfd4-ae64-4992-984c-d0b15d1e8ae6
+Error Number:4060,State:1,Class:11
+log4net: Created Appender [ADONetAppender]
+log4net: Adding appender named [ADONetAppender] to logger [root].
+log4net: Hierarchy Threshold []
+log4net: log4net assembly [log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a]. Loaded from [C:\Users\anont\AppData\Local\Temp\Temporary ASP.NET Files\vs\e4ad1c20\1c348260\assembly\dl3\ec4ad0c5\0093df93_0f98d201\log4net.dll]. (.NET Runtime [4.0.30319.42000] on Microsoft Windows NT 10.0.17134.0)
+log4net: defaultRepositoryType [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository for assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]
+log4net: Assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] Loaded From [C:\Users\anont\AppData\Local\Temp\Temporary ASP.NET Files\vs\e4ad1c20\1c348260\assembly\dl3\64581f80\78001a59_d62ad401\OnlineJudge.dll]
+log4net: Assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] does not have a RepositoryAttribute specified.
+log4net: Assembly [OnlineJudge, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] using repository [log4net-default-repository] and repository type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository [log4net-default-repository] using type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: configuring repository [log4net-default-repository] using file [C:\compilezone\Hybrid\OnlineJudge\OnlineJudge\web.config] watching for file updates
+log4net: configuring repository [log4net-default-repository] using file [C:\compilezone\Hybrid\OnlineJudge\OnlineJudge\web.config]
+log4net: configuring repository [log4net-default-repository] using stream
+log4net: loading XML configuration
+log4net: Configuring Repository [log4net-default-repository]
+log4net: Configuration update mode [Merge].
+log4net: Logger [root] Level string is [ALL].
+log4net: Logger [root] level set to [name="ALL",value=-2147483648].
+log4net: Loading Appender [ADONetAppender] type: [log4net.Appender.ADONetAppender]
+log4net: Setting Property [BufferSize] to Int32 value [1]
+log4net: Setting Property [ConnectionType] to String value [System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]
+log4net: Setting Property [ConnectionString] to String value [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]
+log4net: Setting Property [CommandText] to String value [INSERT INTO Logs ([Date],[Thread],[Level],[Logger],[Message],[Exception]) VALUES (@log_date, @thread, @log_level, @logger, @message, @exception)]
+log4net: Setting Property [ParameterName] to String value [@log_date]
+log4net: Setting Property [DbType] to DbType value [DateTime]
+log4net: Setting Property [Layout] to object [log4net.Layout.RawTimeStampLayout]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@thread]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%thread]
+log4net: Converter [thread] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@log_level]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [50]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%level]
+log4net: Converter [level] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@logger]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%logger]
+log4net: Converter [logger] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@message]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [4000]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%message]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@exception]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [2000]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Created Appender [ADONetAppender]
+log4net: Adding appender named [ADONetAppender] to logger [root].
+log4net: Hierarchy Threshold []
+log4net: configuring repository [log4net-default-repository] using .config file section
+log4net: Application config file is [C:\compilezone\Hybrid\OnlineJudge\OnlineJudge\web.config]
+log4net: Configuring Repository [log4net-default-repository]
+log4net: Configuration update mode [Merge].
+log4net: Logger [root] Level string is [ALL].
+log4net: Logger [root] level set to [name="ALL",value=-2147483648].
+log4net: Loading Appender [ADONetAppender] type: [log4net.Appender.ADONetAppender]
+log4net: Setting Property [BufferSize] to Int32 value [1]
+log4net: Setting Property [ConnectionType] to String value [System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]
+log4net: Setting Property [ConnectionString] to String value [Data Source=localhost\SQLEXPRESS;initial Catalog=OJLogDB; Integrated Security=True;]
+log4net: Setting Property [CommandText] to String value [INSERT INTO Logs ([Date],[Thread],[Level],[Logger],[Message],[Exception]) VALUES (@log_date, @thread, @log_level, @logger, @message, @exception)]
+log4net: Setting Property [ParameterName] to String value [@log_date]
+log4net: Setting Property [DbType] to DbType value [DateTime]
+log4net: Setting Property [Layout] to object [log4net.Layout.RawTimeStampLayout]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@thread]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%thread]
+log4net: Converter [thread] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@log_level]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [50]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%level]
+log4net: Converter [level] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@logger]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [255]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%logger]
+log4net: Converter [logger] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@message]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [4000]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Converter [newline] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [ConversionPattern] to String value [%message]
+log4net: Converter [message] Option [] Format [min=-1,max=2147483647,leftAlign=False]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Setting Property [ParameterName] to String value [@exception]
+log4net: Setting Property [DbType] to DbType value [String]
+log4net: Setting Property [Size] to Int32 value [2000]
+log4net: Setting Property [Layout] to object [log4net.Layout.Layout2RawLayoutAdapter]
+log4net: Setting Collection Property [AddParameter] to object [log4net.Appender.AdoNetAppenderParameter]
+log4net: Created Appender [ADONetAppender]
+log4net: Adding appender named [ADONetAppender] to logger [root].
+log4net: Hierarchy Threshold []
