@@ -61,7 +61,6 @@ namespace OnlineJudge.Repository {
             return context.Contestants.Where(x => x.User.Id == user_id).Select(x=>x.Contest);
         }
 
-
         public void CreateNewUser(UserRegistrationFormData data){
             context.Users.Add(new User(){
                 UserName = data.UserName,
@@ -71,6 +70,10 @@ namespace OnlineJudge.Repository {
             });
 
             context.SaveChanges();
+        }
+
+        public int GetUserCount(){
+            return context.Users.Count();
         }
     }
 }

@@ -185,5 +185,23 @@ namespace OnlineJudge.Repository {
             context.Contests.Add(contest);
             context.SaveChanges();
         }
+
+
+        public int GetContestCount(int problem_id){
+            return context.Contests.Count();
+        }
+
+        public int GetContestSubmissionCount(int contest_id){
+            return context.ContestantSubmissions.Count(x=>x.Id == contest_id);
+        }
+
+        public int GetContestSubmissionOfProblemCount(int contest_id){
+            return context.ContestantSubmissions.Count(x=>x.Problem.Contest.Id == contest_id);
+        }
+
+        public int GetContestSubmissionOfUserCount(int contest_id, int user_id){
+            return context.ContestantSubmissions.Count(x=>x.Problem.Contest.Id == contest_id
+                                                          && x.Submitter.User.Id == user_id);
+        }
     }
 }

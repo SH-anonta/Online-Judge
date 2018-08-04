@@ -189,5 +189,22 @@ namespace OnlineJudge.Repository {
             submission.Status = context.SubmissionStatus.Find(status);
             context.SaveChanges();
         }
+
+
+        public int GetProblemCount(){
+            return context.Problems.Count();
+        }
+
+        public int GetSubmissionCount(){
+            return context.Submissions.Count();
+        }
+
+        public int GetSubmissionCountOfUser(int user_id){
+            return context.Submissions.Count(x=>x.Submitter.Id == user_id);
+        }
+
+        public int GetSubmissionCountOfProblem(int problem_id){
+            return context.Submissions.Count(x=>x.Problem.Id == problem_id);
+        }
     }
 }

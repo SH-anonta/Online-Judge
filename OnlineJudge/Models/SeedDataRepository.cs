@@ -2038,28 +2038,15 @@ public static string intput= @"1000
 
             var admin = ctx.Users.First(x => x.UserName == "admin");
 
-            array.Add(new Announcement(){
-                Title =  "New problems added",
-                Description = "Hurr, durr, new problems ",
-                CreateDate = DateTime.Now,
-                Creator = admin
-            });
-
-            array.Add(new Announcement()
-            {
-                Title =  "Judge is going to be offline",
-                Description = "Description goes here",
-                CreateDate = DateTime.Now,
-                Creator = admin
-            });
-
-            array.Add(new Announcement()
-            {
-                Title =  "The judge is under attack!",
-                Description = "Pls send help",
-                CreateDate = DateTime.Now,
-                Creator = admin
-            });
+            for(int i = 1; i <= 40; i++){
+                array.Add(new Announcement(){
+                    Title =  "Site Notice #"+i,
+                    Description = "Notice description goes here",
+                    CreateDate = DateTime.Now,
+                    Creator = admin
+                });
+            }
+            
 
             return array;
         }

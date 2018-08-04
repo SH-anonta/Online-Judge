@@ -76,5 +76,9 @@ namespace OnlineJudge.Repository {
             context.Announcements.Remove(announcement);
             context.SaveChanges();
         }
+
+        public int GetAnnouncementCount(){
+            return context.Announcements.Count();
+        }
     }
 }
