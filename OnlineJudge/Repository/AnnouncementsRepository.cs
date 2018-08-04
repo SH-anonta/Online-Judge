@@ -42,6 +42,10 @@ namespace OnlineJudge.Repository {
 
         public Announcement GetAnnouncementById(int id){
             var announcement = context.Announcements.Find(id);
+
+            if (announcement == null){
+                throw  new ObjectNotFoundException();
+            }
             return announcement;
         }
 

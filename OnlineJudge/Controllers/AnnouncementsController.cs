@@ -44,9 +44,15 @@ namespace OnlineJudge.Controllers{
         [HttpGet]
         [Route("{id}")]
         public IHttpActionResult AnnoucementDetails(int id){
-            Announcement announcement = announcement_repository.GetAnnouncementById(id);
-            return Ok(new AnnouncementsResponseData(announcement));
+            try{
+                Announcement announcement = announcement_repository.GetAnnouncementById(id);
+                return Ok(new AnnouncementsResponseData(announcement));
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
         }
+
 
         [HttpPost]
         [Route("{id}/edit")]
