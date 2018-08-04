@@ -60,5 +60,17 @@ namespace OnlineJudge.Repository {
         public IEnumerable<Contest> GetUserContestHistory(int user_id){
             return context.Contestants.Where(x => x.User.Id == user_id).Select(x=>x.Contest);
         }
+
+
+        public void CreateNewUser(UserRegistrationFormData data){
+            context.Users.Add(new User(){
+                UserName = data.UserName,
+                Email = data.Email,
+                Password = data.Password, // todo hash first
+                UserType = context.UserTypes.Find(UserTypeEnum.User)
+            });
+
+            context.SaveChanges();
+        }
     }
 }

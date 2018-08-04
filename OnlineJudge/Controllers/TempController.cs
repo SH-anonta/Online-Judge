@@ -26,20 +26,10 @@ namespace OnlineJudge.Controllers
             return "temp";
         }
 
-        [Route("problem")]
+        [Route("page")]
         [HttpGet]
-        public string Problem(){
-            var ctx = new OjDBContext();
-
-            ctx.Problems.Add(new Problem()
-            {
-                Title = "heloo",
-                TestCaseInput = "sdfasfdas",
-                TestCaseOutput = "sdfasfasd"
-            });
-            ctx.SaveChanges();
-
-            return "Problem: " + ctx.Problems.Count();
+        public IHttpActionResult Problem(int? a, int? b){
+            return Ok(a + b);
         }
 
         public class Notice{
@@ -48,6 +38,6 @@ namespace OnlineJudge.Controllers
         }
 
         
-
+        
     }
 }
