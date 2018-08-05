@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Results;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
 using OnlineJudge.Repository;
@@ -44,12 +46,18 @@ namespace OnlineJudge.Controllers{
         [HttpOptions]
         [Route("create")]
         public IHttpActionResult Create([FromBody] AnnouncementFormData data){
-            if (Request.Method == HttpMethod.Options){
+            // for preflight requests
+            if (RequestUtility.IsPreFlightRequest(Request)){
                 return Ok();
             }
 
-            announcement_repository.createAnnouncement(data);
-            return Ok();
+            var result = data.Validate();
+            if (!result.IsValid){
+                return new BadHttpRequest(result.ErrorMessages);
+            }
+
+            var announcement = announcement_repository.createAnnouncement(data);
+            return Ok(new AnnouncementsResponseData(announcement));
         }
 
         [HttpGet]
@@ -66,8 +74,14 @@ namespace OnlineJudge.Controllers{
 
 
         [HttpPost]
+        [HttpOptions]
         [Route("{id}/edit")]
         public IHttpActionResult EditAnnouncement(int id, [FromBody] AnnouncementFormData data){
+            // for preflight requests
+            if (RequestUtility.IsPreFlightRequest(Request)){
+                return Ok();
+            }
+            
             announcement_repository.UpdateAnnouncement(id, data);
             return Ok();
         }

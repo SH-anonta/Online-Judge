@@ -170,6 +170,8 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AnnouncementsController.cs" />
     <Compile Include="Controllers\ContestController.cs" />
+    <Compile Include="Controllers\CustomHttpActions.cs" />
+    <Compile Include="Controllers\RequestUtility.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProblemController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
