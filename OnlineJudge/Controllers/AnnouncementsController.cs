@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Core;
+using System.Net.Http;
 using System.Web.Http;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
@@ -31,12 +33,21 @@ namespace OnlineJudge.Controllers{
         [Route("")]
         public IHttpActionResult AnnouncementList(int from, int to){
             var announcements = announcement_repository.GetAnnouncementList(from, to);
-            return Ok(AnnouncementListItem.MapTo(announcements));
+            return Ok(new CollectionResponse(){
+                TotalCount = announcement_repository.GetAnnouncementCount(),
+                Collection = AnnouncementListItem.MapTo(announcements)
+            });
         }
 
+
         [HttpPost]
+        [HttpOptions]
         [Route("create")]
         public IHttpActionResult Create([FromBody] AnnouncementFormData data){
+            if (Request.Method == HttpMethod.Options){
+                return Ok();
+            }
+
             announcement_repository.createAnnouncement(data);
             return Ok();
         }

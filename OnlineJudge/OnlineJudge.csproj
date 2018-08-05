@@ -199,6 +199,7 @@
     <Compile Include="Repository\ProblemsRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="ResponseModels\AnnouncementResponses.cs" />
+    <Compile Include="ResponseModels\CollectionResponse.cs" />
     <Compile Include="ResponseModels\ContestResponseModels.cs" />
     <Compile Include="ResponseModels\ProblemResponseModels.cs" />
     <Compile Include="ResponseModels\SharedResponses.cs" />

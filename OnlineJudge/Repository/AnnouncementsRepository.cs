@@ -22,11 +22,9 @@ namespace OnlineJudge.Repository {
 
         // sort the rows in descending order by create date
         // return skip the first 'from'-1 rows and then return the next 'to' rows
-        public IQueryable<Announcement> GetAnnouncementList(int from, int to = 20){
-            var rows = from s in context.Announcements
-                orderby s.CreateDate
-                descending
-                select s;
+        public IQueryable<Announcement> GetAnnouncementList(int from, int to = 20)
+        {
+            var rows = context.Announcements.OrderByDescending(x => x.CreateDate);
 
             return rows.Skip(from-1).Take(to-from+1);
         }
@@ -34,7 +32,6 @@ namespace OnlineJudge.Repository {
         public IQueryable<Announcement> GetAnnouncementList(){
             var rows = from s in context.Announcements
                 orderby s.CreateDate
-                descending 
                 select s;
 
             return rows;
