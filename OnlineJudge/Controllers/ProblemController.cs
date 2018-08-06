@@ -32,6 +32,18 @@ namespace OnlineJudge.Controllers{
             return Ok(ProblemListItem.MapTo(problems));
         }
 
+        [Route("")]
+        [HttpGet]
+        public IHttpActionResult GetProblemList(int start, int limit){
+            var problems = problem_repository.GetProblems(start, limit);
+            
+            
+            return Ok(new CollectionResponse(){
+                TotalCount = problem_repository.GetProblemCount(),
+                Collection = ProblemListItem.MapTo(problems)
+            });
+        }
+
         [Route("{Id}")]
         [HttpGet]
         public IHttpActionResult GetProblemDetials(int Id){

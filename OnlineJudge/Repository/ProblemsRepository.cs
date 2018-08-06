@@ -38,12 +38,16 @@ namespace OnlineJudge.Repository {
 
         // get all problems in descending order of their creation
         public IQueryable<Problem> GetAllProblemsList(){
-            var problems = from problem in context.Problems
-                orderby problem.CreateDate
-                descending
-                select problem;
+            var problems = context.Problems.OrderByDescending(x => x.CreateDate);
 
             return problems;
+        }
+
+        // get all problems in descending order of their creation, withing the specified range
+        public IQueryable<Problem> GetProblems(int start, int limit){
+            var problems = context.Problems.OrderByDescending(x => x.CreateDate);
+
+            return problems.Skip(start-1).Take(limit-start+1);
         }
 
         public ProblemDetails GetProblemDetails(int id){

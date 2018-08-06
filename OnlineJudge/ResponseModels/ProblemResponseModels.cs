@@ -51,6 +51,8 @@ namespace OnlineJudge.ResponseModels {
         public double MemoryLimit { set; get; }
 
         public string Creator { set; get; }
+        public int CreatorId { set; get; }
+
         public DateTime CreateDate { set; get; }
 
         public bool IsPublic { set; get; }
@@ -70,6 +72,7 @@ namespace OnlineJudge.ResponseModels {
             this.MemoryLimit = problem.MemoryLimit; 
             
             this.Creator = problem.Creator.UserName; 
+            this.CreatorId = problem.Creator.Id; 
             this.CreateDate = problem.CreateDate;
             this.IsPublic = problem.IsPublic; 
         }

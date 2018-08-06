@@ -2015,19 +2015,23 @@ public static string intput= @"1000
     public class SeedDataRepository {
         public static List<Problem> getProblems(OjDBContext ctx){
             var user = ctx.Users.First(x => x.UserName == "admin");
-
-            var a=  new Problem(){
-                Title = "Sum it",
-                TestCaseInput = ProblemDummyData.intput,
-                TestCaseOutput = ProblemDummyData.expected_output,
-                TimeLimit = 1,
-                MemoryLimit = 25,
-                CreateDate = DateTime.Now,
-                Creator = user
-            };
-
             var problems= new List<Problem>();
-            problems.Add(a);
+
+            for(int i = 1; i <= 30; i++){
+                var a=  new Problem(){
+                    Title = "Problem #"+ i,
+                    TestCaseInput = ProblemDummyData.intput,
+                    TestCaseOutput = ProblemDummyData.expected_output,
+                    TimeLimit = 1,
+                    MemoryLimit = 25,
+                    CreateDate = DateTime.Now,
+                    Creator = user
+                };
+
+                
+                problems.Add(a);
+            }
+            
 
             return problems;
         }
