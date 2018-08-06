@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -14,7 +15,6 @@ namespace OnlineJudge.Controllers{
     [RoutePrefix("api/users")]
     public class UserController : ApiController{
         public UserRepository user_repository= new UserRepository();
-
 
         [HttpGet]
         [Route("{id}")]
@@ -46,10 +46,15 @@ namespace OnlineJudge.Controllers{
             }
         }
 
+
+        // return users' submissoins in reverse order of their creation
         [HttpGet]
         [Route("{id}/submissions")]
-        public IHttpActionResult UserSubmissions(int id){
-            return Ok(SubmissionResponseData.MapTo(user_repository.GetUserSubmissions(id)));
+        public IHttpActionResult UserSubmissions(int id, int start, int limit){
+            return Ok(new CollectionResponse(){
+                TotalCount = user_repository.GetUserSubmissionCount(id),
+                Collection = SubmissionResponseData.MapTo(user_repository.GetUserSubmissions(id, start, limit))
+            });
         }
 
         [HttpGet]

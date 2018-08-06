@@ -2037,6 +2037,26 @@ public static string intput= @"1000
         }
 
         // only for develpment purposes
+        public static List<Submission> getSubmissions(OjDBContext ctx){
+            var array = new List<Submission>();
+
+            var admin = ctx.Users.First(x => x.UserName == "admin");
+            var problem = ctx.Problems.First();
+
+            for(int i = 1; i <= 40; i++){
+                array.Add(new Submission(){
+                    Submitter = admin,
+                    Problem = problem,
+                    ProgrammingLanguage = ctx.ProgrammingLanguages.Find(ProgrammingLanguageEnum.Cpp11),
+                    Status = ctx.SubmissionStatus.Find(Verdict.Accepted),
+                });
+            }
+            
+
+            return array;
+        }
+
+        // only for develpment purposes
         public static List<Announcement> getAnnouncements(OjDBContext ctx){
             var array = new List<Announcement>();
 

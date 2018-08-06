@@ -28,9 +28,12 @@ namespace OnlineJudge.Repository {
             return context.Users.Select(x=>x);
         }
 
-        public IEnumerable<Submission> GetUserSubmissions(int user_id){
-            var submissions = context.Submissions.Where(x => x.Submitter.Id == user_id);
-            return submissions;
+        public IEnumerable<Submission> GetUserSubmissions(int user_id, int start, int limit){
+            var submissions = context.Submissions
+                                .Where(x => x.Submitter.Id == user_id)
+                                .OrderByDescending(x=>x.SubmissionDate);
+
+            return submissions.Skip(start-1).Take(limit-start+1);;
         }
 
         public User GetUserDetails(int id){
@@ -74,6 +77,10 @@ namespace OnlineJudge.Repository {
 
         public int GetUserCount(){
             return context.Users.Count();
+        }
+
+        public int GetUserSubmissionCount(int uesr_id){
+            return context.Submissions.Count(x=>x.Submitter.Id == uesr_id);
         }
     }
 }

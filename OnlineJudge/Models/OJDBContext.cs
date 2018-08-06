@@ -77,6 +77,9 @@ namespace OnlineJudge.Models {
             context.Contests.AddRange(SeedDataRepository.GetContests(context));
             context.SaveChanges();
             
+            // seed only for development
+            context.Submissions.AddRange(SeedDataRepository.getSubmissions(context));
+            context.SaveChanges();
             
             
 
