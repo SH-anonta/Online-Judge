@@ -175,6 +175,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProblemController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Controllers\TempController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="FormModels\AnnouncementFormData.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="ResponseModels\CollectionResponse.cs" />
     <Compile Include="ResponseModels\ContestResponseModels.cs" />
     <Compile Include="ResponseModels\ProblemResponseModels.cs" />
+    <Compile Include="ResponseModels\ProgrammingLanguageModels.cs" />
     <Compile Include="ResponseModels\SharedResponses.cs" />
     <Compile Include="ResponseModels\SubmissionResponses.cs" />
     <Compile Include="ResponseModels\UserResponseModels.cs" />
