@@ -81,6 +81,11 @@ namespace OnlineJudge.Controllers{
             if (RequestUtility.IsPreFlightRequest(Request)){
                 return Ok();
             }
+
+            var result = data.Validate();
+            if (!result.IsValid){
+                return new BadHttpRequest(result.ErrorMessages);
+            }
             
             announcement_repository.UpdateAnnouncement(id, data);
             return Ok();
