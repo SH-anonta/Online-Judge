@@ -15,11 +15,11 @@ namespace OnlineJudge.Services {
 
         // todo use a readonly binding of Problem
         public void judge(SubmissionFormData submissison, Problem problem){
-            int problem_code = Int32.Parse(submissison.ProblemCode);
+            int problem_code = problem.Id;
             logger.Info(String.Format("Submission recieved from user {0}, for Problem {1}", 1, problem_code));
             
             var runner = new JudgeCodeRunner.CodeRunner(ProgrammingLanguageEnum.Cpp89,
-                                                        submissison.SolutionCode,
+                                                        submissison.SourceCode,
                                                         problem.TestCaseInput,
                                                         problem.TestCaseOutput,
                                                         problem.TimeLimit);

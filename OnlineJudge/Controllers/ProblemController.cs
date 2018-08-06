@@ -177,15 +177,21 @@ namespace OnlineJudge.Controllers{
             return Ok();
         }
         
-        [Route("submit")]
         [HttpPost]
-        public IHttpActionResult Submit(SubmissionFormData data){
-            try{
-                problem_repository.CreateSubmission(data);
+        [HttpOptions]
+        [Route("{problem_id}/submit")]
+        public IHttpActionResult Submit(int problem_id, [FromBody]SubmissionFormData data){
+            if (RequestUtility.IsPreFlightRequest(Request)){
+                return Ok();
             }
-            catch (Exception e){
-                logger.Error("Failed to judge submission", e);
-            }
+
+            problem_repository.CreateSubmission(problem_id, data);
+//            try{
+//                
+//            }
+//            catch (Exception e){
+//                logger.Error("Failed to judge submission", e);
+//            }
             
             return Ok();
         }

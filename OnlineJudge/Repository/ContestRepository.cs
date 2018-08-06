@@ -113,7 +113,7 @@ namespace OnlineJudge.Repository {
             // todo fix
             User submitter = context.Users.First();
 
-            Submission submission = problem_repository.CreateSubmission(submission_data);
+            Submission submission = problem_repository.CreateSubmission(problem.Id, submission_data);
 
             ContestSubmission contest_submission = new ContestSubmission(){
                 Submitter = context.Contestants.First(x => x.User.Id == submitter.Id),

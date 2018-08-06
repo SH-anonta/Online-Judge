@@ -5,8 +5,7 @@ using System.Web;
 
 namespace OnlineJudge.FormModels {
     public class SubmissionFormData{
-        public string ProblemCode { set; get; }
-        public string SolutionCode { set; get; }
+        public string SourceCode { set; get; }
         public int LanguageId { set; get; }
     }
 }

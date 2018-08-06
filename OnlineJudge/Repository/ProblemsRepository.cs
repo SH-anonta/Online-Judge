@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity.Core;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Channels;
@@ -151,18 +152,20 @@ namespace OnlineJudge.Repository {
             context.SaveChanges();
         }
 
-        public Submission CreateSubmission(SubmissionFormData submission_data){
-            int problem_code = Int32.Parse(submission_data.ProblemCode);
+        public Submission CreateSubmission(int problem_id, SubmissionFormData submission_data){
+            int problem_code = problem_id;
             var judge = new JudgeService();
             var problem = context.Problems.Find(problem_code);
+            var language = context.ProgrammingLanguages.Find((ProgrammingLanguageEnum)submission_data.LanguageId);
 
-
+            Trace.WriteLine(submission_data.LanguageId);
             var submission = new Submission(){
                 Status = context.SubmissionStatus.Find(Verdict.Running),
                 Problem = problem,
-                SourceCode = submission_data.SolutionCode,
+                SourceCode = submission_data.SourceCode,
                 SubmissionDate = DateTime.Now,
-                Submitter = context.Users.First(x => x.UserName == "admin")
+                Submitter = context.Users.First(x => x.UserName == "admin"),
+                ProgrammingLanguage = language
             };
 
             context.Submissions.Add(submission);
