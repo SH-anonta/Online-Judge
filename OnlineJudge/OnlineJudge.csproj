@@ -216,7 +216,7 @@
     <Content Include="Bundles\favicon.ico" />
     <Content Include="Bundles\index.html" />
     <Content Include="Bundles\inline.318b50c57b4eba3d437b.bundle.js" />
-    <Content Include="Bundles\main.6caf2ce4467bca5d04f5.bundle.js" />
+    <Content Include="Bundles\main.ee9b0a301fa37c7495a8.bundle.js" />
     <Content Include="Bundles\polyfills.fa62713060e7012f88ea.bundle.js" />
     <Content Include="Bundles\scripts.385b291e179030219400.bundle.js" />
     <Content Include="Bundles\styles.d5d97a308ff8324385a3.bundle.css" />
