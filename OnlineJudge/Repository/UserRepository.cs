@@ -82,5 +82,14 @@ namespace OnlineJudge.Repository {
         public int GetUserSubmissionCount(int uesr_id){
             return context.Submissions.Count(x=>x.Submitter.Id == uesr_id);
         }
+
+        public IEnumerable<Problem> GetProblems(int user_id, int start, int limit){
+            var problems = context.Problems.Where(x => x.Creator.Id == user_id).OrderByDescending(x=>x.CreateDate);
+            return problems.Skip(start-1).Take(limit-start+1);
+        }
+
+        public int GetProblemCount(int user_id){
+            return context.Problems.Count(x => x.Creator.Id == user_id);
+        }
     }
 }

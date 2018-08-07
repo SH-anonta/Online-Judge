@@ -63,5 +63,17 @@ namespace OnlineJudge.Controllers{
             return Ok(ContestListItem.MapTo(user_repository.GetUserContestHistory(id)));
         }
 
+
+        [HttpGet]
+        [Route("{id}/problems")]
+        public IHttpActionResult GetUserProblems(int id, int start, int limit){
+            var problems = user_repository.GetProblems(id, start, limit);
+            
+            
+            return Ok(new CollectionResponse(){
+                TotalCount = user_repository.GetProblemCount(id),
+                Collection = ProblemListItem.MapTo(problems)
+            });
+        }
     }
 }

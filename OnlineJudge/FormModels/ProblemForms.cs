@@ -32,7 +32,6 @@ namespace OnlineJudge.FormModels {
         public bool IsPublic { set; get; }
 
         public ProblemCreationForm(NameValueCollection data, ICollection<MultipartFileData> files){
-            Trace.WriteLine("Method was called");
 
             this.Title  = data.GetValues("Title")[0];
             this.Description  = data.GetValues("Description")[0];
