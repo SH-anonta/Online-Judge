@@ -34,9 +34,14 @@ namespace OnlineJudge.Controllers{
             return Ok(UserListItemData.MapTo(user_repository.GetUserList()));
         }
 
+        [HttpOptions]
         [HttpPost]
         [Route("{id}/edit")]
         public IHttpActionResult UpdateUser([FromBody]UserProfileUpdateForm data, int id){
+            if (RequestUtility.IsPreFlightRequest(Request)){
+                return Ok();
+            }
+            
             try{
                 user_repository.UpdateUser(id, data);
                 return Ok();
@@ -74,6 +79,12 @@ namespace OnlineJudge.Controllers{
                 TotalCount = user_repository.GetProblemCount(id),
                 Collection = ProblemListItem.MapTo(problems)
             });
+        }
+
+        [HttpGet]
+        [Route("types")]
+        public IHttpActionResult GetUserTypes(){
+            return Ok(UserTypeData.MapTo(user_repository.GetUserTypes()));
         }
     }
 }

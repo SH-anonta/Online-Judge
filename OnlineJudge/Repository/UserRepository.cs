@@ -91,5 +91,9 @@ namespace OnlineJudge.Repository {
         public int GetProblemCount(int user_id){
             return context.Problems.Count(x => x.Creator.Id == user_id);
         }
+
+        public IEnumerable<UserType> GetUserTypes(){
+            return context.UserTypes.Select(x => x);
+        }
     }
 }
