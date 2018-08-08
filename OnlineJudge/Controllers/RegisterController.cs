@@ -4,6 +4,7 @@ using OnlineJudge.Repository;
 
 namespace OnlineJudge.Controllers{
     
+    
     [RoutePrefix("api/register")]
     public class RegisterController : ApiController{
         private UserRepository user_repository;
@@ -16,7 +17,13 @@ namespace OnlineJudge.Controllers{
             this.user_repository = user_repository;
         }
 
+        [HttpPost]
+        [HttpOptions]
         public IHttpActionResult Register([FromBody] UserRegistrationFormData data){
+            if (RequestUtility.IsPreFlightRequest(Request)){
+                return Ok();
+            }
+            
             // todo do validation checks
 
             user_repository.CreateNewUser(data);

@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using JudgeCodeRunner;
 using OnlineJudge.FormModels;
@@ -12,6 +14,24 @@ using OnlineJudge.Models;
 using OnlineJudge.ResponseModels;
 
 namespace OnlineJudge.Repository {
+    class HashUtility{
+        public static string MD5Hash(string input){
+            // Use input string to calculate MD5 hash
+            using (MD5 md5 = MD5.Create()){
+                byte[] inputBytes = Encoding.ASCII.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                // Convert the byte array to hexadecimal string
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++){
+                    sb.Append(hashBytes[i].ToString("X2"));
+                }
+
+                return sb.ToString();
+            }
+        }
+    }
+
     public partial class UserRepository {
 
         public OjDBContext context;
@@ -68,7 +88,7 @@ namespace OnlineJudge.Repository {
             context.Users.Add(new User(){
                 UserName = data.UserName,
                 Email = data.Email,
-                Password = data.Password, // todo hash first
+                Password = HashUtility.MD5Hash(data.Password),
                 UserType = context.UserTypes.Find(UserTypeEnum.User)
             });
 
