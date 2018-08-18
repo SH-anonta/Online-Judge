@@ -4,6 +4,7 @@ using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Web.UI.WebControls;
 using JudgeCodeRunner;
+using OnlineJudge.Repository;
 
 namespace OnlineJudge.Models {
 
@@ -2098,12 +2099,12 @@ public static string intput= @"1000
 
         public static List<User> getUsers(OjDBContext ctx){
             var users = new List<User>();
-
+            var password = HashUtility.MD5Hash("password");
             users.Add(new User()
             {
                 UserName = "admin",
                 Email = "admin@admin.min",
-                Password = "password",
+                Password = password,
                 UserType = ctx.UserTypes.Find(UserTypeEnum.Admin)
             });
 
@@ -2111,7 +2112,7 @@ public static string intput= @"1000
             {
                 UserName = "user",
                 Email = "user@oj.com",
-                Password = "password",
+                Password = password,
                 UserType = ctx.UserTypes.Find(UserTypeEnum.User)
             });
 
@@ -2119,7 +2120,7 @@ public static string intput= @"1000
             {
                 UserName = "judge",
                 Email = "judge@oj.com",
-                Password = "password",
+                Password = password,
                 UserType = ctx.UserTypes.Find(UserTypeEnum.Judge)
             });
 
