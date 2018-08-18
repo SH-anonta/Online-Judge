@@ -34,6 +34,9 @@ namespace OnlineJudge.Services {
 
         }
 
-        
+
+        public void CreateSubmission(int problemId, SubmissionFormData data){
+            throw new NotImplementedException();
+        }
     }
 }

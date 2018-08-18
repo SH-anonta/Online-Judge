@@ -94,13 +94,15 @@ namespace OnlineJudge.ResponseModels {
     class ContestantListItemData{
         public int UserId { set; get; }
         public string UserName { set; get; }
-        public int Score { set; get; }
+        public int Penalty { set; get; }
+        public int SolveCount { set; get; }
 
 
         public ContestantListItemData(Contestant contestant){
             this.UserId = contestant.User.Id;
             this.UserName = contestant.User.UserName;
-            this.Score= contestant.Score;
+            this.Penalty= contestant.Penalty;
+            this.SolveCount= contestant.SolveCount;
         }
 
         public static List<ContestantListItemData> MapTo(IEnumerable<Contestant> contestants){

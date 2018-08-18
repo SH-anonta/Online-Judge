@@ -177,6 +177,18 @@ namespace OnlineJudge.Controllers{
             return Ok();
         }
         
+        
+
+    }
+
+    [RoutePrefix("api/problems")]
+    public class ProblemSubmissionController : ApiController{
+        private SubmissionRepository submission_repository;
+
+        ProblemSubmissionController(){
+            submission_repository = new SubmissionRepository();
+        }
+
         [HttpPost]
         [HttpOptions]
         [Route("{problem_id}/submit")]
@@ -185,21 +197,17 @@ namespace OnlineJudge.Controllers{
                 return Ok();
             }
 
-            problem_repository.CreateSubmission(problem_id, data);
-//            try{
-//                
-//            }
-//            catch (Exception e){
-//                logger.Error("Failed to judge submission", e);
-//            }
-            
-            return Ok();
+
+            try{
+                submission_repository.CreateProblemSubmission(problem_id, data);
+                return Ok();
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
         }
-
         
-
     }
-
 
     [RoutePrefix("api/all-submissions")]
     public class SubmissionsController : ApiController{

@@ -101,30 +101,7 @@ namespace OnlineJudge.Repository {
             return contest.Problems.First(x => x.Order == problem_order);
         }
 
-        public void CreateSubmission(int contest_id, int problem_no, SubmissionFormData submission_data){
-            Contest contest = context.Contests.Include(x=>x.Problems).FirstOrDefault(x=>x.Id == contest_id);
-            ContestProblem contest_problem = contest.Problems.FirstOrDefault(x=>x.Order == problem_no);
-            Problem problem = contest_problem.Problem;
-
-            // important: problem_repository must be initialized using this.context
-            ProblemRepository problem_repository = new ProblemRepository(this.context);
-            //todo check for null values
-
-            // todo fix
-            User submitter = context.Users.First();
-
-            Submission submission = problem_repository.CreateSubmission(problem.Id, submission_data);
-
-            ContestSubmission contest_submission = new ContestSubmission(){
-                Submitter = context.Contestants.First(x => x.User.Id == submitter.Id),
-                Problem = contest_problem,
-                Submission = submission,
-            };
-
-            contest.Submissions.Add(contest_submission);
-            context.SaveChanges();
-
-        }
+        
 
         public IEnumerable<Submission> GetAllSubmissions(int contest_id){
             Contest contest = context.Contests.Include(x => x.Submissions).FirstOrDefault(x=>x.Id == contest_id);
@@ -202,6 +179,42 @@ namespace OnlineJudge.Repository {
         public int GetContestSubmissionOfUserCount(int contest_id, int user_id){
             return context.ContestantSubmissions.Count(x=>x.Problem.Contest.Id == contest_id
                                                           && x.Submitter.User.Id == user_id);
+        }
+    }
+
+    class ContestSubmissionRepository{
+        private OjDBContext context;
+
+        public ContestSubmissionRepository(){
+            this.context= new OjDBContext();
+        }
+
+
+        public void CreateSubmission(int contest_id, int problem_no, SubmissionFormData submission_data){
+            // important: submission_repository must be initialized using this.context
+            SubmissionRepository submission_repository= new SubmissionRepository(context);
+            
+            Contest contest = context.Contests.Include(x=>x.Problems).FirstOrDefault(x=>x.Id == contest_id);
+            ContestProblem contest_problem = contest.Problems.FirstOrDefault(x=>x.Order == problem_no);
+            Problem problem = contest_problem.Problem;
+
+            
+            //todo check for null values
+
+            // todo fix
+            User submitter = context.Users.First();
+
+            Submission submission = submission_repository.CreateProblemSubmission(problem.Id, submission_data);
+
+            ContestSubmission contest_submission = new ContestSubmission(){
+                Submitter = context.Contestants.First(x => x.User.Id == submitter.Id),
+                Problem = contest_problem,
+                Submission = submission,
+            };
+
+            contest.Submissions.Add(contest_submission);
+            context.SaveChanges();
+
         }
     }
 }

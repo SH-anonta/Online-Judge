@@ -200,6 +200,7 @@
     <Compile Include="Repository\ContestRepository.cs" />
     <Compile Include="Repository\LogRepository.cs" />
     <Compile Include="Repository\ProblemsRepository.cs" />
+    <Compile Include="Repository\SubmissionRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="ResponseModels\AnnouncementResponses.cs" />
     <Compile Include="ResponseModels\CollectionResponse.cs" />

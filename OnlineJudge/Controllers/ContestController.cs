@@ -112,18 +112,6 @@ namespace OnlineJudge.Controllers{
             return Ok(new ContestProblemDetailsData(conest_prblem));
         }
 
-        [HttpPost]
-        [Route("{contest_id}/problems/{problem_no}/submit")]
-        public IHttpActionResult ContestProblemSubmit(int contest_id, int problem_no, [FromBody] SubmissionFormData submission_data){
-            try{
-                contest_repository.CreateSubmission(contest_id, problem_no, submission_data);
-                return Ok();
-            }
-            catch (ObjectNotFoundException e){
-                return NotFound();
-            }
-        }
-
         // submissions
         [HttpGet]
         [Route("{contest_id}/problems/{problem_no}/submissions")]
@@ -177,5 +165,27 @@ namespace OnlineJudge.Controllers{
             
         }
 
+    }
+
+    [RoutePrefix("api/contests")]
+    public class ContestSubmissionController : ApiController{
+        private readonly  ContestSubmissionRepository contest_submission_repository;
+
+        public ContestSubmissionController(){
+            contest_submission_repository = new ContestSubmissionRepository();
+        }
+
+
+        [HttpPost]
+        [Route("{contest_id}/problems/{problem_no}/submit")]
+        public IHttpActionResult ContestProblemSubmit(int contest_id, int problem_no, [FromBody] SubmissionFormData submission_data){
+            try{
+                contest_submission_repository.CreateSubmission(contest_id, problem_no, submission_data);
+                return Ok();
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
+        }
     }
 }
