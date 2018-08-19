@@ -211,6 +211,7 @@
     <Compile Include="ResponseModels\SubmissionResponses.cs" />
     <Compile Include="ResponseModels\UserResponseModels.cs" />
     <Compile Include="Services\AuthenticationFilter.cs" />
+    <Compile Include="Services\ContestService.cs" />
     <Compile Include="Services\JudgeService.cs" />
   </ItemGroup>
   <ItemGroup>

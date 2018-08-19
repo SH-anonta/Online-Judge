@@ -66,6 +66,7 @@ namespace OnlineJudge.Models {
 
         public virtual Submission Submission { set; get; }
         public virtual Contestant Submitter { set; get; }
+        public virtual Contest Contest { set; get; }
         public virtual ContestProblem Problem { set; get; }
     }
 }

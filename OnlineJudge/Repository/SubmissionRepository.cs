@@ -37,8 +37,6 @@ namespace OnlineJudge.Repository {
         }
 
         public Submission CreateProblemSubmission(int problem_id, SubmissionFormData submission_data){
-            Trace.WriteLine(submission_data.SourceCode);
-
             var problem = context.Problems.Find(problem_id);
             var judge = new JudgeService();
 
@@ -60,6 +58,10 @@ namespace OnlineJudge.Repository {
                 submission.StandardErrorStream= result.ErrorMsg;
 
                 context.SaveChanges();
+
+                // this event must be emitter *after* invoking context.SaveChanges()
+                OnSubmissionStatusChange?.Invoke(this, e);
+
             };
 
             judge.judge(submission_data, problem);

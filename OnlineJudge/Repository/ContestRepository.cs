@@ -5,11 +5,13 @@ using System.Data.Entity;
 using System.Data.Entity.Core;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Web;
 using JudgeCodeRunner;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
 using OnlineJudge.ResponseModels;
+using OnlineJudge.Services;
 
 namespace OnlineJudge.Repository {
     public class ContestRepository{
@@ -180,13 +182,31 @@ namespace OnlineJudge.Repository {
             return context.ContestantSubmissions.Count(x=>x.Problem.Contest.Id == contest_id
                                                           && x.Submitter.User.Id == user_id);
         }
+
+        // rank list sorted in order of descending solve count and then ascending penalty
+        public IEnumerable<ContestRankListItem> GetRankList(int contest_id){
+            var contestants = context.Contestants.Where(x => x.Contest.Id == contest_id);
+            
+            // todo sort results
+//            var sorted = 
+
+            var rank_list = new List<ContestRankListItem>();
+            foreach (var contestant in contestants){
+                rank_list.Add(new ContestRankListItem(contestant));
+                // todo add solved problem info here
+            }
+         
+            return rank_list;
+        }
     }
 
     class ContestSubmissionRepository{
         private OjDBContext context;
+        private ContestService contest_service;
 
         public ContestSubmissionRepository(){
             this.context= new OjDBContext();
+            this.contest_service= new ContestService();
         }
 
 
@@ -198,7 +218,8 @@ namespace OnlineJudge.Repository {
             ContestProblem contest_problem = contest.Problems.FirstOrDefault(x=>x.Order == problem_no);
             Problem problem = contest_problem.Problem;
 
-            
+            submission_repository.OnSubmissionStatusChange += SubmissionStatusUpdateHandler;
+
             //todo check for null values
 
             // todo fix
@@ -214,7 +235,23 @@ namespace OnlineJudge.Repository {
 
             contest.Submissions.Add(contest_submission);
             context.SaveChanges();
+        }
 
+
+        private void SubmissionStatusUpdateHandler(Object sender, ExecutionResultEventArgs args){
+            // the submission entry is updated by SubmissionRepository,
+            // this handler only updates the contestant
+
+            // replace with real user
+            var submitter = context.Contestants.Include(x => x.Submissions).First(x=> x.Id == 1);
+
+            submitter.Penalty = contest_service.CalclatePenalty(submitter.Submissions);
+            
+            submitter.SolveCount = context.ContestProblems.
+                                    Count(x=>x.Submissions.
+                                    Count(y=>y.Submission.Status.Id == Verdict.Accepted) > 0);
+
+            context.SaveChanges();
         }
     }
 }

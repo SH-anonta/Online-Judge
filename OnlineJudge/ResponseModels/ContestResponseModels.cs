@@ -6,7 +6,7 @@ using System.Web.WebSockets;
 using OnlineJudge.Models;
 
 namespace OnlineJudge.ResponseModels {
-    class ContestListItem{
+    public class ContestListItem{
         public int Id{ set; get; }
         public string Title { set; get; }
         public DateTime StartDate { set; get; }
@@ -35,7 +35,7 @@ namespace OnlineJudge.ResponseModels {
         }
     }
 
-    class ContestProblemListItemData{
+    public class ContestProblemListItemData{
         public int Order{ set; get; }
         public string Title { set; get; }
         public int SolveCount { set; get; }
@@ -57,7 +57,7 @@ namespace OnlineJudge.ResponseModels {
         }
     }
 
-    class ContestDetailsData{
+    public class ContestDetailsData{
         public int Id{ set; get; }
         public string Title { set; get; }
         public string Description { set; get; }
@@ -91,7 +91,7 @@ namespace OnlineJudge.ResponseModels {
         }
     }
 
-    class ContestantListItemData{
+    public class ContestantListItemData{
         public int UserId { set; get; }
         public string UserName { set; get; }
         public int Penalty { set; get; }
@@ -116,7 +116,7 @@ namespace OnlineJudge.ResponseModels {
         }
     }
 
-    class ContestProblemDetailsData{
+    public class ContestProblemDetailsData{
         public ProblemDetails problem_details { set; get; }
         public int Order { set; get; }
 
@@ -126,7 +126,33 @@ namespace OnlineJudge.ResponseModels {
         }
     }
 
-    class ContestHistoryListItemData{
+    public class ContestHistoryListItemData{
         // todo implement
+    }
+
+    public class ContestRankListItem{
+        public int UserId{ set; get; }
+        public string UserName{ set; get; }
+        public int SolveCount { set; get; }
+        public int Penalty { set; get; }
+        public IEnumerable<int> Solved;
+
+
+        public ContestRankListItem(Contestant contestant){
+            this.UserName = contestant.User.UserName;
+            this.UserId = contestant.User.Id;
+            this.Penalty = contestant.Penalty;
+            this.SolveCount = contestant.SolveCount;
+        }
+
+        public static List<ContestRankListItem> MapTo(IEnumerable<Contestant> contestants){
+            var mapped = new List<ContestRankListItem>();
+
+            foreach (var contestant in contestants){
+                mapped.Add(new ContestRankListItem(contestant));
+            }
+
+            return mapped;
+        }
     }
 }

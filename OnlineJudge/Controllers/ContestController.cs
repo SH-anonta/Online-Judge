@@ -165,6 +165,13 @@ namespace OnlineJudge.Controllers{
             
         }
 
+
+        // contest rank list
+        [HttpGet]
+        [Route("{contest_id}/rank")]
+        public IHttpActionResult ContestRankList(int contest_id){
+            return Ok(contest_repository.GetRankList(contest_id));
+        }
     }
 
     [RoutePrefix("api/contests")]
