@@ -184,19 +184,17 @@ namespace OnlineJudge.Repository {
         }
 
         // rank list sorted in order of descending solve count and then ascending penalty
-        public IEnumerable<ContestRankListItem> GetRankList(int contest_id){
-            var contestants = context.Contestants.Where(x => x.Contest.Id == contest_id);
-            
-            // todo sort results
-//            var sorted = 
-
-            var rank_list = new List<ContestRankListItem>();
-            foreach (var contestant in contestants){
-                rank_list.Add(new ContestRankListItem(contestant));
-                // todo add solved problem info here
+        public IEnumerable<ContestRankListItem> GetRankList(int contest_id, int start= 1, int limit = 100){
+            Contest contest = context.Contests.Include(x=>x.Problems).FirstOrDefault(x=>x.Id == contest_id);
+            if (contest == null){
+                throw new ObjectNotFoundException("Contest with specified ID not found");
             }
-         
-            return rank_list;
+
+            var contestants = context.Contestants.Include(x=>x.Submissions).Where(x => x.Contest.Id == contest_id);
+            contestants = contestants.OrderByDescending(x=> x.SolveCount).ThenBy(x => x.Penalty);
+
+            contestants = contestants.Skip(start-1).Take(limit-start+1);
+            return ContestRankListItem.MapTo(contestants, contest);
         }
     }
 

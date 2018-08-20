@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using JudgeCodeRunner;
 
 namespace OnlineJudge.Models {
     public class Contest {
@@ -68,5 +69,9 @@ namespace OnlineJudge.Models {
         public virtual Contestant Submitter { set; get; }
         public virtual Contest Contest { set; get; }
         public virtual ContestProblem Problem { set; get; }
+
+        public bool IsAccepted(){
+            return this.Submission.Status.Id == Verdict.Accepted;
+        }
     }
 }

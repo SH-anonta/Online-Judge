@@ -28,6 +28,10 @@ namespace OnlineJudge.Models {
         public Submission(){
 
         }
+
+        public bool IsAccepted(){
+            return this.Status.Id == Verdict.Accepted;
+        }
     }
 
     public class SubmissionStatus{

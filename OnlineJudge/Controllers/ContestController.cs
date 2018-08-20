@@ -169,8 +169,8 @@ namespace OnlineJudge.Controllers{
         // contest rank list
         [HttpGet]
         [Route("{contest_id}/rank")]
-        public IHttpActionResult ContestRankList(int contest_id){
-            return Ok(contest_repository.GetRankList(contest_id));
+        public IHttpActionResult ContestRankList(int contest_id, int start, int limit){
+            return Ok(contest_repository.GetRankList(contest_id, start, limit));
         }
     }
 
