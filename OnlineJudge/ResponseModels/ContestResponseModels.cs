@@ -188,4 +188,11 @@ namespace OnlineJudge.ResponseModels {
             return mapped;
         }
     }
+
+    public class ContestRankCollection{
+        public int TotalCount { set; get; }
+        public int RankStartsFrom{ set; get; }
+        public IEnumerable<ContestRankListItem> Collection{ set; get; }
+        public string ContestTitle { get; set; }
+    }
 }

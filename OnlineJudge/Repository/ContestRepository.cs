@@ -64,6 +64,10 @@ namespace OnlineJudge.Repository {
                 throw new InvalidOperationException("User is already registered for contest");
             }
 
+            if (contest.StartDate < DateTime.Now){
+                throw new InvalidOperationException("Contest registration time has ended");
+            }
+
             Trace.WriteLine(contest.Contestants.Count);
             var contestant = new Contestant(user);
             
@@ -184,17 +188,36 @@ namespace OnlineJudge.Repository {
         }
 
         // rank list sorted in order of descending solve count and then ascending penalty
-        public IEnumerable<ContestRankListItem> GetRankList(int contest_id, int start= 1, int limit = 100){
+        public ContestRankCollection GetRankList(int contest_id, int start= 1, int limit = 100){
             Contest contest = context.Contests.Include(x=>x.Problems).FirstOrDefault(x=>x.Id == contest_id);
+            
+
             if (contest == null){
                 throw new ObjectNotFoundException("Contest with specified ID not found");
             }
 
-            var contestants = context.Contestants.Include(x=>x.Submissions).Where(x => x.Contest.Id == contest_id);
-            contestants = contestants.OrderByDescending(x=> x.SolveCount).ThenBy(x => x.Penalty);
+            var contestants = context.Contestants.Include(x=>x.Submissions).Where(x => x.Contest.Id == contest_id && x.Submissions.Count > 0);
+            
+            // number of contestants who have at least one submission
+            int contestants_count = contestants.Count();
 
+            contestants = contestants.OrderByDescending(x=> x.SolveCount).ThenBy(x => x.Penalty);
             contestants = contestants.Skip(start-1).Take(limit-start+1);
-            return ContestRankListItem.MapTo(contestants, contest);
+
+            ContestRankCollection rank_list = new ContestRankCollection(){
+                ContestTitle = contest.Title,
+                RankStartsFrom = start,
+                Collection = ContestRankListItem.MapTo(contestants, contest),
+                TotalCount = contestants_count
+            };
+
+            return rank_list;
+        }
+
+        public void DeleteContest(int contest_id){
+            Contest contest = GetContestById(contest_id);
+            context.Contests.Remove(contest);
+            context.SaveChanges();
         }
     }
 
@@ -213,6 +236,12 @@ namespace OnlineJudge.Repository {
             SubmissionRepository submission_repository= new SubmissionRepository(context);
             
             Contest contest = context.Contests.Include(x=>x.Problems).FirstOrDefault(x=>x.Id == contest_id);
+
+            if (contest.EndDate < DateTime.Now){
+                throw new InvalidOperationException("Can not create submission to contest that has ended");
+            }
+
+
             ContestProblem contest_problem = contest.Problems.FirstOrDefault(x=>x.Order == problem_no);
             Problem problem = contest_problem.Problem;
 
@@ -248,7 +277,6 @@ namespace OnlineJudge.Repository {
             submitter.SolveCount = context.ContestProblems.
                                     Count(x=>x.Submissions.
                                     Count(y=>y.Submission.Status.Id == Verdict.Accepted) > 0);
-
             context.SaveChanges();
         }
     }

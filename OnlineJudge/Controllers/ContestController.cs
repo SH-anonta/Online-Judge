@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Core;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+using System.Diagnostics;
 using System.Web.Http;
 using OnlineJudge.FormModels;
-using OnlineJudge.Models;
 using OnlineJudge.Repository;
 using OnlineJudge.ResponseModels;
 
@@ -67,7 +63,7 @@ namespace OnlineJudge.Controllers{
                 return NotFound();
             }
             catch (InvalidOperationException e){
-                return BadRequest(e.Message);
+                return InternalServerError(e);
             }
             
         }
@@ -165,12 +161,32 @@ namespace OnlineJudge.Controllers{
             
         }
 
+        // delete conflicts with reference constaints
+        [HttpPost]
+        [Route("{contest_id}/delete")]
+        public IHttpActionResult ContestantDelete(int contest_id){
+            try{
+                contest_repository.DeleteContest(contest_id);
+                return Ok();
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
+            
+        }
 
         // contest rank list
         [HttpGet]
         [Route("{contest_id}/rank")]
         public IHttpActionResult ContestRankList(int contest_id, int start, int limit){
-            return Ok(contest_repository.GetRankList(contest_id, start, limit));
+
+            try{
+                return Ok(contest_repository.GetRankList(contest_id, start, limit));
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
+            
         }
     }
 
@@ -186,9 +202,13 @@ namespace OnlineJudge.Controllers{
         [HttpPost]
         [Route("{contest_id}/problems/{problem_no}/submit")]
         public IHttpActionResult ContestProblemSubmit(int contest_id, int problem_no, [FromBody] SubmissionFormData submission_data){
-            try{
+            try
+            {
                 contest_submission_repository.CreateSubmission(contest_id, problem_no, submission_data);
                 return Ok();
+            }
+            catch (InvalidOperationException e){
+                return BadRequest("Can not submit to contest that has ended");
             }
             catch (ObjectNotFoundException e){
                 return NotFound();

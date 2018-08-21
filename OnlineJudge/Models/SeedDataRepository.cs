@@ -2163,20 +2163,22 @@ public static string intput= @"1000
                 StartDate = DateTime.Now,
                 EndDate = DateTime.MaxValue,
             };
+
+
+            for (int i = 0; i < 5; i++){
+                ContestProblem contest_problem = new ContestProblem(){
+                    Order = i,
+                    Contest = contest,
+                    Problem =  problem,
+                };
+                contest.Problems.Add(contest_problem);
+            }
+
             
-            ContestProblem contest_problem = new ContestProblem(){
-                Contest = contest,
-                Problem =  problem,
-            };
-
-            Contestant contestant = new Contestant(ctx.Users.First());
-
-//            ctx.ContestProblems.Add(contest_problem);
-//            ctx.Contestants.Add(contestant);
-//            ctx.SaveChanges();
-
-            contest.Problems.Add(contest_problem);
-            contest.Contestants.Add(contestant);
+            for (int i = 0; i < 30; i++){
+                Contestant contestant = new Contestant(ctx.Users.First());
+                contest.Contestants.Add(contestant);
+            }
 
             contests.Add(contest);
 

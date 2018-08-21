@@ -81,7 +81,8 @@ namespace OnlineJudge.Repository {
         }
 
         public IEnumerable<Contest> GetUserContestHistory(int user_id){
-            return context.Contestants.Where(x => x.User.Id == user_id).Select(x=>x.Contest);
+            var contests = context.Contestants.Where(x => x.User.Id == user_id).Select(x=>x.Contest);
+            return contests;
         }
 
         public void CreateNewUser(UserRegistrationFormData data){
