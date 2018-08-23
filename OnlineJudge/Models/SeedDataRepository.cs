@@ -2160,7 +2160,7 @@ public static string intput= @"1000
                 Description = "Contest Contest",
                 Creator = ctx.Users.First(),
 
-                StartDate = DateTime.Now,
+                StartDate = new DateTime(2018, 12, 1),
                 EndDate = DateTime.MaxValue,
             };
 

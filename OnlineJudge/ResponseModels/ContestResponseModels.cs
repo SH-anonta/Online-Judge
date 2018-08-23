@@ -195,4 +195,14 @@ namespace OnlineJudge.ResponseModels {
         public IEnumerable<ContestRankListItem> Collection{ set; get; }
         public string ContestTitle { get; set; }
     }
+
+    public class UnFinishedContestListCollection{
+        public IEnumerable<ContestListItem> RunningContests;
+        public IEnumerable<ContestListItem> UpcomingContests;
+
+        public UnFinishedContestListCollection(IEnumerable<Contest> running_contests,IEnumerable<Contest> upcoming_contests){
+            RunningContests = ContestListItem.MapTo(running_contests);
+            UpcomingContests = ContestListItem.MapTo(upcoming_contests);
+        }
+    }
 }

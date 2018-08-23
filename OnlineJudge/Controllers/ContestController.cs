@@ -38,6 +38,19 @@ namespace OnlineJudge.Controllers{
             return Ok(ContestListItem.MapTo(all_contests));
         }
 
+
+        [HttpGet]
+        [Route("unfinished-contests")]
+        public IHttpActionResult UnfinishedContests(){
+            return Ok(contest_repository.GetUnfinishedContests());
+        }
+
+        [HttpGet]
+        [Route("past-contests")]
+        public IHttpActionResult PastContests(int start, int limit){
+            return Ok(contest_repository.GetPastContests(start, limit));
+        }
+
         [HttpGet]
         [Route("{contest_id}")]
         public IHttpActionResult ContestDetails(int contest_id){

@@ -219,6 +219,20 @@ namespace OnlineJudge.Repository {
             context.Contests.Remove(contest);
             context.SaveChanges();
         }
+
+        public UnFinishedContestListCollection GetUnfinishedContests(){
+            var all_contests = context.Contests.OrderByDescending(x => x.StartDate);
+            var running = all_contests.Where(x => x.StartDate < DateTime.Now && x.EndDate > DateTime.Now);
+            var upcoming = all_contests.Where(x => x.StartDate > DateTime.Now);
+            
+            return new UnFinishedContestListCollection(running, upcoming);
+        }
+
+        public IEnumerable<Contest> GetPastContests(int start, int limit){
+            // select contests that have ended
+            var contests = context.Contests.OrderByDescending(x=>x.StartDate).Where(x=>x.EndDate < DateTime.Now);
+            return contests.Skip(start - 1).Take(limit-start+1);
+        }
     }
 
     class ContestSubmissionRepository{
@@ -241,6 +255,9 @@ namespace OnlineJudge.Repository {
                 throw new InvalidOperationException("Can not create submission to contest that has ended");
             }
 
+            if (contest.StartDate > DateTime.Now){
+                throw new InvalidOperationException("Can not create submission to contest that has not started");
+            }
 
             ContestProblem contest_problem = contest.Problems.FirstOrDefault(x=>x.Order == problem_no);
             Problem problem = contest_problem.Problem;
