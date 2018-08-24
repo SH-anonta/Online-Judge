@@ -118,7 +118,7 @@ namespace OnlineJudge.Controllers{
         [Route("{contest_id}/problems/{problem_no}")]
         public IHttpActionResult ContestProblemDetails(int contest_id, int problem_no){
             var conest_prblem = contest_repository.GetContestProblem(contest_id, problem_no);
-            return Ok(new ContestProblemDetailsData(conest_prblem));
+            return Ok(new ProblemDetails(conest_prblem.Problem));
         }
 
         // submissions
