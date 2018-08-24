@@ -2151,17 +2151,33 @@ public static string intput= @"1000
         }
 
         public static List<Contest> GetContests(OjDBContext ctx){
-            var contests = new List<Contest>();
+            var past = DateTime.Now;
+            past = past.Subtract(TimeSpan.FromHours(5));
 
+            var present = DateTime.Now;
+
+            var future = DateTime.Now;
+            future = future.AddHours(5);
+
+
+            return new List<Contest>(){
+                CreateContes(ctx, "Contest 1", past, present),   // past contest
+                CreateContes(ctx, "Contest 2", past, future),   // running contest
+                CreateContes(ctx, "Contest 3", future, DateTime.MaxValue),   // upcomping contest
+            };
+        }
+
+        // create one cotnest entry using given start and end_time dates
+        public static Contest CreateContes(OjDBContext ctx, string title, DateTime start_time, DateTime end_time){
             Problem problem = ctx.Problems.First();
 
             var contest = new Contest(){
-                Title = "Practice contest #8",
+                Title = title,
                 Description = "Contest Contest",
                 Creator = ctx.Users.First(),
 
-                StartDate = new DateTime(2018, 12, 1),
-                EndDate = DateTime.MaxValue,
+                StartDate = start_time,
+                EndDate = end_time,
             };
 
 
@@ -2180,9 +2196,7 @@ public static string intput= @"1000
                 contest.Contestants.Add(contestant);
             }
 
-            contests.Add(contest);
-
-            return contests;
+            return contest;
         }
     }
 }
