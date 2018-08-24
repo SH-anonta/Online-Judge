@@ -118,16 +118,22 @@ namespace OnlineJudge.Controllers{
                 // Read the form data.
                 await Request.Content.ReadAsMultipartAsync(provider);
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 return InternalServerError(e);
             }
 
             var problem_form = new ProblemCreationForm(provider.FormData, provider.FileData);
 
-            problem_repository.CreateProblem(problem_form);
-            
-            return Ok();
+            FormDataValidationResult result = problem_form.Validate();
+
+            if (result.IsValid){
+                problem_repository.CreateProblem(problem_form);
+                return Ok();
+            }
+            else{
+                return new BadHttpRequest(result.ErrorMessages);
+            }
         }
 
         [HttpPost]
