@@ -205,4 +205,10 @@ namespace OnlineJudge.ResponseModels {
             UpcomingContests = ContestListItem.MapTo(upcoming_contests);
         }
     }
+
+    public class ContestListCollection{
+        public int TotalCount;
+        public IEnumerable<ContestListItem> Collection;
+    }
+
 }

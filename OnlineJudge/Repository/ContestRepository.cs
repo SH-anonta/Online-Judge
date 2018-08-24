@@ -228,10 +228,14 @@ namespace OnlineJudge.Repository {
             return new UnFinishedContestListCollection(running, upcoming);
         }
 
-        public IEnumerable<Contest> GetPastContests(int start, int limit){
+        public ContestListCollection GetPastContests(int start, int limit){
             // select contests that have ended
             var contests = context.Contests.OrderByDescending(x=>x.StartDate).Where(x=>x.EndDate < DateTime.Now);
-            return contests.Skip(start - 1).Take(limit-start+1);
+
+            return new ContestListCollection(){
+                TotalCount = contests.Count(),
+                Collection = ContestListItem.MapTo(contests.Skip(start - 1).Take(limit-start+1)),
+            };
         }
     }
 
