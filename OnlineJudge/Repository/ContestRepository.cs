@@ -109,14 +109,15 @@ namespace OnlineJudge.Repository {
 
         
 
-        public IEnumerable<Submission> GetAllSubmissions(int contest_id){
+        public IEnumerable<Submission> GetAllSubmissions(int contest_id, int start, int limit){
             Contest contest = context.Contests.Include(x => x.Submissions).FirstOrDefault(x=>x.Id == contest_id);
 
             if (contest == null){
                 throw new ObjectDisposedException("Contest with specified id not found");
             }
 
-            return contest.Submissions.Select(x=>x.Submission);
+            var submissions = contest.Submissions.Select(x => x.Submission).OrderByDescending(x => x.SubmissionDate);
+            return submissions.Skip(start-1).Take(limit-start+1);
         }
 
         public IEnumerable<Submission> GetContestantSubmissions(int contest_id, int user_id){
@@ -175,7 +176,7 @@ namespace OnlineJudge.Repository {
         }
 
         public int GetContestSubmissionCount(int contest_id){
-            return context.ContestantSubmissions.Count(x=>x.Id == contest_id);
+            return context.ContestantSubmissions.Count(x=>x.Contest.Id == contest_id);
         }
 
         public int GetContestSubmissionOfProblemCount(int contest_id){

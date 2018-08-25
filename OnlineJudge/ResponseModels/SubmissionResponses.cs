@@ -5,7 +5,7 @@ using System.Web;
 using OnlineJudge.Models;
 
 namespace OnlineJudge.ResponseModels {
-    class SubmissionResponseData{
+    public class SubmissionResponseData{
         public string ProblemTitle { set; get; }
         public int ProblemId { set; get; }
 

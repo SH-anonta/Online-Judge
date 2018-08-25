@@ -211,4 +211,11 @@ namespace OnlineJudge.ResponseModels {
         public IEnumerable<ContestListItem> Collection;
     }
 
+    public class ContestSubmissionListCollection{
+        public int TotalCount;
+        public IEnumerable<SubmissionResponseData> Collection;
+
+    }
+
+
 }

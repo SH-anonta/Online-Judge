@@ -137,10 +137,13 @@ namespace OnlineJudge.Controllers{
         // submissions
         [HttpGet]
         [Route("{contest_id}/submissions")]
-        public IHttpActionResult ContestSubmissions(int contest_id){
+        public IHttpActionResult ContestSubmissions(int contest_id, int start, int limit){
             try{
-                var submissions = contest_repository.GetAllSubmissions(contest_id);
-                return Ok(SubmissionResponseData.MapTo(submissions));
+                var submissions = contest_repository.GetAllSubmissions(contest_id, start, limit);
+                return Ok(new ContestSubmissionListCollection{
+                    TotalCount = contest_repository.GetContestSubmissionCount(contest_id),
+                    Collection = SubmissionResponseData.MapTo(submissions)
+                });
             }
             catch (ObjectNotFoundException e){
                 return NotFound();
