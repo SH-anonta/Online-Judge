@@ -10,14 +10,14 @@ namespace JudgeCodeRunner {
         }
 
         static void testCodeRunner(){
-            string source_path = DummyCode.getCPP89WACode();
+//            string source_path = DummyCode.getCPP89WACode();
 //            string source_path = DummyCode.getCpp89Code();
-//            string source_path = DummyCode.getPython3Code();
-            ProgrammingLanguageEnum lang = ProgrammingLanguageEnum.Cpp89;
-//            ProgrammingLanguageEnum lang = ProgrammingLanguageEnum.Python3;
+            string source_path = DummyCode.getPython3Code();
+//            ProgrammingLanguageEnum lang = ProgrammingLanguageEnum.Cpp89;
+            ProgrammingLanguageEnum lang = ProgrammingLanguageEnum.Python3;
 
-            double time_limit= 0.5;
-            CodeRunner runner = new CodeRunner(lang, source_path, DummyData.bigInput, DummyData.expected_output, time_limit);
+            double time_limit= 1;
+            CodeRunner runner = new CodeRunner(lang, source_path, DummyData.intput, DummyData.expected_output, time_limit);
             runner.OnExecutionFinished += CodeResultsHandler;
             runner.RunCode();
 
