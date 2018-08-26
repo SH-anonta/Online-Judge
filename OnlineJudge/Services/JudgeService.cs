@@ -18,7 +18,7 @@ namespace OnlineJudge.Services {
             int problem_code = problem.Id;
             logger.Info(String.Format("Submission recieved from user {0}, for Problem {1}", 1, problem_code));
             
-            var runner = new JudgeCodeRunner.CodeRunner(ProgrammingLanguageEnum.Cpp89,
+            var runner = new JudgeCodeRunner.CodeRunner((ProgrammingLanguageEnum) submissison.ProgrammingLanguageId,
                                                         submissison.SourceCode,
                                                         problem.TestCaseInput,
                                                         problem.TestCaseOutput,

@@ -24,7 +24,7 @@ namespace OnlineJudge.Repository {
         }
 
         public Submission InitializeSubmissionObject(Problem problem, SubmissionFormData submission_data){
-            var language = context.ProgrammingLanguages.Find((ProgrammingLanguageEnum)submission_data.LanguageId);
+            var language = context.ProgrammingLanguages.Find((ProgrammingLanguageEnum)submission_data.ProgrammingLanguageId);
 
             return new Submission(){
                 Status = context.SubmissionStatus.Find(Verdict.Running),
@@ -44,7 +44,7 @@ namespace OnlineJudge.Repository {
                 throw new ObjectNotFoundException("Problem with specified id does not exist");
             }
 
-//            Trace.WriteLine(submission_data.LanguageId);
+//            Trace.WriteLine(submission_data.ProgrammingLanguageId);
             var submission = InitializeSubmissionObject(problem, submission_data);
 
             context.Submissions.Add(submission);
