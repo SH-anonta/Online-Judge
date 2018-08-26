@@ -11,8 +11,14 @@ namespace OnlineJudge.Models {
         public string Title { set; get; }
         public string Description { set; get; }
         
+        public string Password { set; get; }
+
+        [Column(TypeName = "DateTime2")]
         public DateTime StartDate { set; get; }
+        [Column(TypeName = "DateTime2")]
         public DateTime EndDate { set; get; }
+
+
         
         public virtual User Creator { set; get; }
         

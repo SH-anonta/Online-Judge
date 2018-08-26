@@ -82,8 +82,13 @@ namespace OnlineJudge.Controllers{
         }
 
         [HttpPost]
+        [HttpOptions]
         [Route("create")]
         public IHttpActionResult ContestCreate([FromBody]ContestCreationFormData data){
+            if (RequestUtility.IsPreFlightRequest(Request)){
+                return Ok();
+            }
+
             try{
                 // todo replace 1 with current user id
                 contest_repository.CreateContest(1, data);

@@ -144,9 +144,13 @@ namespace OnlineJudge.Repository {
             List<ContestProblem> contest_problems = new List<ContestProblem>();
             var creator = context.Users.Find(user_id);
 
+            if (creator == null){
+                throw new ObjectNotFoundException("User with specified not found");
+            }
+
+            int order = 0;
             foreach(int problem_id in data.Problems){
                 var problem = context.Problems.Find(problem_id);
-                
 
                 if (problem == null){
                     throw new InvalidOperationException("One or more specified problem IDs were not found");
@@ -154,7 +158,10 @@ namespace OnlineJudge.Repository {
 
                 contest_problems.Add(new ContestProblem(){
                     Problem = problem,
+                    Order = order,
                 });
+
+                order++;
             }
 
             Contest contest = new Contest(){
@@ -163,7 +170,8 @@ namespace OnlineJudge.Repository {
                 StartDate = data.StartDate,
                 EndDate = data.EndDate,
                 Problems = contest_problems,
-                Creator = creator
+                Creator = creator,
+                Password = data.Password,
             };
 
             context.Contests.Add(contest);
