@@ -89,6 +89,11 @@ namespace OnlineJudge.Controllers{
                 return Ok();
             }
 
+            var validation_oresult = data.Validate();
+            if (!validation_oresult.IsValid){
+                return new BadHttpRequest(validation_oresult.ErrorMessages);
+            }
+
             try{
                 // todo replace 1 with current user id
                 contest_repository.CreateContest(1, data);

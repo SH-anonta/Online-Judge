@@ -171,6 +171,7 @@ namespace OnlineJudge.Repository {
                 EndDate = data.EndDate,
                 Problems = contest_problems,
                 Creator = creator,
+                IsPublic = data.IsPublic,
                 Password = data.Password,
             };
 

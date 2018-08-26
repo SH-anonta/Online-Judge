@@ -12,13 +12,13 @@ namespace OnlineJudge.Models {
         public string Description { set; get; }
         
         public string Password { set; get; }
+        public bool IsPublic { set; get; }
+
 
         [Column(TypeName = "DateTime2")]
         public DateTime StartDate { set; get; }
         [Column(TypeName = "DateTime2")]
         public DateTime EndDate { set; get; }
-
-
         
         public virtual User Creator { set; get; }
         
