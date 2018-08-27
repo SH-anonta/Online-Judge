@@ -70,17 +70,24 @@ namespace OnlineJudge.ResponseModels {
         
         public string Creator { set; get; }
         public int CreatorId { set; get; }
+
+        public bool IsPublic { set; get; }
         
         public IEnumerable<ContestProblemListItemData> Problems { set; get; }
 
         public ContestDetailsData(Contest contest){
             this.Id = contest.Id;
             this.Title = contest.Title; 
+            this.Description = contest.Description; 
+
             this.StartDate = contest.StartDate; 
             this.EndDate = contest.EndDate; 
+
             this.Creator = contest.Creator.UserName; 
             this.CreatorId = contest.Creator.Id;
             this.Problems = ContestProblemListItemData.MapTo(contest.Problems);
+
+            this.IsPublic = contest.IsPublic;
         }
 
         public static List<ContestDetailsData> MapTo(IEnumerable<Contest> contests){

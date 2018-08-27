@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.Entity.Core;
-using System.Diagnostics;
 using System.Web.Http;
 using OnlineJudge.FormModels;
 using OnlineJudge.Repository;
@@ -63,13 +62,17 @@ namespace OnlineJudge.Controllers{
             }
         }
 
+        [HttpOptions]
         [HttpPost]
         [Route("{contest_id}/register")]
-        public IHttpActionResult ContestRegistration(int contest_id){
-            
+        public IHttpActionResult ContestRegistration(int contest_id, [FromBody]ContestRegistrationFormData registration_form_data){
+            if (RequestUtility.IsPreFlightRequest(Request)){
+                return Ok();
+            }
+
             try{
                 // todo replace user id 2 with the user sending the request
-                contest_repository.RegisterUserForContest(contest_id, 2);
+                contest_repository.RegisterUserForContest(contest_id, 2, registration_form_data);
                 return Ok();
             }
             catch (ObjectNotFoundException e){

@@ -46,7 +46,7 @@ namespace OnlineJudge.Repository {
             return contest;
         }
 
-        public Contestant RegisterUserForContest(int contest_id, int user_id){
+        public Contestant RegisterUserForContest(int contest_id, int user_id, ContestRegistrationFormData data){
             Contest contest = context.Contests.Include(x=> x.Contestants).FirstOrDefault(x => x.Id == contest_id);
             
             var user = context.Users.Find(user_id);
@@ -64,6 +64,10 @@ namespace OnlineJudge.Repository {
                 throw new InvalidOperationException("User is already registered for contest");
             }
 
+            if (!contest.IsPublic && contest.Password != data.Password){
+                throw new InvalidOperationException("Wrong password for registation");
+            }
+
             if (contest.StartDate < DateTime.Now){
                 throw new InvalidOperationException("Contest registration time has ended");
             }
@@ -76,6 +80,7 @@ namespace OnlineJudge.Repository {
             
             return contestant;
         }
+
 
         public IEnumerable<Contestant> GetContestantsOfContest(int contest_id){
             var contest = context.Contests.Include(x=>x.Contestants).FirstOrDefault(x => x.Id == contest_id);

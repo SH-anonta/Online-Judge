@@ -196,6 +196,7 @@
     <Compile Include="Models\Submission.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AdminRepository.cs" />
     <Compile Include="Repository\AnnouncementsRepository.cs" />
     <Compile Include="Repository\ContestRepository.cs" />
     <Compile Include="Repository\LogRepository.cs" />

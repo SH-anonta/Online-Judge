@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.EnterpriseServices.Internal;
 using System.Linq;
-using System.Web;
 using Microsoft.Ajax.Utilities;
 
 namespace OnlineJudge.FormModels {
@@ -62,6 +60,12 @@ namespace OnlineJudge.FormModels {
 
             return result;
         }
+
+
+    }
+
+    public class ContestRegistrationFormData{
+        public string Password { set; get; }
     }
 
     

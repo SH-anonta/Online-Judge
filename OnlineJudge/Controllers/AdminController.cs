@@ -12,5 +12,9 @@ namespace OnlineJudge.Controllers{
         public ActionResult Index(){
             return View("AdminHome");
         }
+        
+
     }
+
+
 }

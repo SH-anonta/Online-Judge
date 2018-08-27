@@ -2175,7 +2175,8 @@ public static string intput= @"1000
                 Title = title,
                 Description = "Contest Contest",
                 Creator = ctx.Users.First(),
-
+                Password = "password",
+                IsPublic = false,
                 StartDate = start_time,
                 EndDate = end_time,
             };
