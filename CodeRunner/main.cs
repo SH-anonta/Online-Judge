@@ -4,7 +4,17 @@ using CodeRunner.Compilers;
 using JudgeCodeRunner.CompilerServices;
 
 namespace JudgeCodeRunner {
-    class Driver{      
+    class Driver
+    {
+        private static string RiskyCode = @"
+import os
+
+#os.listdir('G:/tmp')
+f = open('G:/tmp/take.txt', 'w')
+f.write('abc')
+f.close()
+        
+";
         public static void Main(){
             testCodeRunner();
         }

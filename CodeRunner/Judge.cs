@@ -45,7 +45,6 @@ namespace JudgeCodeRunner {
             this.time_limit = time_limit;
             
             // expects StartInfo.FileName of proc to be set
-            // todo throw exception if path of exe is not set
             if (proc.StartInfo.FileName == null || proc.StartInfo.FileName == ""){
                 throw new Exception("StartInfo.FileName of process must be set (by the compiler)");
             }
