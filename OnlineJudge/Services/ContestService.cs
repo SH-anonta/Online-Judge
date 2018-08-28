@@ -13,6 +13,10 @@ namespace OnlineJudge.Services {
         // this method assumes all ContestSubmission objects recieved via parameter belong to the same Contestant
         public int CalclatePenalty(IEnumerable<ContestSubmission> submissions){
             // at least one submission must be present in the submissoins list
+            if (!submissions.Any()){
+                return 0;
+            }
+
             DateTime contest_start_time = submissions.First().Contest.StartDate;
             
 
