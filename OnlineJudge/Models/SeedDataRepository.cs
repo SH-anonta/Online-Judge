@@ -2192,7 +2192,7 @@ public static string intput= @"1000
             }
 
             
-            for (int i = 0; i < 30; i++){
+            for (int i = 0; i < 1; i++){
                 Contestant contestant = new Contestant(ctx.Users.First());
                 contest.Contestants.Add(contestant);
             }

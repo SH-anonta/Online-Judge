@@ -126,15 +126,19 @@ namespace OnlineJudge.Repository {
         }
 
         public IEnumerable<Submission> GetContestantSubmissions(int contest_id, int user_id){
-            // todo add null value checks
-            Contestant contestant = context.Contestants.Include(x => x.Submissions)
-                                                       .FirstOrDefault(x => x.Contest.Id == contest_id 
-                                                            && x.User.Id == user_id);
-            if(contestant == null){
-                throw new ObjectDisposedException("Contest with specified id not found");
-            }
+//            Contest contest = context.Contests.Include(x => x.Submissions).FirstOrDefault(x=>x.Id==contest_id);
 
-            return contestant.Submissions.OrderByDescending(x =>x.Submission.SubmissionDate).Select(x=>x.Submission);
+//            Contestant contestant = context.Contestants.Include(x => x.Submissions)
+//                                                       .FirstOrDefault(x => x.Contest.Id == contest_id 
+//                                                            && x.User.Id == user_id);
+//            if(contestant == null){
+//                throw new ObjectDisposedException("Contest with specified id not found");
+//            }
+
+//            return contestant.Submissions.OrderByDescending(x =>x.Submission.SubmissionDate).Select(x=>x.Submission);
+
+            var submissions =context.ContestantSubmissions.Where(x => x.Contest.Id == contest_id && x.Submission.Submitter.Id == user_id);
+            return submissions.OrderByDescending(x => x.Submission.SubmissionDate).Select(x=>x.Submission);
         }
 
         public IEnumerable<Submission> GetContestantProblemSubmissions(int contest_id, int problem_no){
@@ -251,7 +255,8 @@ namespace OnlineJudge.Repository {
                 throw new ObjectNotFoundException("Contest with specified ID not found");
             }
 
-            var contestants = context.Contestants.Include(x=>x.Submissions).Where(x => x.Contest.Id == contest_id && x.Submissions.Count > 0);
+//            var contestants = context.Contestants.Include(x=>x.Submissions).Where(x => x.Contest.Id == contest_id && x.Submissions.Count > 0);
+            var contestants = context.Contestants.Include(x=>x.Submissions).Where(x => x.Contest.Id == contest_id);
             
             // number of contestants who have at least one submission
             int contestants_count = contestants.Count();

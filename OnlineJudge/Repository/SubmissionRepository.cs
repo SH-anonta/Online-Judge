@@ -55,6 +55,7 @@ namespace OnlineJudge.Repository {
                 submission.Status = context.SubmissionStatus.Find(result.Verdict);
                 submission.RunningTime = result.RunningTime;
                 submission.PeakMemmoryUsage = result.MemmoryUsage;
+//                submission.PeakMemmoryUsage = result.Verdict == Verdict.CompilationError ? 0 : 5;  // TODO REPLACE WITH REAL VALUE
                 submission.StandardErrorStream= result.ErrorMsg;
 
                 context.SaveChanges();

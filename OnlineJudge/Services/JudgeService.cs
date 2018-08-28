@@ -13,7 +13,6 @@ namespace OnlineJudge.Services {
         private static readonly log4net.ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        // todo use a readonly binding of Problem
         public void judge(SubmissionFormData submissison, Problem problem){
             int problem_code = problem.Id;
             logger.Info(String.Format("Submission recieved from user {0}, for Problem {1}", 1, problem_code));
@@ -35,8 +34,5 @@ namespace OnlineJudge.Services {
         }
 
 
-        public void CreateSubmission(int problemId, SubmissionFormData data){
-            throw new NotImplementedException();
-        }
     }
 }
