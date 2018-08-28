@@ -1,0 +1,66 @@
+﻿@model OnlineJudge.Models.UserTest
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit profile</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 mx-auto">
+                <form #form="ngForm" method="post">
+
+                    <div class="form-group">
+                        <label for="UserName">Username</label>
+
+                        <input type="text"
+                               name="UserName"
+                               id="UserName"
+                               class="form-control mb-2"
+                               value=@Model.UserName
+                               readonly />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Email">E-mail</label>
+                        <input type="email"
+                               value=@Model.Email
+                               name="Email"
+                               id="Email"
+                               class="form-control mb-2"
+                               required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Password">Password</label>
+                        <input type="password"
+                               name="Password"
+                               id="Password"
+                               placeholder="Keep empty to preserve old password"
+                               class="form-control mb-2" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="conf-pass">Confirm Password</label>
+                        <input type="password"
+                               name="ConfirmPassword"
+                               id="conf-pass"
+                               placeholder="Keep empty to preserve old password"
+                               class="form-control mb-2"
+                               required />
+                    </div>
+
+                    <div class="form-group text-right">
+                        <button class="btn btn-primary btn-dark">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>
