@@ -126,17 +126,6 @@ namespace OnlineJudge.Repository {
         }
 
         public IEnumerable<Submission> GetContestantSubmissions(int contest_id, int user_id){
-//            Contest contest = context.Contests.Include(x => x.Submissions).FirstOrDefault(x=>x.Id==contest_id);
-
-//            Contestant contestant = context.Contestants.Include(x => x.Submissions)
-//                                                       .FirstOrDefault(x => x.Contest.Id == contest_id 
-//                                                            && x.User.Id == user_id);
-//            if(contestant == null){
-//                throw new ObjectDisposedException("Contest with specified id not found");
-//            }
-
-//            return contestant.Submissions.OrderByDescending(x =>x.Submission.SubmissionDate).Select(x=>x.Submission);
-
             var submissions =context.ContestantSubmissions.Where(x => x.Contest.Id == contest_id && x.Submission.Submitter.Id == user_id);
             return submissions.OrderByDescending(x => x.Submission.SubmissionDate).Select(x=>x.Submission);
         }
@@ -248,21 +237,24 @@ namespace OnlineJudge.Repository {
 
         // rank list sorted in order of descending solve count and then ascending penalty
         public ContestRankCollection GetRankList(int contest_id, int start= 1, int limit = 100){
-            Contest contest = context.Contests.Include(x=>x.Problems).FirstOrDefault(x=>x.Id == contest_id);
+            Contest contest = context.Contests.Include(x=>x.Problems).
+                Include(x=>x.Contestants.Select(y=>y.Submissions)).
+                FirstOrDefault(x=>x.Id == contest_id);
             
 
             if (contest == null){
                 throw new ObjectNotFoundException("Contest with specified ID not found");
             }
 
-//            var contestants = context.Contestants.Include(x=>x.Submissions).Where(x => x.Contest.Id == contest_id && x.Submissions.Count > 0);
-            var contestants = context.Contestants.Include(x=>x.Submissions).Where(x => x.Contest.Id == contest_id);
-            
+//            var contestants = context.Contestants.Include(x=>x.Submissions).Where(x => x.Contest.Id == contest_id);
+            IEnumerable<Contestant> contestants = context.Contestants.Include(x=>x.Submissions).Where(x=>x.Contest.Id == contest_id);
+            var subs = contestants.First();
+//            var sub = contestants.First().Submissions;
             // number of contestants who have at least one submission
             int contestants_count = contestants.Count();
 
-            contestants = contestants.OrderByDescending(x=> x.SolveCount).ThenBy(x => x.Penalty);
-            contestants = contestants.Skip(start-1).Take(limit-start+1);
+//            contestants = contestants.OrderByDescending(x=> x.SolveCount).ThenBy(x => x.Penalty);
+//            contestants = contestants.Skip(start-1).Take(limit-start+1);
 
             ContestRankCollection rank_list = new ContestRankCollection(){
                 ContestTitle = contest.Title,
@@ -338,7 +330,7 @@ namespace OnlineJudge.Repository {
             Submission submission = submission_repository.CreateProblemSubmission(problem.Id, submission_data);
 
             ContestSubmission contest_submission = new ContestSubmission(){
-                Submitter = context.Contestants.First(x => x.User.Id == submitter.Id),
+                Submitter = context.Contestants.First(x => x.Contest.Id == contest_id && x.User.Id == submitter.Id),
                 Problem = contest_problem,
                 Submission = submission,
             };
