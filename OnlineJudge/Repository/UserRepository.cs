@@ -44,6 +44,14 @@ namespace OnlineJudge.Repository {
             this.context = context;
         }
 
+        public bool IsValidUser(string userName, string password)
+        {
+            User user;
+            user = context.Users.Where(x => x.UserName == userName && x.Password == password)
+                .SingleOrDefault();
+            return (user != null) ? true : false;
+        }
+
         public IEnumerable<User> GetUserList(){
             return context.Users.Select(x=>x);
         }
