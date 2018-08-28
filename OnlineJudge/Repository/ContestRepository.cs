@@ -247,8 +247,8 @@ namespace OnlineJudge.Repository {
             }
 
 //            var contestants = context.Contestants.Include(x=>x.Submissions).Where(x => x.Contest.Id == contest_id);
-            IEnumerable<Contestant> contestants = context.Contestants.Include(x=>x.Submissions).Where(x=>x.Contest.Id == contest_id);
-            var subs = contestants.First();
+            IEnumerable<Contestant> contestants = context.Contestants.Include(x=>x.Submissions).Where(x=>x.Contest.Id == contest_id && x.Submissions.Count > 0);
+            
 //            var sub = contestants.First().Submissions;
             // number of contestants who have at least one submission
             int contestants_count = contestants.Count();
