@@ -28,7 +28,7 @@ namespace OnlineJudge.Controllers
 
 
         // POST: api/Login
-        public void Post(Login credentials)
+        public IHttpActionResult Post(Login credentials)
         {
             Login loginDetails = new Login (){
                 Username = credentials.Username,
@@ -40,14 +40,15 @@ namespace OnlineJudge.Controllers
                 if (user_repository.IsValidUser(loginDetails.Username, loginDetails.Password))
                 {
                     HttpContext.Current.Session["userName"] = loginDetails.Username;
-                    RedirectToRoute("api/announcements", 200);
+                    return Ok();
+//                    RedirectToRoute("api/announcements", 200);
                 }
-                else
-                {
-
+                else{
+                    return BadRequest();
                 }
             }
-            
+
+            return BadRequest();
         }
     }
 }

@@ -44,10 +44,10 @@ namespace OnlineJudge.Repository {
             this.context = context;
         }
 
-        public bool IsValidUser(string userName, string password)
-        {
+        public bool IsValidUser(string userName, string password){
             User user;
-            user = context.Users.Where(x => x.UserName == userName && x.Password == password)
+            password = HashUtility.MD5Hash(password);
+            user = context.Users.Where(x => x.UserName == userName && x.Password == password )
                 .SingleOrDefault();
             return (user != null) ? true : false;
         }
