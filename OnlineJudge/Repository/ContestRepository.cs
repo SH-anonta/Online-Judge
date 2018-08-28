@@ -320,11 +320,22 @@ namespace OnlineJudge.Repository {
             ContestProblem contest_problem = contest.Problems.FirstOrDefault(x=>x.Order == problem_no);
             Problem problem = contest_problem.Problem;
 
-            submission_repository.OnSubmissionStatusChange += SubmissionStatusUpdateHandler;
+            submission_repository.OnSubmissionStatusChange += (Object sender, ExecutionResultEventArgs args)=>{
+                // the submission entry is updated by SubmissionRepository,
+                // this handler only updates the contestant
 
-            //todo check for null values
+                // replace with real user
+                var contestant = context.Contestants.Include(x => x.Submissions).First(x=> x.Contest.Id == contest_id);
 
-            // todo fix
+                contestant.Penalty = contest_service.CalclatePenalty(contestant.Submissions);
+            
+                contestant.SolveCount = context.ContestProblems.Count(x=>x.Submissions.
+                                 Count(y=>y.Submission.Status.Id == Verdict.Accepted) > 0);
+
+                context.SaveChanges();
+            };
+
+
             User submitter = context.Users.First();
 
             Submission submission = submission_repository.CreateProblemSubmission(problem.Id, submission_data);
@@ -340,19 +351,19 @@ namespace OnlineJudge.Repository {
         }
 
 
-        private void SubmissionStatusUpdateHandler(Object sender, ExecutionResultEventArgs args){
-            // the submission entry is updated by SubmissionRepository,
-            // this handler only updates the contestant
-
-            // replace with real user
-            var submitter = context.Contestants.Include(x => x.Submissions).First(x=> x.Id == 1);
-
-            submitter.Penalty = contest_service.CalclatePenalty(submitter.Submissions);
-            
-            submitter.SolveCount = context.ContestProblems.
-                                    Count(x=>x.Submissions.
-                                    Count(y=>y.Submission.Status.Id == Verdict.Accepted) > 0);
-            context.SaveChanges();
-        }
+//        private void SubmissionStatusUpdateHandler(Object sender, ExecutionResultEventArgs args){
+//            // the submission entry is updated by SubmissionRepository,
+//            // this handler only updates the contestant
+//
+//            // replace with real user
+//            var submitter = context.Contestants.Include(x => x.Submissions).First(x=> x.Id == 1);
+//
+//            submitter.Penalty = contest_service.CalclatePenalty(submitter.Submissions);
+//            
+//            submitter.SolveCount = context.ContestProblems.
+//                                    Count(x=>x.Submissions.
+//                                    Count(y=>y.Submission.Status.Id == Verdict.Accepted) > 0);
+//            context.SaveChanges();
+//        }
     }
 }
