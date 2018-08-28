@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-using JudgeCodeRunner.CompilerServices;
+using CodeRunner.Compilers;
 
 namespace JudgeCodeRunner{
     public enum Verdict{
+        Queueed,
+        Compiling,
+        Running,
+
         Accepted,
         WrongAnswer,
         RunTimeError,
@@ -16,13 +20,13 @@ namespace JudgeCodeRunner{
         public event EventHandler<ExecutionResultEventArgs> OnExecutionFinished;
 
         private static string gcc_compiler_path = @"C:\Program Files (x86)\CodeBlocks\MinGW\bin\g++.exe";
-        private static string output_exe_name = @"G:\compile\exes\code.exe";
-        private CPPCompiler compiler = new CPPCompiler();
+//        private static string output_exe_name = @"G:\compile\exes\code.exe";
+        private Compiler compiler;
         
         
         private string input;               // input for the program being judged
         private string expected_output;
-        private string source_file_path;
+        private string source_code;
         private double time_limit;
 
 
@@ -30,17 +34,19 @@ namespace JudgeCodeRunner{
         private Process proc;
 
         // time_limit is in seconds
-        public CodeRunner(string source_file_path, string input, string expected_output, double time_limit){
+        public CodeRunner(ProgrammingLanguageEnum languageEnum, string source_code, string input, string expected_output, double time_limit){
             this.input = input;
             this.expected_output = expected_output;
-            this.source_file_path = source_file_path;
+            this.source_code = source_code;
             this.time_limit = time_limit;
+
+            this.compiler = CompilerFactory.getCompiler(languageEnum);
         }
         
         // used by client 
         public void RunCode(){
             compiler.OnCompilationFinished += compilationFinishedHandler;
-            compiler.CompileSource(source_file_path, output_exe_name);
+            compiler.CompileSource(source_code);
         }
 
 

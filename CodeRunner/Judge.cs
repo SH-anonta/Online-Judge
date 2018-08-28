@@ -21,7 +21,7 @@ namespace JudgeCodeRunner {
 
         public override string ToString(){
             return String.Format("Verdict: {0}\nTime: {1}\nMemory: {2}\nErrorMsg: {3}",
-                Verdict,MemmoryUsage,RunningTime,ErrorMsg);
+                Verdict,RunningTime,MemmoryUsage,ErrorMsg);
         }
     }
 
@@ -34,7 +34,6 @@ namespace JudgeCodeRunner {
 
         private StringBuilder actual_output= new StringBuilder();
 
-        private Stopwatch running_time_recorder = new Stopwatch();
 
         // flags
         private bool process_killed_by_TLE_timer= false;
@@ -46,16 +45,13 @@ namespace JudgeCodeRunner {
             this.time_limit = time_limit;
             
             // expects StartInfo.FileName of proc to be set
-            // todo throw exception if path of exe is not set
-            if (proc.StartInfo.FileName == null){
+            if (proc.StartInfo.FileName == null || proc.StartInfo.FileName == ""){
                 throw new Exception("StartInfo.FileName of process must be set (by the compiler)");
             }
-
             
             proc.StartInfo.RedirectStandardInput= true;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.RedirectStandardError= true;
-            
             
             proc.EnableRaisingEvents = true;
             proc.StartInfo.UseShellExecute = false;
@@ -66,7 +62,6 @@ namespace JudgeCodeRunner {
         }
 
         public void Run(){           
-            running_time_recorder.Start();
             proc.Start();
 
             // Provide the program with the test case input
@@ -95,11 +90,12 @@ namespace JudgeCodeRunner {
                 return;
             }
 
-            running_time_recorder.Stop();
-
-            double running_time = running_time_recorder.Elapsed.TotalSeconds;
+//            double running_time = running_time_recorder.Elapsed.TotalSeconds;
+            double running_time = (proc.ExitTime-proc.StartTime).TotalSeconds;
+            // todo remove stop watch
 
             string output = actual_output.ToString();
+            Console.WriteLine(output);
 
             if (proc.ExitCode == 0){
 //                Console.WriteLine("Program ran successfully");
@@ -109,9 +105,9 @@ namespace JudgeCodeRunner {
 //                Console.WriteLine("Expected----------------------------------");
 //                Console.WriteLine(expected_output);
 //                Console.WriteLine("------------------------------------------");
-
-                // todo check output here
+            
                 Verdict verdict = output.TrimEnd() == expected_output.TrimEnd()? Verdict.Accepted : Verdict.WrongAnswer;
+                // todo add memory usage to result
                 ExecutionResult res = new ExecutionResult(verdict, running_time);
                 OnExecutionFinished(this, new ExecutionResultEventArgs(res));
             }

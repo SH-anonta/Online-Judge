@@ -1,22 +1,31 @@
 ﻿using System;
 using System.CodeDom.Compiler;
+using CodeRunner.Compilers;
 using JudgeCodeRunner.CompilerServices;
 
 namespace JudgeCodeRunner {
-    class Driver{      
+    class Driver
+    {
+        static double time_limit= 1;
+        private static string RiskyCode = @"
+import os
+
+#os.listdir('G:/tmp')
+f = open('G:/tmp/take.txt', 'w')
+f.write('abc')
+f.close()
+        
+";
         public static void Main(){
             testCodeRunner();
-//            testCompiler();
         }
 
         static void testCodeRunner(){
-            string source_path = @"G:\compile\ac.cpp";
-
-
-            double time_limit= 0.5;
-            CodeRunner runner = new CodeRunner(source_path, DummyData.intput, DummyData.expected_output, time_limit);
-            runner.OnExecutionFinished += CodeResultsHandler;
-            runner.RunCode();
+            
+//            TestCCompiler();
+//            TestCpp11Compiler();
+//            TestCpp89Compiler();
+            TestPython3Compiler();
 
             // intentionally wait forever
             while (true){}
@@ -26,22 +35,41 @@ namespace JudgeCodeRunner {
             Console.WriteLine(args.ExecutionResult);
         }
 
-        static void testCompiler(){
-            string source_path = @"G:\compile\ac.cpp";
-            CPPCompiler cpp = new CPPCompiler();
-//            cpp.CompileSource(handler, source_path, @"G:\compile\exes\auto.exe");
-//            cpp.CompileSource(handler, source_path);
+        private static void TestCpp11Compiler(){
+            string source_path = DummyCode.getCpp11Code();
+            ProgrammingLanguageEnum lang = ProgrammingLanguageEnum.Cpp11;
 
-
-            cpp.OnCompilationFinished += handler;
-            cpp.CompileSource(source_path);
-
-//          intentionally wait forever
-            while (true){}
+            CodeRunner runner = new CodeRunner(lang, source_path, DummyData.intput, DummyData.expected_output, time_limit);
+            runner.OnExecutionFinished += CodeResultsHandler;
+            runner.RunCode();
         }
 
-        static void handler(object sender, CompilationFinishedEventArgs args){
-            Console.WriteLine(args.compilation_result);
+        private static void TestCpp89Compiler(){
+            string source_path = DummyCode.getCpp89Code();
+            ProgrammingLanguageEnum lang = ProgrammingLanguageEnum.Cpp89;
+
+            CodeRunner runner = new CodeRunner(lang, source_path, DummyData.intput, DummyData.expected_output, time_limit);
+            runner.OnExecutionFinished += CodeResultsHandler;
+            runner.RunCode();
+        }
+
+        private static void TestCCompiler(){
+            string source_path = DummyCode.getCCode();
+            ProgrammingLanguageEnum lang = ProgrammingLanguageEnum.C;
+
+            CodeRunner runner = new CodeRunner(lang, source_path, DummyData.intput, DummyData.expected_output, time_limit);
+            runner.OnExecutionFinished += CodeResultsHandler;
+            runner.RunCode();
+        }
+
+        private static void TestPython3Compiler(){
+            string source_path = DummyCode.getPython3Code();
+            ProgrammingLanguageEnum lang = ProgrammingLanguageEnum.Python3;
+
+            
+            CodeRunner runner = new CodeRunner(lang, source_path, DummyData.intput, DummyData.expected_output, time_limit);
+            runner.OnExecutionFinished += CodeResultsHandler;
+            runner.RunCode();
         }
     }
 }

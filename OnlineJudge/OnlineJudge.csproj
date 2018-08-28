@@ -46,16 +46,34 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.6\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.6\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -148,13 +166,64 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AnnouncementsController.cs" />
+    <Compile Include="Controllers\ContestController.cs" />
+    <Compile Include="Controllers\CustomHttpActions.cs" />
+    <Compile Include="Controllers\RequestUtility.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProblemController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SiteController.cs" />
+    <Compile Include="Controllers\TempController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="FormModels\AnnouncementFormData.cs" />
+    <Compile Include="FormModels\ContestFormModels.cs" />
+    <Compile Include="FormModels\FormData.cs" />
+    <Compile Include="FormModels\ProblemForms.cs" />
+    <Compile Include="FormModels\SubmissionFormData.cs" />
+    <Compile Include="FormModels\UserForms.cs" />
+    <Compile Include="FormModels\UserRegistrationFormData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Announcement.cs" />
+    <Compile Include="Models\Contest.cs" />
+    <Compile Include="Models\OJDBContext.cs" />
+    <Compile Include="Models\Problem.cs" />
+    <Compile Include="Models\SeedDataRepository.cs" />
+    <Compile Include="Models\Submission.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AdminRepository.cs" />
+    <Compile Include="Repository\AnnouncementsRepository.cs" />
+    <Compile Include="Repository\ContestRepository.cs" />
+    <Compile Include="Repository\LogRepository.cs" />
+    <Compile Include="Repository\ProblemsRepository.cs" />
+    <Compile Include="Repository\SubmissionRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="ResponseModels\AnnouncementResponses.cs" />
+    <Compile Include="ResponseModels\CollectionResponse.cs" />
+    <Compile Include="ResponseModels\ContestResponseModels.cs" />
+    <Compile Include="ResponseModels\ProblemResponseModels.cs" />
+    <Compile Include="ResponseModels\ProgrammingLanguageModels.cs" />
+    <Compile Include="ResponseModels\SharedResponses.cs" />
+    <Compile Include="ResponseModels\SubmissionResponses.cs" />
+    <Compile Include="ResponseModels\UserResponseModels.cs" />
+    <Compile Include="Services\AuthenticationFilter.cs" />
+    <Compile Include="Services\ContestService.cs" />
+    <Compile Include="Services\JudgeService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bundles\3rdpartylicenses.txt" />
+    <Content Include="Bundles\favicon.ico" />
+    <Content Include="Bundles\index.html" />
+    <Content Include="Bundles\inline.318b50c57b4eba3d437b.bundle.js" />
+    <Content Include="Bundles\main.ee9b0a301fa37c7495a8.bundle.js" />
+    <Content Include="Bundles\polyfills.fa62713060e7012f88ea.bundle.js" />
+    <Content Include="Bundles\scripts.385b291e179030219400.bundle.js" />
+    <Content Include="Bundles\styles.d5d97a308ff8324385a3.bundle.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -190,13 +259,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Admin\AdminHome.cshtml" />
+    <Content Include="Views\Shared\AdminSiteLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -210,6 +278,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeRunner\CodeRunner.csproj">
+      <Project>{1cc2b8da-5226-4a5e-942d-008c06650620}</Project>
+      <Name>CodeRunner</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
