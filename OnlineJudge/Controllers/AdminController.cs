@@ -33,7 +33,7 @@ namespace OnlineJudge.Controllers{
             {
                 new UserTest { Id = 1, UserName = "Saif", Title = "Mohhmad", Email = "ezaz@gmail.com", Password = "abcd", Usertype = "Admin" },
                 new UserTest { Id = 2, UserName = "kaif", Title = "Mohhmad", Email = "kaif@gmail.com", Password = "abcd", Usertype = "User" },
-                new UserTest { Id = 3, UserName = "taif", Title = "Mohhmad", Email = "taif@gmail.com", Password = "abcd", Usertype = "Admin" },
+                new UserTest { Id = 3, UserName = "taif", Title = "Mohhmad", Email = "taif@gmail.com", Password = "abcd", Usertype = "Admin" }, 
             };
 
         [HttpGet]
