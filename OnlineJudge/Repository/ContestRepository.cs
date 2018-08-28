@@ -134,7 +134,7 @@ namespace OnlineJudge.Repository {
                 throw new ObjectDisposedException("Contest with specified id not found");
             }
 
-            return contestant.Submissions.Select(x=>x.Submission);
+            return contestant.Submissions.OrderByDescending(x =>x.Submission.SubmissionDate).Select(x=>x.Submission);
         }
 
         public IEnumerable<Submission> GetContestantProblemSubmissions(int contest_id, int problem_no){
@@ -181,6 +181,46 @@ namespace OnlineJudge.Repository {
             };
 
             context.Contests.Add(contest);
+            context.SaveChanges();
+        }
+
+        public void UpdateContest(int contest_id, ContestCreationFormData data){
+            List<ContestProblem> contest_problems = new List<ContestProblem>();
+
+            int order = 0;
+            foreach(int problem_id in data.Problems){
+                var problem = context.Problems.Find(problem_id);
+
+                if (problem == null){
+                    throw new InvalidOperationException("One or more specified problem IDs were not found");
+                }
+
+                contest_problems.Add(new ContestProblem(){
+                    Problem = problem,
+                    Order = order,
+                });
+
+                order++;
+            }
+
+            // delete existing contest problems
+            foreach (var old_problem in context.ContestProblems.Where(x=>x.Contest.Id == contest_id)){
+                context.ContestProblems.Remove(old_problem);
+            }
+
+            Contest contest = context.Contests.Find(contest_id);
+            if (contest == null){
+                throw new ObjectNotFoundException("Contest with specified ID not found");
+            }
+            
+            contest.Title = data.Title;
+            contest.Description = data.Description;
+            contest.StartDate = data.StartDate;
+            contest.EndDate = data.EndDate;
+            contest.Problems = contest_problems;
+            contest.IsPublic = data.IsPublic;
+            contest.Password = data.Password;
+
             context.SaveChanges();
         }
 
@@ -252,6 +292,8 @@ namespace OnlineJudge.Repository {
                 Collection = ContestListItem.MapTo(contests.Skip(start - 1).Take(limit-start+1)),
             };
         }
+
+        
     }
 
     class ContestSubmissionRepository{

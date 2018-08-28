@@ -109,8 +109,23 @@ namespace OnlineJudge.Controllers{
 
         [HttpPost]
         [Route("{contest_id}/edit")]
-        public IHttpActionResult ContestUpdate(int contest_id){
-            // todo implement
+        public IHttpActionResult ContestUpdate(int contest_id, [FromBody]ContestCreationFormData data){
+            if (RequestUtility.IsPreFlightRequest(Request)){
+                return Ok();
+            }
+
+            var validation_oresult = data.Validate();
+            if (!validation_oresult.IsValid){
+                return new BadHttpRequest(validation_oresult.ErrorMessages);
+            }
+
+            try{
+                // todo replace 1 with current user id
+                contest_repository.UpdateContest(1, data);
+            }
+            catch (Exception e){
+                return InternalServerError(e);
+            }
             return Ok();
         }
 
@@ -228,11 +243,15 @@ namespace OnlineJudge.Controllers{
         }
 
 
+        [HttpOptions]
         [HttpPost]
         [Route("{contest_id}/problems/{problem_no}/submit")]
         public IHttpActionResult ContestProblemSubmit(int contest_id, int problem_no, [FromBody] SubmissionFormData submission_data){
-            try
-            {
+            if (RequestUtility.IsPreFlightRequest(Request)){
+                return Ok();
+            }
+
+            try{
                 contest_submission_repository.CreateSubmission(contest_id, problem_no, submission_data);
                 return Ok();
             }
