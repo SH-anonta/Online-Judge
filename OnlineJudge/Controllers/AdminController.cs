@@ -22,7 +22,7 @@ namespace OnlineJudge.Controllers{
         //user profile
         [HttpGet]
         [Route("user")]
-        public ActionResult UserProfile()
+        public ActionResult UserProfile() 
         {
             UserTest usertest = new UserTest { Id = 1, UserName = "Saif", Title = "Mohhmad", Email = "ezaz@gmail.com", Password = "abcd" , Usertype = "Admin" };
 
