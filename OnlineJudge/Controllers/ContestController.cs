@@ -107,6 +107,7 @@ namespace OnlineJudge.Controllers{
             return Ok();
         }
 
+        [HttpOptions]
         [HttpPost]
         [Route("{contest_id}/edit")]
         public IHttpActionResult ContestUpdate(int contest_id, [FromBody]ContestCreationFormData data){
@@ -120,8 +121,7 @@ namespace OnlineJudge.Controllers{
             }
 
             try{
-                // todo replace 1 with current user id
-                contest_repository.UpdateContest(1, data);
+                contest_repository.UpdateContest(contest_id, data);
             }
             catch (Exception e){
                 return InternalServerError(e);

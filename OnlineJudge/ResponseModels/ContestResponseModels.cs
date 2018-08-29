@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.ExceptionServices;
-using System.Web;
-using System.Web.WebSockets;
-using JudgeCodeRunner;
 using OnlineJudge.Models;
 
 namespace OnlineJudge.ResponseModels {
@@ -39,11 +34,14 @@ namespace OnlineJudge.ResponseModels {
     }
 
     public class ContestProblemListItemData{
+        public int Id{ set; get; }      // ID of the actual problem entry
         public int Order{ set; get; }
         public string Title { set; get; }
         public int SolveCount { set; get; }
 
         public ContestProblemListItemData(ContestProblem problem){
+            Id = problem.Problem.Id;
+
             Order = problem.Order;
             Title = problem.Problem.Title;
             SolveCount = 0; // todo replace with actual value
