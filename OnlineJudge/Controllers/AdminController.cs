@@ -41,7 +41,7 @@ namespace OnlineJudge.Controllers{
         public ActionResult EditUserProfile(int id)
         {
             UserTest usertest = usertestList.Where(u => u.Id == id).SingleOrDefault();
-            return View("EditProfile", usertest);
+            return View("EditProfile", usertest); 
         }
 
 
