@@ -59,7 +59,7 @@
 
                         //DateTime and time calculating Function
 
-                        public string CalculateAge(DateTime DayOfJoining)
+                        public string CalculatePassedTimeAfterJoining(DateTime DayOfJoining)
                         {
                             var dt = DateTime.Now;
                             var years = new DateTime(DateTime.Now.Subtract(DayOfJoining).Ticks).Year - 1;
@@ -80,14 +80,14 @@
 
                             var days = dt.Subtract(pastYear.AddMonths(months)).Days;
 
-                            return string.Format("It's been {0} years, {1} months, and {2} days since your joined", years, months, days);
+                            return string.Format("It's been {0} years, {1} months, and {2} days since you joined", years, months, days);
                         }
                     }
 
 
                     <tr>
                         <th>Joined</th>
-                        <td>@CalculateAge(new DateTime(2011, 11, 27))</td>
+                        <td>@CalculatePassedTimeAfterJoining(new DateTime(2011, 11, 27))</td>
                     </tr>
 
                 </table>
