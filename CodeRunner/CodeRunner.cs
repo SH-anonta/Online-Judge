@@ -40,7 +40,7 @@ namespace JudgeCodeRunner{
             this.source_code = source_code;
             this.time_limit = time_limit;
 
-            this.compiler = CompilerFactory.getCompiler(languageEnum);
+            this.compiler = CompilerFactory.getInstance().getCompiler(languageEnum);
         }
         
         // used by client 

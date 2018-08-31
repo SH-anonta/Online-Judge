@@ -23,9 +23,9 @@ f.close()
         static void testCodeRunner(){
             
 //            TestCCompiler();
-//            TestCpp11Compiler();
+            TestCpp11Compiler();
 //            TestCpp89Compiler();
-            TestPython3Compiler();
+//            TestPython3Compiler();
 
             // intentionally wait forever
             while (true){}
