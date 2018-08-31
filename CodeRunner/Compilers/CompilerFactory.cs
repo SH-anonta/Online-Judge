@@ -22,6 +22,7 @@ namespace JudgeCodeRunner {
         private static readonly string ENVIRONMENT_VARIABLE_NAME = "ONLINE_JUDGE_COMPILER_PATHS";
 
         private static string GPP_COMPILER_PATH;
+//        private static string GCC_COMPILER_PATH= @"C:\Program Files (x86)\CodeBlocks\MinGW\bin\gcc.exe";
         private static string GCC_COMPILER_PATH;
         public static string PYTHON_INTERPRETER_PATH;
 
@@ -36,8 +37,8 @@ namespace JudgeCodeRunner {
             
             var paths = JsonConvert.DeserializeObject<Dictionary<string, string>>(compiler_paths);
 
-            GPP_COMPILER_PATH = paths["C"];
-            GCC_COMPILER_PATH = paths["CPP11"];
+            GPP_COMPILER_PATH = paths["CPP"];
+            GCC_COMPILER_PATH = paths["C"];
             PYTHON_INTERPRETER_PATH = paths["PYTHON36"];
         }
 

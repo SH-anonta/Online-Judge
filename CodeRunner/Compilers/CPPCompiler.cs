@@ -24,6 +24,9 @@ namespace JudgeCodeRunner.CompilerServices {
         public CPPCompiler(string compiler_path, string command_arguments= "")        {
             this.compiler_path = compiler_path;
             this.command_arguments = command_arguments;
+
+            Console.WriteLine(compiler_path); // todo delete statement
+            Console.WriteLine(); // todo delete statement
         }
         
         // compiles given source code and creates exe file in output_file_path, if output file path is null,

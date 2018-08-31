@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using CodeRunner.Compilers;
+using JudgeCodeRunner.CompilerServices;
 
 namespace JudgeCodeRunner{
     public enum Verdict{
@@ -41,6 +42,8 @@ namespace JudgeCodeRunner{
             this.time_limit = time_limit;
 
             this.compiler = CompilerFactory.getInstance().getCompiler(languageEnum);
+//            this.compiler = new CPPCompiler(@"C:/Program Files (x86)/CodeBlocks/MinGW/bin/g++.exe", "-std=c++11");
+
         }
         
         // used by client 
