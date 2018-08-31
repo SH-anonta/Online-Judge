@@ -220,10 +220,10 @@
     <Content Include="Bundles\favicon.ico" />
     <Content Include="Bundles\index.html" />
     <Content Include="Bundles\inline.318b50c57b4eba3d437b.bundle.js" />
-    <Content Include="Bundles\main.ee9b0a301fa37c7495a8.bundle.js" />
+    <Content Include="Bundles\main.c1f9c9834091ef6810ff.bundle.js" />
     <Content Include="Bundles\polyfills.fa62713060e7012f88ea.bundle.js" />
-    <Content Include="Bundles\scripts.385b291e179030219400.bundle.js" />
-    <Content Include="Bundles\styles.d5d97a308ff8324385a3.bundle.css" />
+    <Content Include="Bundles\scripts.c511616d4398dd7a65fe.bundle.js" />
+    <Content Include="Bundles\styles.802c54b85766b4882a03.bundle.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
