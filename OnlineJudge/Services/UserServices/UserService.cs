@@ -95,6 +95,34 @@ namespace OnlineJudge.Services {
 
     // authorization methods go here 
     public partial class UserService{
+        // User profile
+
+        // either uesr is admin or is editing their own user profile
+        public bool IsAuthorizedToEditUesrProfile(int user_id){
+            if (!UserIsAuthenticated()){
+                return false;
+            }
+
+            if (login_info.IsAdmin()){
+                return true;
+            }
+
+            return login_info.UserId == user_id;
+        }
+
+        public bool IsAuthorizedToViewUserProblems(int user_id){
+            if (!UserIsAuthenticated()){
+                return false;
+            }
+
+            if (login_info.IsAdmin()){
+                return true;
+            }
+
+            return login_info.UserId == user_id;
+        }
+
+
         // Announcement
         public bool IsAuthorizedToCreateAnnouncements(){
             return UserIsAuthenticated() && login_info.IsAdmin();
@@ -114,6 +142,22 @@ namespace OnlineJudge.Services {
             return UserIsAuthenticated() &&
                    (login_info.UserType == UserTypeEnum.Admin
                     || login_info.UserType == UserTypeEnum.Judge);
+        }
+
+        public bool IsAuthorizedToViewProblem(int problem_id){
+            if (!UserIsAuthenticated()){
+                return false;
+            }
+
+            if (login_info.IsAdmin()){
+                return true;
+            }
+
+            // else check if the user is a judge and is the creator of this problem
+            var context = new OjDBContext();
+            var problem = context.Problems.Find(problem_id);
+
+            return problem.Creator.Id == login_info.UserId;
         }
 
         public bool IsAuthorizedToEditProblem(int problem_id){

@@ -47,6 +47,10 @@ namespace OnlineJudge.Controllers{
         [Route("{Id}")]
         [HttpGet]
         public IHttpActionResult GetProblemDetials(int Id){
+            if (!user_service.IsAuthorizedToViewProblem(Id)){
+                return Unauthorized();
+            }
+
             try{
                 ProblemDetails problem = problem_repository.GetProblemDetails(Id);
                 return Ok(problem);

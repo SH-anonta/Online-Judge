@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core;
-using System.Data.Entity.Core.Common.CommandTrees;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Data.Entity.Core;
 using System.Web.Http;
-using System.Web.Http.Routing;
 using OnlineJudge.FormModels;
 using OnlineJudge.Repository;
 using OnlineJudge.ResponseModels;
+using OnlineJudge.Services;
 
 namespace OnlineJudge.Controllers{
     [RoutePrefix("api/users")]
     public class UserController : ApiController{
+        private UserService user_service  = new UserService();
         public UserRepository user_repository= new UserRepository();
 
         [HttpGet]
@@ -38,6 +33,10 @@ namespace OnlineJudge.Controllers{
         [HttpPost]
         [Route("{id}/edit")]
         public IHttpActionResult UpdateUser([FromBody]UserProfileUpdateForm data, int id){
+            if (!user_service.IsAuthorizedToEditUesrProfile(id)){
+                return Unauthorized();
+            }
+
             if (RequestUtility.IsPreFlightRequest(Request)){
                 return Ok();
             }
@@ -72,6 +71,10 @@ namespace OnlineJudge.Controllers{
         [HttpGet]
         [Route("{id}/problems")]
         public IHttpActionResult GetUserProblems(int id, int start, int limit){
+            if (!user_service.IsAuthorizedToViewUserProblems(id)){
+                return Unauthorized();
+            }
+
             var problems = user_repository.GetProblems(id, start, limit);
             
             
