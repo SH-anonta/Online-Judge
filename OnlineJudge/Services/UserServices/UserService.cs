@@ -192,7 +192,53 @@ namespace OnlineJudge.Services {
             // either user is the creator of problem, admin, or the problem is publicly visible
             return IsAuthorizedToEditProblem(problem_id) || context.Problems.Find(problem_id).IsPublic;
         }
-        
+
+        // Contests
+        public bool IsAuthorizedToCreateContest(){
+            return UserIsAuthenticated() && (login_info.IsAdmin() || login_info.IsJudge());
+        }
+
+        public bool IsAuthorizedToEditContest(int contest_id){
+            if (!UserIsAuthenticated()){
+                return false;
+            }
+
+            if (login_info.IsAdmin()){
+                return true;
+            }
+
+            // else check if the user is a judge and is the creator of this problem
+            var context = new OjDBContext();
+            var contest = context.Contests.Find(contest_id);
+
+            return contest.Creator.Id == login_info.UserId;
+        }
+
+        public bool IsAuthorizedToViewContestProblem(int contest_id){
+            // same logic
+            return IsAuthorizedToEditContest(contest_id);
+        }
+
+        public bool IsAuthorizedToViewContestProblems(int contest_id){
+            // same logic
+            return IsAuthorizedToEditContest(contest_id);
+        }
+
+        public bool IsAuthorizedToDeleteContest(int contest_id){
+            // same logic
+            return IsAuthorizedToEditContest(contest_id);
+        }
+
+        public bool IsAuthorizedToSubmitToContest(int contest_id){
+            var context = new OjDBContext();
+            var contestant =
+                context.Contestants.FirstOrDefault(x => x.User.Id == login_info.UserId 
+                                                        && x.Contest.Id == contest_id);
+
+            return contestant != null;
+        }
+
+
     }
 
 }
