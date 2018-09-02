@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Linq;
 using System.Web;
-using System.Web.Http;
 using OnlineJudge.Models;
 using OnlineJudge.Repository;
+using Login = System.Web.UI.WebControls.Login;
 
 namespace OnlineJudge.Services {
     class UserLoginInfo{
@@ -39,6 +39,15 @@ namespace OnlineJudge.Services {
             
         }
 
+        public int GetUserId(){
+            if (login_info == null){
+                throw new Exception("User is not authenticated");
+            }
+
+            return login_info.UserId;
+        }
+
+
         public bool UserIsAuthenticated(){
             return login_info != null;
         }
@@ -70,6 +79,8 @@ namespace OnlineJudge.Services {
         private void RemoveLoginDataOnSession(){
             HttpContext.Current.Session[LOGIN_INFO_SESSION_KEY] = null;
         }
+
+        
     }
 
 
@@ -77,6 +88,23 @@ namespace OnlineJudge.Services {
     public partial class UserService{
         public bool IsAuthorizedToCreateAnnouncements(){
             return UserIsAuthenticated() && login_info.UserType == UserTypeEnum.Admin;
+        }
+
+        public bool IsAuthorizedToDeleteAnnouncements(){
+            return UserIsAuthenticated() && login_info.UserType == UserTypeEnum.Admin;
+        }
+
+        public bool IsAuthorizedToEditAnnouncements(int announcement_id){
+
+            if (!UserIsAuthenticated() || login_info.UserType != UserTypeEnum.Admin){
+                return false;
+            }
+
+            var context = new OjDBContext();
+            
+            var found = context.Announcements.FirstOrDefault(x => x.Id == announcement_id 
+                                    && x.Creator.Id == login_info.UserId);
+            return found != null;
         }
     }
 

@@ -216,7 +216,7 @@
     <Compile Include="ResponseModels\UserResponseModels.cs" />
     <Compile Include="Services\ContestService.cs" />
     <Compile Include="Services\JudgeService.cs" />
-    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\UserServices\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bundles\3rdpartylicenses.txt" />

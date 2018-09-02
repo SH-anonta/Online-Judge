@@ -7,10 +7,12 @@ using System.Web;
 using System.Web.Http;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
+using OnlineJudge.Services;
 
 namespace OnlineJudge.Repository {
     public partial class AnnouncementRepository {
         public OjDBContext context = new OjDBContext();
+        public UserService user_service = new UserService();
 
         public AnnouncementRepository(OjDBContext context){
             this.context = context;
@@ -51,7 +53,7 @@ namespace OnlineJudge.Repository {
                 Title = data.Title,
                 Description = data.Description,
                 CreateDate = DateTime.Now,
-                Creator = context.Users.First(x => x.UserName == "admin")
+                Creator = context.Users.Find(user_service.GetUserId())
             };
 
             context.Announcements.Add(announcement);
