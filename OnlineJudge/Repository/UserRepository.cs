@@ -124,5 +124,9 @@ namespace OnlineJudge.Repository {
         public IEnumerable<UserType> GetUserTypes(){
             return context.UserTypes.Select(x => x);
         }
+
+        public User GetUserByUserName(string userName){
+            return context.Users.FirstOrDefault(x => x.UserName == userName);
+        }
     }
 }

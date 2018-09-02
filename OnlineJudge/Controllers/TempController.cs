@@ -10,6 +10,7 @@ using System.Web.Http;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
 using OnlineJudge.Repository;
+using Services;
 
 namespace OnlineJudge.Controllers
 {
@@ -26,10 +27,12 @@ namespace OnlineJudge.Controllers
             return "temp";
         }
 
+        [IsAuthenticated]
         [Route("page")]
         [HttpGet]
-        public IHttpActionResult Problem(int? a, int? b){
-            return Ok(a + b);
+        public IHttpActionResult Problem(){
+
+            return Ok("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         }
 
         public class Notice{
