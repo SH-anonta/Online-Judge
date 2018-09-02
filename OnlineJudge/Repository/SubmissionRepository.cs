@@ -12,6 +12,7 @@ using OnlineJudge.Services;
 namespace OnlineJudge.Repository {
     public class SubmissionRepository{
         public event EventHandler<ExecutionResultEventArgs> OnSubmissionStatusChange;
+        public UserService user_service = new UserService();
 
         private readonly OjDBContext context;
 
@@ -31,7 +32,7 @@ namespace OnlineJudge.Repository {
                 Problem = problem,
                 SourceCode = submission_data.SourceCode,
                 SubmissionDate = DateTime.Now,
-                Submitter = context.Users.First(x => x.UserName == "admin"),
+                Submitter = context.Users.Find(user_service.GetUserId()),
                 ProgrammingLanguage = language
             };
         }

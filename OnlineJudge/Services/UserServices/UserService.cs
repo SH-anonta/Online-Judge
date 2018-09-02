@@ -121,7 +121,7 @@ namespace OnlineJudge.Services {
                 return false;
             }
 
-            if (login_info.UserType == UserTypeEnum.Admin){
+            if (login_info.IsAdmin()){
                 return true;
             }
 
@@ -129,8 +129,7 @@ namespace OnlineJudge.Services {
             var context = new OjDBContext();
             var problem = context.Problems.Find(problem_id);
 
-            return login_info.UserType == UserTypeEnum.Judge
-                   && problem.Creator.Id == login_info.UserId;
+            return login_info.IsJudge() && problem.Creator.Id == login_info.UserId;
 
         }
 
@@ -138,6 +137,18 @@ namespace OnlineJudge.Services {
             // same as checking authorization for problem editing
             return IsAuthorizedToEditProblem(problem_id);
         }
+
+        public bool IsAuthorizedToAccessProblemTestCaseFiles(int problem_id){
+            return IsAuthorizedToEditProblem(problem_id);
+        }
+        
+        public bool IsAuthorizedToSubmitToProblem(int problem_id){
+            var context = new OjDBContext();
+
+            // either user is the creator of problem, admin, or the problem is publicly visible
+            return IsAuthorizedToEditProblem(problem_id) || context.Problems.Find(problem_id).IsPublic;
+        }
+        
     }
 
 }
