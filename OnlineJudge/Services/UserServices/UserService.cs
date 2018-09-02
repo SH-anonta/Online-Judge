@@ -7,8 +7,8 @@ using Login = System.Web.UI.WebControls.Login;
 
 namespace OnlineJudge.Services {
     class UserLoginInfo{
-        public string UserName { set; get; }
-        public int UserId{ set; get; }
+        public string UserName { get; }
+        public int UserId{ get; }
         public UserTypeEnum UserType;
         public DateTime LogInTime;
 
@@ -18,6 +18,15 @@ namespace OnlineJudge.Services {
             UserType = user.UserType.Id;
             LogInTime = DateTime.Now;
         }
+
+        public bool IsAdmin(){
+            return UserType == UserTypeEnum.Admin;
+        }
+
+        public bool IsJudge(){
+            return UserType == UserTypeEnum.Judge;
+        }
+
     }
 
     public partial class UserService {
@@ -86,25 +95,48 @@ namespace OnlineJudge.Services {
 
     // authorization methods go here 
     public partial class UserService{
+        // Announcement
         public bool IsAuthorizedToCreateAnnouncements(){
-            return UserIsAuthenticated() && login_info.UserType == UserTypeEnum.Admin;
+            return UserIsAuthenticated() && login_info.IsAdmin();
         }
 
         public bool IsAuthorizedToDeleteAnnouncements(){
-            return UserIsAuthenticated() && login_info.UserType == UserTypeEnum.Admin;
+            return UserIsAuthenticated() && login_info.IsAdmin();
         }
 
         public bool IsAuthorizedToEditAnnouncements(int announcement_id){
+            return UserIsAuthenticated() && login_info.IsAdmin();
+        }
 
-            if (!UserIsAuthenticated() || login_info.UserType != UserTypeEnum.Admin){
+        // Problems 
+        public bool IsAuthorizedToCreateProblem()
+        {
+            return UserIsAuthenticated() &&
+                   (login_info.UserType == UserTypeEnum.Admin
+                    || login_info.UserType == UserTypeEnum.Judge);
+        }
+
+        public bool IsAuthorizedToEditProblem(int problem_id){
+            if (!UserIsAuthenticated()){
                 return false;
             }
 
+            if (login_info.UserType == UserTypeEnum.Admin){
+                return true;
+            }
+
+            // else check if the user is a judge and is the creator of this problem
             var context = new OjDBContext();
-            
-            var found = context.Announcements.FirstOrDefault(x => x.Id == announcement_id 
-                                    && x.Creator.Id == login_info.UserId);
-            return found != null;
+            var problem = context.Problems.Find(problem_id);
+
+            return login_info.UserType == UserTypeEnum.Judge
+                   && problem.Creator.Id == login_info.UserId;
+
+        }
+
+        public bool IsAuthorizedToDeleteProblem(int problem_id){
+            // same as checking authorization for problem editing
+            return IsAuthorizedToEditProblem(problem_id);
         }
     }
 

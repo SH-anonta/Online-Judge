@@ -17,6 +17,7 @@ namespace OnlineJudge.Repository {
     public partial class ProblemRepository {
 
         public OjDBContext context;
+        private UserService user_service= new UserService();
 
         public ProblemRepository(){
             this.context = new OjDBContext();
@@ -103,8 +104,8 @@ namespace OnlineJudge.Repository {
                 TestCaseOutput = data.TestCaseOutput,
 
                 CreateDate = DateTime.Now,
-                // todo set to the request sender
-                Creator = context.Users.Find(1),
+                
+                Creator = context.Users.Find(user_service.GetUserId()),
             };
 
             context.Problems.Add(problem);
