@@ -16,6 +16,29 @@ f.write('abc')
 f.close()
         
 ";
+
+        private static string HighMemoryCode = @"
+#include <iostream>
+
+using namespace std;
+
+int main(int argc, char* argv[]){
+    double array[100000];
+
+    auto x = 1100;
+    int t, a,b;
+    cin>>t;
+
+    for(int i= 0; i<t; i++){
+        cin>>a>>b;
+        cout<< a+b<<endl;
+    }
+
+
+    return 0;
+}
+
+";
         public static void Main(){
             testCodeRunner();
         }

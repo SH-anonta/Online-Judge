@@ -61,9 +61,9 @@ namespace JudgeCodeRunner {
             proc.OutputDataReceived += (sender, e) => { actual_output.AppendLine(e.Data); };
         }
 
-        public void Run(){           
+        public void Run(){
             proc.Start();
-
+            
             // Provide the program with the test case input
             // this has to be called after the process is started
             proc.StandardInput.WriteLineAsync(input);
@@ -77,7 +77,8 @@ namespace JudgeCodeRunner {
             timer.Elapsed += new ElapsedEventHandler(TimeLimitCheckTimer);
 
 //            proc.PriorityClass = ProcessPriorityClass.High;
-//            proc.MaxWorkingSet = new IntPtr(1000);
+            proc.MinWorkingSet = new IntPtr(10000);
+            proc.MaxWorkingSet = new IntPtr(300000);
 //            Console.WriteLine(proc.PeakWorkingSet64);            
             // todo record peak memory usage
 //            long peak_memory_usage = proc.PeakWorkingSet64;
@@ -92,8 +93,8 @@ namespace JudgeCodeRunner {
 
 //            double running_time = running_time_recorder.Elapsed.TotalSeconds;
             double running_time = (proc.ExitTime-proc.StartTime).TotalSeconds;
-            // todo remove stop watch
 
+            
             string output = actual_output.ToString();
             Console.WriteLine(output);
 
