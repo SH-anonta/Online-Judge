@@ -14,11 +14,12 @@ namespace Services {
         }
 
         public override void OnAuthorization(HttpActionContext actionContext){
+            
             if (!user_service.UserIsAuthenticated()){
-//                actionContext.Response.StatusCode = HttpStatusCode.Unauthorized;
+                base.OnAuthorization(actionContext);
             }
 
-            base.OnAuthorization(actionContext);
+            
         }
 
     }

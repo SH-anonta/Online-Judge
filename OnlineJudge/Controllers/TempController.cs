@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿
 using System.Web;
 using System.Web.Http;
-using OnlineJudge.FormModels;
-using OnlineJudge.Models;
-using OnlineJudge.Repository;
 using Services;
 
 namespace OnlineJudge.Controllers
@@ -35,9 +26,53 @@ namespace OnlineJudge.Controllers
             return Ok("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         }
 
-        public class Notice{
-            public string Title { set; get; }
-            public string Descripiton { set; get; }
+        
+
+        [HttpGet]
+        [Route("session-get")]
+        public IHttpActionResult SessionTest(int val){
+            if (val == 0){
+                var a = HttpContext.Current.Session["A"];
+                return Ok(a);
+            }
+            else{
+                HttpContext.Current.Session["A"] = val;
+                return Ok();
+            }
+            
+        }
+
+        class MyClass{
+            public string AB { set; get; }
+            public string AC { set; get; }
+            public string AD { set; get; }
+
+            public MyClass(){
+                AB = "abcd";
+                AC = "abcxxxxd";
+                AD = "xxxabcd";
+            }
+        }
+
+        [HttpGet]
+        [Route("session-comp")]
+        public IHttpActionResult SesisonComp(int val){
+            if (val == 0){
+                var a = HttpContext.Current.Session["A"];
+                return Ok(a);
+            }
+            else{
+                HttpContext.Current.Session["A"] = new MyClass();
+                return Ok();
+            }
+            
+        }
+
+        [HttpGet]
+        [Route("session")]
+        public IHttpActionResult GetSession(int val){
+            return Ok(HttpContext.Current.Session["LoginInfo"]);
+
         }
 
         

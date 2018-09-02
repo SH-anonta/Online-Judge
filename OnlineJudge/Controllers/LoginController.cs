@@ -7,48 +7,39 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using OnlineJudge.Services;
 
 namespace OnlineJudge.Controllers
 {
     [RoutePrefix("api/login")]
-    public class LoginController : ApiController
-    {
-        private UserRepository user_repository;
+    public class LoginController : ApiController{
+        private UserService user_service;
 
-        public LoginController()
-        {
-            this.user_repository = new UserRepository();
+        public LoginController(){
+            this.user_service = new UserService();
         }
 
         //GET: api/login
-        public void GetLogin()
-        {
-            
-        }
+        public void GetLogin(){}
 
 
-        // POST: api/Login
-        public IHttpActionResult Post(Login credentials)
-        {
-            Login loginDetails = new Login (){
-                Username = credentials.Username,
-                Password = credentials.Password
-            };
-
-            if(ModelState.IsValid)
-            {
-                if (user_repository.IsValidUser(loginDetails.Username, loginDetails.Password))
-                {
-                    HttpContext.Current.Session["userName"] = loginDetails.Username;
-                    return Ok();
-//                    RedirectToRoute("api/announcements", 200);
-                }
-                else{
-                    return BadRequest();
-                }
+        [HttpPost]
+        [HttpOptions]
+        [Route("")]
+        public IHttpActionResult Login(Login credentials){
+            if (RequestUtility.IsPreFlightRequest(Request)){
+                return Ok();
             }
 
-            return BadRequest();
+            bool success = user_service.LoginUser(credentials.Username, credentials.Password);
+
+            if (success){
+                return Ok();
+            }
+            else{
+                return BadRequest();
+            }
         }
+
     }
 }

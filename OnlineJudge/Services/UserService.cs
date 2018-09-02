@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Web;
+using System.Web.Http;
 using OnlineJudge.Models;
 using OnlineJudge.Repository;
 
@@ -18,21 +20,19 @@ namespace OnlineJudge.Services {
         }
     }
 
-    public class UserService{
+    public class UserService {
         private static readonly string LOGIN_INFO_SESSION_KEY = "LoginInfo";
         
         private UserLoginInfo login_info;
         private UserRepository user_repository;
 
         public UserService(){
+            user_repository = new UserRepository();
+
             // if the user is not authenticated, this will evaluate to null
-            try
-            {
-                login_info = (UserLoginInfo) HttpContext.Current.Session["LoginInfo"];
-            }
-            catch (NullReferenceException ex){
-                // intentionally do nothing
-            }
+            var x = HttpContext.Current.Session;
+            login_info = (UserLoginInfo) HttpContext.Current.Session[LOGIN_INFO_SESSION_KEY];
+            Console.WriteLine();
             
         }
 
