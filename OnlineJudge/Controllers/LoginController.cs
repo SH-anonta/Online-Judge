@@ -1,12 +1,5 @@
 ﻿using OnlineJudge.Models;
-using OnlineJudge.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web;
-using System.Web.Http;
+ using System.Web.Http;
 using OnlineJudge.Services;
 
 namespace OnlineJudge.Controllers
@@ -16,17 +9,15 @@ namespace OnlineJudge.Controllers
         private UserService user_service;
 
         public LoginController(){
-            this.user_service = new UserService();
+            
         }
-
-        //GET: api/login
-        public void GetLogin(){}
-
-
+        
         [HttpPost]
         [HttpOptions]
         [Route("")]
         public IHttpActionResult Login(Login credentials){
+            this.user_service = new UserService();
+
             if (RequestUtility.IsPreFlightRequest(Request)){
                 return Ok();
             }

@@ -31,7 +31,7 @@ namespace OnlineJudge {
         {
             if(IsWebApiRequest())
             {
-                HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Default);
+                HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);
             }
         }
 

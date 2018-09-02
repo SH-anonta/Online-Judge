@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Data.Entity.Core;
-using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
-using JudgeCodeRunner;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
-using OnlineJudge.ResponseModels;
 
 namespace OnlineJudge.Repository {
     class HashUtility{

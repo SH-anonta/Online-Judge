@@ -1,7 +1,6 @@
 ﻿
 using System.Web;
 using System.Web.Http;
-using Services;
 
 namespace OnlineJudge.Controllers
 {
@@ -18,7 +17,6 @@ namespace OnlineJudge.Controllers
             return "temp";
         }
 
-        [IsAuthenticated]
         [Route("page")]
         [HttpGet]
         public IHttpActionResult Problem(){

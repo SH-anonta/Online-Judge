@@ -172,6 +172,7 @@
     <Compile Include="Controllers\ContestController.cs" />
     <Compile Include="Controllers\CustomHttpActions.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\RequestUtility.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProblemController.cs" />
@@ -213,7 +214,6 @@
     <Compile Include="ResponseModels\SharedResponses.cs" />
     <Compile Include="ResponseModels\SubmissionResponses.cs" />
     <Compile Include="ResponseModels\UserResponseModels.cs" />
-    <Compile Include="AuthFilters\IsAuthenticated.cs" />
     <Compile Include="Services\ContestService.cs" />
     <Compile Include="Services\JudgeService.cs" />
     <Compile Include="Services\UserService.cs" />
