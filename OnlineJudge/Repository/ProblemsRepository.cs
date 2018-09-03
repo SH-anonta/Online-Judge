@@ -52,8 +52,8 @@ namespace OnlineJudge.Repository {
             return problems;
         }
 
-        public IQueryable<Problem> GetPublicProblems(int start, int limit){
-            var problems = context.Problems.OrderByDescending(x => x.CreateDate).Where(x =>x.IsPublic);
+        public IQueryable<Problem> GetProblems(int start, int limit){
+            var problems = context.Problems.OrderByDescending(x => x.CreateDate);
 
             return problems.Skip(start-1).Take(limit-start+1);
         }

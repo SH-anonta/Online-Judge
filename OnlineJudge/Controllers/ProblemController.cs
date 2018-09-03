@@ -39,7 +39,7 @@ namespace OnlineJudge.Controllers{
         [Route("")]
         [HttpGet]
         public IHttpActionResult GetProblemList(int start, int limit){
-            var problems = problem_repository.GetPublicProblems(start, limit);
+            var problems = problem_repository.GetProblems(start, limit);
             
             
             return Ok(new CollectionResponse(){
