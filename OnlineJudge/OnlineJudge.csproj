@@ -223,7 +223,7 @@
     <Content Include="Bundles\favicon.ico" />
     <Content Include="Bundles\index.html" />
     <Content Include="Bundles\inline.318b50c57b4eba3d437b.bundle.js" />
-    <Content Include="Bundles\main.c1f9c9834091ef6810ff.bundle.js" />
+    <Content Include="Bundles\main.b8e44e3d791b987e890a.bundle.js" />
     <Content Include="Bundles\polyfills.fa62713060e7012f88ea.bundle.js" />
     <Content Include="Bundles\scripts.c511616d4398dd7a65fe.bundle.js" />
     <Content Include="Bundles\styles.802c54b85766b4882a03.bundle.css" />

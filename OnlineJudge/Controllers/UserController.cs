@@ -89,5 +89,13 @@ namespace OnlineJudge.Controllers{
         public IHttpActionResult GetUserTypes(){
             return Ok(UserTypeData.MapTo(user_repository.GetUserTypes()));
         }
+
+
+        // returns 
+        [HttpGet]
+        [Route("my-state")]
+        public IHttpActionResult GetUserState(){
+            return Ok(user_service.GetUserState());
+        }
     }
 }

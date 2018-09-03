@@ -6,11 +6,13 @@ using OnlineJudge.Repository;
 using Login = System.Web.UI.WebControls.Login;
 
 namespace OnlineJudge.Services {
-    class UserLoginInfo{
+    
+
+    public class UserLoginInfo{
         public string UserName { get; }
         public int UserId{ get; }
-        public UserTypeEnum UserType;
-        public DateTime LogInTime;
+        public UserTypeEnum UserType { get; }
+        public DateTime LogInTime { get; }
 
         public UserLoginInfo(User user){
             UserName = user.UserName;
@@ -28,6 +30,8 @@ namespace OnlineJudge.Services {
         }
 
     }
+
+
 
     public partial class UserService {
         private static readonly string LOGIN_INFO_SESSION_KEY = "LoginInfo";
@@ -77,6 +81,10 @@ namespace OnlineJudge.Services {
         public void LogoutUser(){
             login_info = null;
             RemoveLoginDataOnSession();
+        }
+
+        public UserLoginInfo GetUserState(){
+            return login_info;
         }
 
         // session handler
