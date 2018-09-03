@@ -11,7 +11,7 @@ namespace OnlineJudge.Controllers{
 
 
     [RoutePrefix("admin-site")]
-    public class AdminController : Controller{
+    public partial class AdminController : Controller{
         private UserService user_service = new UserService();           // use this to log in/out the user and do authorization checks
         private UserRepository user_repository = new UserRepository();     // use this to get user data from db
         
@@ -22,6 +22,14 @@ namespace OnlineJudge.Controllers{
             return View("AdminHome");
         }
          
+       
+
+        
+
+    }
+
+    //NOTE: Everything related to user profiles and user list goes here
+    public partial class AdminController : Controller{
         //user profile
 
         [HttpGet]
@@ -40,11 +48,11 @@ namespace OnlineJudge.Controllers{
         }
 
         UserTest[] usertestList = new UserTest[]
-            {
-                new UserTest { Id = 1, UserName = "Saif", Title = "Mohhmad", Email = "ezaz@gmail.com", Password = "abcd", Usertype = "Admin" },
-                new UserTest { Id = 2, UserName = "kaif", Title = "Mohhmad", Email = "kaif@gmail.com", Password = "abcd", Usertype = "User" },
-                new UserTest { Id = 3, UserName = "taif", Title = "Mohhmad", Email = "taif@gmail.com", Password = "abcd", Usertype = "Admin" }, 
-            };
+        {
+            new UserTest { Id = 1, UserName = "Saif", Title = "Mohhmad", Email = "ezaz@gmail.com", Password = "abcd", Usertype = "Admin" },
+            new UserTest { Id = 2, UserName = "kaif", Title = "Mohhmad", Email = "kaif@gmail.com", Password = "abcd", Usertype = "User" },
+            new UserTest { Id = 3, UserName = "taif", Title = "Mohhmad", Email = "taif@gmail.com", Password = "abcd", Usertype = "Admin" }, 
+        };
 
         [HttpGet]
         [Route("users/{user_id}/edit")]
@@ -59,7 +67,9 @@ namespace OnlineJudge.Controllers{
             // todo handle user prfile edit form submission
             return null;
         }
+    }
 
-
+    //NOTE: Everything related to logging goes here 
+    public partial class AdminController : Controller{
     }
 }
