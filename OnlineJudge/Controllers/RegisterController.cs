@@ -23,9 +23,12 @@ namespace OnlineJudge.Controllers{
             if (RequestUtility.IsPreFlightRequest(Request)){
                 return Ok();
             }
-            
-            // todo do validation checks
 
+            var result = data.Validate();
+
+            if (!result.IsValid){
+                return new BadHttpRequest(result.ErrorMessages);
+            }
             user_repository.CreateNewUser(data);
             return Ok();
         }
