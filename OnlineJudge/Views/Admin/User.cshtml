@@ -1,0 +1,100 @@
+﻿@model OnlineJudge.Models.UserTest
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Profile</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-sm-10">
+                <h3 class="h3">Profile</h3>
+            </div>
+
+            <div class="col-sm-2 text-right">
+                <a href="/admin-site/Edit?id=@Model.Id">Edit</a>   
+
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-sm text-center">
+                <img class="avatar-img" style="height: 100px; width: 100px;"
+                     src="https://www.ischool.berkeley.edu/sites/default/files/styles/profile_photo/public/default_images/avatar.jpeg?itok=CWMQiefO"
+                     alt="">
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-8 mx-auto">
+                <table class="table ">
+                    <tr>
+                        <th>User Name</th>
+                        <td>@Model.UserName</td>
+                    </tr>
+
+                    <tr>
+                        <th>User Title</th>
+                        <td>@Model.Title</td>
+                    </tr>
+
+                    <tr>
+                        <th>User Type</th>
+                        <td>@Model.Usertype</td>
+                    </tr>
+
+                    <tr>
+                        <th>Email</th>
+                        <td>@Model.Email</td>
+                    </tr>
+                    
+                    @*Functions*@
+
+                    @functions{
+
+                        //DateTime and time calculating Function
+
+                        public string CalculatePassedTimeAfterJoining(DateTime DayOfJoining)
+                        {
+                            var dt = DateTime.Now;
+                            var years = new DateTime(DateTime.Now.Subtract(DayOfJoining).Ticks).Year - 1;
+                            var pastYear = DayOfJoining.AddYears(years);
+                            var months = 0;
+                            for (int i = 1; i <= 12; i++)
+                            {
+                                if (pastYear.AddMonths(i) == dt)
+                                {
+                                    months = i;
+                                }
+                                else if (pastYear.AddMonths(i) >= dt)
+                                {
+                                    months = i - 1;
+                                    break;
+                                }
+                            }
+
+                            var days = dt.Subtract(pastYear.AddMonths(months)).Days;
+
+                            return string.Format("It's been {0} years, {1} months, and {2} days since you joined", years, months, days);
+                        }
+                    }
+
+
+                    <tr>
+                        <th>Joined</th>
+                        <td>@CalculatePassedTimeAfterJoining(new DateTime(2011, 11, 27))</td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
