@@ -18,11 +18,11 @@ namespace OnlineJudge {
             // angular route must be the last route 
             mapAngularRoutes(routes);
 
-//            routes.MapRoute(
-//                name: "Default",
-//                url: "{controller}/{action}/{id}",
-//                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-//            );
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
         }
 
         private static void mapAngularRoutes(RouteCollection routes){
