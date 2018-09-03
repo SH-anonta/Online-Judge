@@ -223,13 +223,23 @@ namespace OnlineJudge.Services {
         }
 
         public bool IsAuthorizedToViewContestProblem(int contest_id){
-            // same logic
-            return IsAuthorizedToEditContest(contest_id);
+            if (!UserIsAuthenticated()){
+                return false;
+            }
+
+            if (IsAuthorizedToEditContest(contest_id)){
+                return true;
+            }
+
+            // or if the contest has already started (possibly ended too) and the user is 
+            var context = new OjDBContext();
+            var contest = context.Contests.Find(contest_id);
+            return contest.StartDate < DateTime.Now;
         }
 
         public bool IsAuthorizedToViewContestProblems(int contest_id){
             // same logic
-            return IsAuthorizedToEditContest(contest_id);
+            return IsAuthorizedToViewContestProblem(contest_id);
         }
 
         public bool IsAuthorizedToDeleteContest(int contest_id){
@@ -238,12 +248,19 @@ namespace OnlineJudge.Services {
         }
 
         public bool IsAuthorizedToSubmitToContest(int contest_id){
-            var context = new OjDBContext();
-            var contestant =
-                context.Contestants.FirstOrDefault(x => x.User.Id == login_info.UserId 
-                                                        && x.Contest.Id == contest_id);
+            if (!UserIsAuthenticated()){
+                return false;
+            }
 
-            return contestant != null;
+            if (IsAuthorizedToEditContest(contest_id)){
+                return true;
+            }
+
+            var context = new OjDBContext();
+            var contest = context.Contests.Find(contest_id);
+            return contest.StartDate < DateTime.Now &&
+                   context.Contestants.FirstOrDefault(x =>
+                       x.User.Id == login_info.UserId && x.Contest.Id == contest_id) != null;
         }
 
 
