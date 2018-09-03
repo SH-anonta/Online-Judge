@@ -222,15 +222,14 @@
     <Compile Include="Services\UserServices\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bundles\3rdpartylicenses.txt" />
     <Content Include="Bundles\favicon.ico" />
     <Content Include="Bundles\index.html" />
-    <Content Include="Bundles\inline.bundle.js" />
-    <Content Include="Bundles\main.bundle.js" />
-    <Content Include="Bundles\polyfills.bundle.js" />
-    <Content Include="Bundles\scripts.bundle.js" />
+    <Content Include="Bundles\inline.318b50c57b4eba3d437b.bundle.js" />
+    <Content Include="Bundles\main.b357bffbb416be9ccef3.bundle.js" />
+    <Content Include="Bundles\polyfills.fa62713060e7012f88ea.bundle.js" />
+    <Content Include="Bundles\scripts.c511616d4398dd7a65fe.bundle.js" />
     <Content Include="Bundles\styles.802c54b85766b4882a03.bundle.css" />
-    <Content Include="Bundles\styles.bundle.js" />
-    <Content Include="Bundles\vendor.bundle.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -244,12 +243,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Bundles\inline.bundle.js.map" />
-    <Content Include="Bundles\main.bundle.js.map" />
-    <Content Include="Bundles\polyfills.bundle.js.map" />
-    <Content Include="Bundles\scripts.bundle.js.map" />
-    <Content Include="Bundles\styles.bundle.js.map" />
-    <Content Include="Bundles\vendor.bundle.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
