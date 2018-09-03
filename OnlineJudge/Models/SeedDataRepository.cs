@@ -2026,7 +2026,8 @@ public static string intput= @"1000
                     TimeLimit = 1,
                     MemoryLimit = 25,
                     CreateDate = DateTime.Now,
-                    Creator = user
+                    Creator = user,
+                    IsPublic = true
                 };
 
                 

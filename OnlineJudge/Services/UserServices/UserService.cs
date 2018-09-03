@@ -201,6 +201,10 @@ namespace OnlineJudge.Services {
             return IsAuthorizedToEditProblem(problem_id) || context.Problems.Find(problem_id).IsPublic;
         }
 
+        public bool IsAuthorizedToViewAllProblemList(){
+            return UserIsAuthenticated() && login_info.IsAdmin();
+        }
+
         // Contests
         public bool IsAuthorizedToCreateContest(){
             return UserIsAuthenticated() && (login_info.IsAdmin() || login_info.IsJudge());
