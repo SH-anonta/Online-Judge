@@ -5,6 +5,13 @@ using System.Web;
 
 namespace OnlineJudge.Models
 {
+    public enum Recent
+    {
+        Last_7_Days,
+        Last_30_Days,
+        All_Time
+    }
+
     public class SystemLog
     {
         public int Id { get; set; }

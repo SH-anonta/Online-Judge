@@ -24,7 +24,7 @@ namespace OnlineJudge.Controllers{
          
        
 
-        
+
 
     }
 
@@ -71,5 +71,27 @@ namespace OnlineJudge.Controllers{
 
     //NOTE: Everything related to logging goes here 
     public partial class AdminController : Controller{
+        private LogRepository sysLog = new LogRepository();
+
+        [HttpGet]
+        public ActionResult GetAllLogs()
+        {
+            IQueryable<SystemLog> logs = sysLog.GetAllLogs();
+            return View("ViewAllLogs", logs);
+        }
+
+        [HttpGet]
+        public ActionResult GetLogs(int from, int to)
+        {
+            IQueryable<SystemLog> logs = sysLog.GetLogs(from, to);
+            return View("ViewLogs", logs);
+        }
+
+        [HttpGet]
+        public ActionResult GetLogs(Recent timespan)
+        {
+            IQueryable<SystemLog> logs = sysLog.GetLogs(timespan);
+            return View("ViewLogs", logs);
+        }
     }
 }
