@@ -37,7 +37,7 @@ namespace OnlineJudge.Models {
         public DbSet<ContestProblem> ContestProblems { get; set; }
         public DbSet<Contestant> Contestants { get; set; }
         public DbSet<ContestSubmission> ContestantSubmissions { get; set; }
-
+        public DbSet<SystemLog> SystemLogs { get; set; }
 
     }
 
