@@ -25,9 +25,13 @@ namespace OnlineJudge.Controllers{
         public ProblemRepository problem_repository = new ProblemRepository();
         
         // return all problems in order of creation date
-        [Route("")]
+        [Route("all")]
         [HttpGet]
         public IHttpActionResult GetProblemList(){
+            if (!user_service.IsAuthorizedToViewAllProblemList()){
+                return Unauthorized();
+            }
+
             var problems = problem_repository.GetAllProblemsList();
             return Ok(ProblemListItem.MapTo(problems));
         }

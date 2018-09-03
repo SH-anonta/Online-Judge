@@ -46,7 +46,7 @@ namespace OnlineJudge.Repository {
         }
 
         public IEnumerable<User> GetUserList(){
-            return context.Users.Select(x=>x);
+            return context.Users.OrderBy(x=>x.UserName).Select(x=>x);
         }
 
         public IEnumerable<Submission> GetUserSubmissions(int user_id, int start, int limit){
