@@ -17,6 +17,7 @@ namespace OnlineJudge.Repository {
     public partial class ProblemRepository {
 
         public OjDBContext context;
+        private UserService user_service= new UserService();
 
         public ProblemRepository(){
             this.context = new OjDBContext();
@@ -103,8 +104,8 @@ namespace OnlineJudge.Repository {
                 TestCaseOutput = data.TestCaseOutput,
 
                 CreateDate = DateTime.Now,
-                // todo set to the request sender
-                Creator = context.Users.Find(1),
+                
+                Creator = context.Users.Find(user_service.GetUserId()),
             };
 
             context.Problems.Add(problem);
@@ -150,40 +151,6 @@ namespace OnlineJudge.Repository {
             
             
             context.SaveChanges();
-        }
-
-        public Submission CreateSubmission(int problem_id, SubmissionFormData submission_data){
-            int problem_code = problem_id;
-            var judge = new JudgeService();
-            var problem = context.Problems.Find(problem_code);
-            var language = context.ProgrammingLanguages.Find((ProgrammingLanguageEnum)submission_data.LanguageId);
-
-            Trace.WriteLine(submission_data.LanguageId);
-            var submission = new Submission(){
-                Status = context.SubmissionStatus.Find(Verdict.Running),
-                Problem = problem,
-                SourceCode = submission_data.SourceCode,
-                SubmissionDate = DateTime.Now,
-                Submitter = context.Users.First(x => x.UserName == "admin"),
-                ProgrammingLanguage = language
-            };
-
-            context.Submissions.Add(submission);
-            context.SaveChanges();
-
-            judge.OnSubmissionStatusChange += (sender, e) =>{
-                var result = e.ExecutionResult;
-                submission.Status = context.SubmissionStatus.Find(result.Verdict);
-                submission.RunningTime = result.RunningTime;
-                submission.PeakMemmoryUsage = result.MemmoryUsage;
-                submission.StandardErrorStream= result.ErrorMsg;
-
-                context.SaveChanges();
-            };
-
-            judge.judge(submission_data, problem);
-
-            return submission;
         }
 
         public void UpdateSubmissionStatus(int submission_id, Verdict status){

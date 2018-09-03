@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Core;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using OnlineJudge.FormModels;
-using OnlineJudge.Models;
 using OnlineJudge.Repository;
 using OnlineJudge.ResponseModels;
+using OnlineJudge.Services;
 
 namespace OnlineJudge.Controllers{
     [RoutePrefix("api/contests")]
     public class ContestController : ApiController{
         private ContestRepository contest_repository;
+        private UserService user_service = new UserService();
 
         public ContestController(){
             contest_repository = new ContestRepository();
@@ -42,6 +39,19 @@ namespace OnlineJudge.Controllers{
             return Ok(ContestListItem.MapTo(all_contests));
         }
 
+
+        [HttpGet]
+        [Route("unfinished-contests")]
+        public IHttpActionResult UnfinishedContests(){
+            return Ok(contest_repository.GetUnfinishedContests());
+        }
+
+        [HttpGet]
+        [Route("past-contests")]
+        public IHttpActionResult PastContests(int start, int limit){
+            return Ok(contest_repository.GetPastContests(start, limit));
+        }
+
         [HttpGet]
         [Route("{contest_id}")]
         public IHttpActionResult ContestDetails(int contest_id){
@@ -54,27 +64,45 @@ namespace OnlineJudge.Controllers{
             }
         }
 
+        [HttpOptions]
         [HttpPost]
         [Route("{contest_id}/register")]
-        public IHttpActionResult ContestRegistration(int contest_id){
-            
+        public IHttpActionResult ContestRegistration(int contest_id, [FromBody]ContestRegistrationFormData registration_form_data){
+            if (RequestUtility.IsPreFlightRequest(Request)){
+                return Ok();
+            }
+
             try{
                 // todo replace user id 2 with the user sending the request
-                contest_repository.RegisterUserForContest(contest_id, 2);
+                contest_repository.RegisterUserForContest(contest_id, 2, registration_form_data);
                 return Ok();
             }
             catch (ObjectNotFoundException e){
                 return NotFound();
             }
             catch (InvalidOperationException e){
-                return BadRequest(e.Message);
+                return InternalServerError(e);
             }
             
         }
 
         [HttpPost]
+        [HttpOptions]
         [Route("create")]
         public IHttpActionResult ContestCreate([FromBody]ContestCreationFormData data){
+            if (!user_service.IsAuthorizedToCreateContest()){
+                return Unauthorized();
+            }
+
+            if (RequestUtility.IsPreFlightRequest(Request)){
+                return Ok();
+            }
+
+            var validation_oresult = data.Validate();
+            if (!validation_oresult.IsValid){
+                return new BadHttpRequest(validation_oresult.ErrorMessages);
+            }
+
             try{
                 // todo replace 1 with current user id
                 contest_repository.CreateContest(1, data);
@@ -85,10 +113,29 @@ namespace OnlineJudge.Controllers{
             return Ok();
         }
 
+        [HttpOptions]
         [HttpPost]
         [Route("{contest_id}/edit")]
-        public IHttpActionResult ContestUpdate(int contest_id){
-            // todo implement
+        public IHttpActionResult ContestUpdate(int contest_id, [FromBody]ContestCreationFormData data){
+            if (!user_service.IsAuthorizedToEditContest(contest_id)){
+                return Unauthorized();
+            }
+
+            if (RequestUtility.IsPreFlightRequest(Request)){
+                return Ok();
+            }
+
+            var validation_oresult = data.Validate();
+            if (!validation_oresult.IsValid){
+                return new BadHttpRequest(validation_oresult.ErrorMessages);
+            }
+
+            try{
+                contest_repository.UpdateContest(contest_id, data);
+            }
+            catch (Exception e){
+                return InternalServerError(e);
+            }
             return Ok();
         }
 
@@ -96,6 +143,10 @@ namespace OnlineJudge.Controllers{
         [HttpGet]
         [Route("{contest_id}/problems")]
         public IHttpActionResult ContestProblemList(int contest_id){
+            if (!user_service.IsAuthorizedToViewContestProblems(contest_id)){
+                return Unauthorized();
+            }
+
             try{
                 var contest = contest_repository.GetContestById(contest_id);
                 return Ok(new ContestDetailsData(contest));
@@ -108,20 +159,12 @@ namespace OnlineJudge.Controllers{
         [HttpGet]
         [Route("{contest_id}/problems/{problem_no}")]
         public IHttpActionResult ContestProblemDetails(int contest_id, int problem_no){
-            var conest_prblem = contest_repository.GetContestProblem(contest_id, problem_no);
-            return Ok(new ContestProblemDetailsData(conest_prblem));
-        }
+            if (!user_service.IsAuthorizedToViewContestProblem(contest_id)){
+                return Unauthorized();
+            }
 
-        [HttpPost]
-        [Route("{contest_id}/problems/{problem_no}/submit")]
-        public IHttpActionResult ContestProblemSubmit(int contest_id, int problem_no, [FromBody] SubmissionFormData submission_data){
-            try{
-                contest_repository.CreateSubmission(contest_id, problem_no, submission_data);
-                return Ok();
-            }
-            catch (ObjectNotFoundException e){
-                return NotFound();
-            }
+            var conest_prblem = contest_repository.GetContestProblem(contest_id, problem_no);
+            return Ok(new ProblemDetails(conest_prblem.Problem));
         }
 
         // submissions
@@ -140,10 +183,13 @@ namespace OnlineJudge.Controllers{
         // submissions
         [HttpGet]
         [Route("{contest_id}/submissions")]
-        public IHttpActionResult ContestSubmissions(int contest_id){
+        public IHttpActionResult ContestSubmissions(int contest_id, int start, int limit){
             try{
-                var submissions = contest_repository.GetAllSubmissions(contest_id);
-                return Ok(SubmissionResponseData.MapTo(submissions));
+                var submissions = contest_repository.GetAllSubmissions(contest_id, start, limit);
+                return Ok(new ContestSubmissionListCollection{
+                    TotalCount = contest_repository.GetContestSubmissionCount(contest_id),
+                    Collection = SubmissionResponseData.MapTo(submissions)
+                });
             }
             catch (ObjectNotFoundException e){
                 return NotFound();
@@ -177,5 +223,71 @@ namespace OnlineJudge.Controllers{
             
         }
 
+        // delete conflicts with reference constaints
+        [HttpPost]
+        [Route("{contest_id}/delete")]
+        public IHttpActionResult ContestantDelete(int contest_id){
+            if (!user_service.IsAuthorizedToDeleteContest(contest_id)){
+                return Unauthorized();
+            }
+
+            try{
+                contest_repository.DeleteContest(contest_id);
+                return Ok();
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
+            
+        }
+
+        // contest rank list
+        [HttpGet]
+        [Route("{contest_id}/rank")]
+        public IHttpActionResult ContestRankList(int contest_id, int start, int limit){
+
+            try{
+                return Ok(contest_repository.GetRankList(contest_id, start, limit));
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
+            
+        }
+    }
+
+    [RoutePrefix("api/contests")]
+    public class ContestSubmissionController : ApiController{
+        private UserService user_service = new UserService();
+        private readonly  ContestSubmissionRepository contest_submission_repository;
+
+        public ContestSubmissionController(){
+            contest_submission_repository = new ContestSubmissionRepository();
+        }
+
+
+        [HttpOptions]
+        [HttpPost]
+        [Route("{contest_id}/problems/{problem_no}/submit")]
+        public IHttpActionResult ContestProblemSubmit(int contest_id, int problem_no, [FromBody] SubmissionFormData submission_data){
+            if (!user_service.IsAuthorizedToSubmitToContest(contest_id)){
+                return Unauthorized();
+            }
+            
+            if (RequestUtility.IsPreFlightRequest(Request)){
+                return Ok();
+            }
+
+            try{
+                contest_submission_repository.CreateSubmission(contest_id, problem_no, submission_data);
+                return Ok();
+            }
+            catch (InvalidOperationException e){
+                return BadRequest("Can not submit to contest that has ended");
+            }
+            catch (ObjectNotFoundException e){
+                return NotFound();
+            }
+        }
     }
 }

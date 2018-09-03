@@ -1,27 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core;
-using System.Net;
-using System.Net.Http;
+﻿using System.Data.Entity.Core;
 using System.Web.Http;
-using System.Web.Http.Results;
 using OnlineJudge.FormModels;
 using OnlineJudge.Models;
 using OnlineJudge.Repository;
 using OnlineJudge.ResponseModels;
+using OnlineJudge.Services;
 
 namespace OnlineJudge.Controllers{
     [RoutePrefix("api/announcements")]
     public class AnnouncementsController : ApiController{
+        private UserService user_service;
         private AnnouncementRepository announcement_repository;
 
         // todo add object not found exception handlers to acitons 
         public AnnouncementsController(): base(){
             announcement_repository = new AnnouncementRepository();
+            user_service= new UserService();
         }
 
         public AnnouncementsController(AnnouncementRepository repo): base(){
             announcement_repository = repo;
+            user_service= new UserService();
         }
 
         [HttpGet]
@@ -46,6 +45,10 @@ namespace OnlineJudge.Controllers{
         [HttpOptions]
         [Route("create")]
         public IHttpActionResult Create([FromBody] AnnouncementFormData data){
+            if (!user_service.IsAuthorizedToCreateAnnouncements()){
+                return Unauthorized();
+            }
+
             // for preflight requests
             if (RequestUtility.IsPreFlightRequest(Request)){
                 return Ok();
@@ -77,6 +80,10 @@ namespace OnlineJudge.Controllers{
         [HttpOptions]
         [Route("{id}/edit")]
         public IHttpActionResult EditAnnouncement(int id, [FromBody] AnnouncementFormData data){
+            if (!user_service.IsAuthorizedToEditAnnouncements(id)){
+                return Unauthorized();
+            }
+
             // for preflight requests
             if (RequestUtility.IsPreFlightRequest(Request)){
                 return Ok();
@@ -94,6 +101,10 @@ namespace OnlineJudge.Controllers{
         [HttpPost]
         [Route("{id}/delete")]
         public IHttpActionResult DeleteAnnouncement(int id){
+            if (!user_service.IsAuthorizedToDeleteAnnouncements()){
+                return Unauthorized();
+            }
+
             try{
                 announcement_repository.DeleteAnnouncement(id);
                 return Ok();

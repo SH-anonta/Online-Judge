@@ -10,10 +10,10 @@ using JudgeCodeRunner;
 namespace CodeRunner.Compilers {
     class PythonCompiler: Compiler {
         public event EventHandler<CompilationFinishedEventArgs> OnCompilationFinished;
-        private static string PYTHON_INTERPRETER_PATH= @"C:\Program Files\Python36\python.exe";
+        private readonly string interpreter_path;
 
-        public PythonCompiler(){
-
+        public PythonCompiler(string interpreter_path){
+            this.interpreter_path = interpreter_path;
         }
 
         public void CompileSource(string source_code){
@@ -31,7 +31,7 @@ namespace CodeRunner.Compilers {
         private Process GenerateProcessOfCompiledCode(string output_exe_path){
             Process process = new Process();
 
-            process.StartInfo.FileName = PYTHON_INTERPRETER_PATH;
+            process.StartInfo.FileName = interpreter_path;
             process.StartInfo.Arguments = output_exe_path;
             return process;
         }

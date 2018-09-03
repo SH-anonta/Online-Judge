@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
 using CodeRunner.Compilers;
 using JudgeCodeRunner.CompilerServices;
 
@@ -42,7 +41,9 @@ namespace JudgeCodeRunner{
             this.source_code = source_code;
             this.time_limit = time_limit;
 
-            this.compiler = CompilerFactory.getCompiler(languageEnum);
+            this.compiler = CompilerFactory.getInstance().getCompiler(languageEnum);
+//            this.compiler = new CPPCompiler(@"C:/Program Files (x86)/CodeBlocks/MinGW/bin/g++.exe", "-std=c++11");
+
         }
         
         // used by client 

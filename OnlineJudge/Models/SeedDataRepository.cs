@@ -4,6 +4,7 @@ using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Web.UI.WebControls;
 using JudgeCodeRunner;
+using OnlineJudge.Repository;
 
 namespace OnlineJudge.Models {
 
@@ -2098,12 +2099,12 @@ public static string intput= @"1000
 
         public static List<User> getUsers(OjDBContext ctx){
             var users = new List<User>();
-
+            var password = HashUtility.MD5Hash("password");
             users.Add(new User()
             {
                 UserName = "admin",
                 Email = "admin@admin.min",
-                Password = "password",
+                Password = password,
                 UserType = ctx.UserTypes.Find(UserTypeEnum.Admin)
             });
 
@@ -2111,7 +2112,7 @@ public static string intput= @"1000
             {
                 UserName = "user",
                 Email = "user@oj.com",
-                Password = "password",
+                Password = password,
                 UserType = ctx.UserTypes.Find(UserTypeEnum.User)
             });
 
@@ -2119,7 +2120,7 @@ public static string intput= @"1000
             {
                 UserName = "judge",
                 Email = "judge@oj.com",
-                Password = "password",
+                Password = password,
                 UserType = ctx.UserTypes.Find(UserTypeEnum.Judge)
             });
 
@@ -2150,36 +2151,53 @@ public static string intput= @"1000
         }
 
         public static List<Contest> GetContests(OjDBContext ctx){
-            var contests = new List<Contest>();
+            var past = DateTime.Now;
+            past = past.Subtract(TimeSpan.FromHours(5));
 
+            var present = DateTime.Now;
+
+            var future = DateTime.Now;
+            future = future.AddHours(5);
+
+
+            return new List<Contest>(){
+                CreateContes(ctx, "Contest 1", past, present),   // past contest
+                CreateContes(ctx, "Contest 2", past, future),   // running contest
+                CreateContes(ctx, "Contest 3", future, DateTime.MaxValue),   // upcomping contest
+            };
+        }
+
+        // create one cotnest entry using given start and end_time dates
+        public static Contest CreateContes(OjDBContext ctx, string title, DateTime start_time, DateTime end_time){
             Problem problem = ctx.Problems.First();
 
             var contest = new Contest(){
-                Title = "Practice contest #8",
+                Title = title,
                 Description = "Contest Contest",
                 Creator = ctx.Users.First(),
-
-                StartDate = DateTime.Now,
-                EndDate = DateTime.MaxValue,
+                Password = "password",
+                IsPublic = false,
+                StartDate = start_time,
+                EndDate = end_time,
             };
+
+
+            for (int i = 0; i < 5; i++){
+                ContestProblem contest_problem = new ContestProblem(){
+                    Order = i,
+                    Contest = contest,
+                    Problem =  problem,
+                };
+                contest.Problems.Add(contest_problem);
+            }
+
             
-            ContestProblem contest_problem = new ContestProblem(){
-                Contest = contest,
-                Problem =  problem,
-            };
+            for (int i = 0; i < 1; i++){
+                Contestant contestant = new Contestant(ctx.Users.First());
+                contest.Contestants.Add(contestant);
+            }
 
-            Contestant contestant = new Contestant(ctx.Users.First());
-
-//            ctx.ContestProblems.Add(contest_problem);
-//            ctx.Contestants.Add(contestant);
-//            ctx.SaveChanges();
-
-            contest.Problems.Add(contest_problem);
-            contest.Contestants.Add(contestant);
-
-            contests.Add(contest);
-
-            return contests;
+            return contest;
         }
     }
 }
