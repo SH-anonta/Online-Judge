@@ -226,7 +226,7 @@
     <Content Include="Bundles\favicon.ico" />
     <Content Include="Bundles\index.html" />
     <Content Include="Bundles\inline.318b50c57b4eba3d437b.bundle.js" />
-    <Content Include="Bundles\main.94620f6e33ecab99629c.bundle.js" />
+    <Content Include="Bundles\main.ea4a9a5001b210411c2a.bundle.js" />
     <Content Include="Bundles\polyfills.fa62713060e7012f88ea.bundle.js" />
     <Content Include="Bundles\scripts.c511616d4398dd7a65fe.bundle.js" />
     <Content Include="Bundles\styles.802c54b85766b4882a03.bundle.css" />
@@ -254,6 +254,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="SystemConfigInstructions.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

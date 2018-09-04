@@ -1,0 +1,14 @@
+﻿The following Environment variables must be set for the system run properly
+
+Create new *System environment* variable named "ONLINE_JUDGE_COMPILER_PATHS"
+
+with value : 
+{
+	"CPP" : "<path to cpp compiler executable>",
+	"C" : "",
+	"PYTHON36" : "",
+}
+
+Example: 
+
+{"CPP" : "C:/Program Files (x86)/CodeBlocks/MinGW/bin/g++.exe","C" : "C:/Program Files (x86)/CodeBlocks/MinGW/bin/gcc.exe","PYTHON36" : "C:/Program Files/Python36/python.exe",}

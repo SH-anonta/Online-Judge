@@ -1,0 +1,30 @@
+﻿The following db must be set for keeping system logs
+
+Create a new database in SQL Server. Database name: OJLogDB
+
+then execute the following query:
+
+CREATE TABLE [dbo].[Logs] (
+[Id] [int] IDENTITY (1, 1) NOT NULL,
+[Date] [datetime] NOT NULL,
+[Thread] [varchar] (255) NOT NULL,
+[Level] [varchar] (50) NOT NULL,
+[Logger] [varchar] (255) NOT NULL,
+[Message] [varchar] (4000) NOT NULL,
+[Exception] [varchar] (2000) NULL
+)
+
+this will create a table named "Logs" with mentioned properties.
+I have already configured the project OnlineJudge to use log4net to insert logs directly into localDB. So as long as the db exisits locally with same db name and table name, running the application will generate the logs directly into the db.
+If you cannot see the logs being inserted into DB, check:
+Task-Tree/OnlineJudge/log4net.txt
+for errors.
+the system.diagnostics will record all log4net debugger information in that file.
+
+Connected DB. Logs generating the database now.
+
+Issues marked:
+ 1. Conflicting SQL version number.Must use Version=1.0.3300.0.
+ 2. Permission denied when performing write operations. Make sure SQL server folder is not Read-only.
+ 3. Make sure buffersize=""1"". If you put more, then application will wait till buffer overflow occurs before 
+     starting to log into DB (for personal use, configured for this project). 
