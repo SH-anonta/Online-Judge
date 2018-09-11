@@ -1,0 +1,1640 @@
+{
+	"info": {
+		"_postman_id": "6405cb77-f957-4749-8723-f1767ee84451",
+		"name": "OJ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Announcements",
+			"item": [
+				{
+					"name": "Announcement list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2400f885-1f7b-4db2-aacc-349d5e938ce7",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"Returns array of lenght >= 0\", function () {",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.length).to.gt(-1);",
+									"});",
+									"",
+									"",
+									"pm.test('Schema is valid', function() {",
+									"    var data = pm.response.json();",
+									"    pm.expect(tv4.validate(data, environment.announcement_schema)).to.be.true;",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/announcements?from=1&to=200",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"announcements"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "1"
+								},
+								{
+									"key": "to",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Announcement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Hello New post",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Send help, were under fire",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HostName}}/api/announcements/create",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"announcements",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Announcement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "New post, Editted",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Pls Send help, were under fire",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HostName}}/api/announcements/1/edit",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"announcements",
+								"1",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Announcement details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "New post",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Send help, were under fire",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HostName}}/api/announcements/1",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"announcements",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Announcement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/announcements/1/delete",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"announcements",
+								"1",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Problem",
+			"item": [
+				{
+					"name": "Submit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "SourceCode",
+									"value": "#include <iostream>\n\nusing namespace std;\n\nint main(int argc, char* argv[]){\n    int t, a,b;\n    cin>>t;\n\n    for(int i= 0; i<t; i++){\n        cin>>a>>b;\n        cout<< a+b<<endl;\n    }\n\n\n    return 0;\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "ProgrammingLanguageId",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HostName}}/api/problems/1/submit",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"problems",
+								"1",
+								"submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Problem list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/problems/",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"problems",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Problem details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/problems/1",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"problems",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Problem input file",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/problems/1/input-file",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"problems",
+								"1",
+								"input-file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Problem output file",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/problems/1/output-file",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"problems",
+								"1",
+								"output-file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Problem create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0010d285-5d3d-45af-ba0c-3124d48ad6ff",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "input",
+									"type": "file"
+								},
+								{
+									"key": "output",
+									"type": "file"
+								},
+								{
+									"key": "Title",
+									"value": "hello",
+									"type": "text"
+								},
+								{
+									"key": "Description",
+									"value": "from the other side",
+									"type": "text"
+								},
+								{
+									"key": "Constraints",
+									"value": "meaning of life = 42",
+									"type": "text"
+								},
+								{
+									"key": "InputSpecification",
+									"value": "no input",
+									"type": "text"
+								},
+								{
+									"key": "OutputSpecification",
+									"value": "no output",
+									"type": "text"
+								},
+								{
+									"key": "SampleInput",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "SampleOutput",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "Notes",
+									"value": "No notes",
+									"type": "text"
+								},
+								{
+									"key": "TimeLimit",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "MemoryLimit",
+									"value": "128",
+									"type": "text"
+								},
+								{
+									"key": "IsPublic",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HostName}}/api/problems/create",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"problems",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Problem edit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0010d285-5d3d-45af-ba0c-3124d48ad6ff",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "input",
+									"value": "",
+									"type": "file"
+								},
+								{
+									"key": "output",
+									"value": "",
+									"type": "file"
+								},
+								{
+									"key": "Title",
+									"value": "hello",
+									"type": "text"
+								},
+								{
+									"key": "Description",
+									"value": "from the other side",
+									"type": "text"
+								},
+								{
+									"key": "Constraints",
+									"value": "Now its' cgabges",
+									"type": "text"
+								},
+								{
+									"key": "InputSpecification",
+									"value": "no input",
+									"type": "text"
+								},
+								{
+									"key": "OutputSpecification",
+									"value": "no output",
+									"type": "text"
+								},
+								{
+									"key": "SampleInput",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "SampleOutput",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "Notes",
+									"value": "No notes",
+									"type": "text"
+								},
+								{
+									"key": "TimeLimit",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "MemoryLimit",
+									"value": "128",
+									"type": "text"
+								},
+								{
+									"key": "IsPublic",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HostName}}/api/problems/3/edit",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"problems",
+								"3",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Problem delete",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0010d285-5d3d-45af-ba0c-3124d48ad6ff",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "input",
+									"type": "file"
+								},
+								{
+									"key": "output",
+									"type": "file"
+								},
+								{
+									"key": "Title",
+									"value": "hello",
+									"type": "text"
+								},
+								{
+									"key": "Description",
+									"value": "from the other side",
+									"type": "text"
+								},
+								{
+									"key": "Constraints",
+									"value": "meaning of life = 42",
+									"type": "text"
+								},
+								{
+									"key": "InputSpecification",
+									"value": "no input",
+									"type": "text"
+								},
+								{
+									"key": "OutputSpecification",
+									"value": "no output",
+									"type": "text"
+								},
+								{
+									"key": "SampleInput",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "SampleOutput",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "Notes",
+									"value": "No notes",
+									"type": "text"
+								},
+								{
+									"key": "TimeLimit",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "MemoryLimit",
+									"value": "128",
+									"type": "text"
+								},
+								{
+									"key": "IsPublic",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HostName}}/api/problems/2/delete",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"problems",
+								"2",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Submission",
+			"item": [
+				{
+					"name": "All Submissions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/all-submissions",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"all-submissions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "557402da-dfdb-410e-9c8d-b17baf989ecb",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/users/1",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Types",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "557402da-dfdb-410e-9c8d-b17baf989ecb",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/users/types",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User submisisons",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "557402da-dfdb-410e-9c8d-b17baf989ecb",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/users/1/submissions?start=1&limit=10",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1",
+								"submissions"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User problems",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "557402da-dfdb-410e-9c8d-b17baf989ecb",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.be.ok;",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/users/1/problems?start=1&limit=10",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1",
+								"problems"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User profile update",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78b2993b-4e74-47bb-86a2-0bf55a75c10e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "UserType",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "Email",
+									"value": "admin@jamal.com",
+									"type": "text"
+								},
+								{
+									"key": "Password",
+									"value": "passlass",
+									"type": "text"
+								},
+								{
+									"key": "ConfirmPassword",
+									"value": "LOLOLOL",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HostName}}/api/users/1/edit",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User contest history",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78b2993b-4e74-47bb-86a2-0bf55a75c10e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "UserType",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "Email",
+									"value": "admin@jamal.com",
+									"type": "text"
+								},
+								{
+									"key": "Password",
+									"value": "passlass",
+									"type": "text"
+								},
+								{
+									"key": "ConfirmPassword",
+									"value": "LOLOLOL",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HostName}}/api/users/1/contests",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1",
+								"contests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b0400986-ecfc-48a2-8bdb-1ade5f9578f3",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"pm.test(\"Your test name\", function () {",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.length).to.gt(-1);",
+									"});",
+									"",
+									"var user_list_item_schema = [",
+									"    {",
+									"        Id : Number,",
+									"        UserName : String,",
+									"        UserType : String,",
+									"    }",
+									"    ",
+									"];",
+									"",
+									"pm.test('Schema is valid', function() {",
+									"    var data = pm.response.json();",
+									"    pm.expect(tv4.validate(data, user_list_item_schema)).to.be.true;",
+									"});",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/users",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contests",
+			"item": [
+				{
+					"name": "Contest List",
+					"item": [
+						{
+							"name": "Contest list",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{HostName}}/api/contests",
+									"host": [
+										"{{HostName}}"
+									],
+									"path": [
+										"api",
+										"contests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Contest past list",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{HostName}}/api/contests/past-contests?start=1&limit=100",
+									"host": [
+										"{{HostName}}"
+									],
+									"path": [
+										"api",
+										"contests",
+										"past-contests"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "100"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Contest unfinished list",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{HostName}}/api/contests/unfinished-contests",
+									"host": [
+										"{{HostName}}"
+									],
+									"path": [
+										"api",
+										"contests",
+										"unfinished-contests"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Contest Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"Title\" : \"This is a new contest\",\n\t\"Description\" : \"This is a contest for practice\",\n\t\"StartDate\" : \"2016-01-01 12:10\",\n\t\"EndDate\" : \"2016-01-01 13:00\",\n\t\"Problems\" : [1,2,3],\n\t\"IsPublic\": \"false\",\n\t\"Password\" : \"abc\",\n\t\"ConfirmPassword\" : \"abc\"\n}"
+						},
+						"url": {
+							"raw": "{{HostName}}/api/contests/create",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"contests",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contest register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/contests/1/register",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"contests",
+								"1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contest problem submit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "SourceCode",
+									"value": "#include <iostream>\n\nusing namespace std;\n\nint main(int argc, char* argv[]){\n    int t, a,b;\n    cin>>t;\n\n    for(int i= 0; i<t; i++){\n        cin>>a>>b;\n        cout<< a+b<<endl;\n    }\n\n\n    return 0;\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "LanguageId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HostName}}/api/contests/2/problems/4/submit",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"contests",
+								"2",
+								"problems",
+								"4",
+								"submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contest Rank List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/contests/2/rank?start=1&limit=100",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"contests",
+								"2",
+								"rank"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contest submissions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/contests/2/submissions?start=1&limit=10",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"contests",
+								"2",
+								"submissions"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contest contestants",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/contests/1/contestants",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"contests",
+								"1",
+								"contestants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contest details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/contests/1",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"contests",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contest contestant submissions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/contests/1/contestants/11/submissions",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"contests",
+								"1",
+								"contestants",
+								"11",
+								"submissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contest problem submissions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/contests/1/problems/10/submissions",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"contests",
+								"1",
+								"problems",
+								"10",
+								"submissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contest problem list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/contests/1/problems",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"contests",
+								"1",
+								"problems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contest problem details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/contests/1/problems/0",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"contests",
+								"1",
+								"problems",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contest delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/contests/1/delete",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"contests",
+								"1",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register Login",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "UserName",
+									"value": "userabcd",
+									"type": "text"
+								},
+								{
+									"key": "Email",
+									"value": "email@mail.com",
+									"type": "text"
+								},
+								{
+									"key": "Password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "ConfirmPassword",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HostName}}/api/register",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "UserName",
+									"value": "user",
+									"type": "text"
+								},
+								{
+									"key": "Password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HostName}}/api/login",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Site",
+			"item": [
+				{
+					"name": "Programming languages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{HostName}}/api/programming-languages",
+							"host": [
+								"{{HostName}}"
+							],
+							"path": [
+								"api",
+								"programming-languages"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "temp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7eea0f9b-e322-478f-b788-570b0a00e989",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response is Ok\", x =>{",
+							"    pm.response.to.be.ok;",
+							"});",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body('\"temp\"');",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Title here",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Notice notice",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{HostName}}/api/temp/page",
+					"host": [
+						"{{HostName}}"
+					],
+					"path": [
+						"api",
+						"temp",
+						"page"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7eea0f9b-e322-478f-b788-570b0a00e989",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"response is Ok\", x =>{",
+							"    pm.response.to.be.ok;",
+							"});",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body('\"temp\"');",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Title here",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Notice notice",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{HostName}}/admin-site",
+					"host": [
+						"{{HostName}}"
+					],
+					"path": [
+						"admin-site"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
